@@ -12,7 +12,7 @@
 
 <body>
     <center>
-        <h2>Ejemplo 9 - Tema 2</h2>
+        <h2>Ejemplo 8 - Tema 2</h2>
     </center>
 
     <table border=1 width="50%">
