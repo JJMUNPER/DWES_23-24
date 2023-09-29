@@ -19,5 +19,22 @@
      El origen de esa violación de la simetría inicial se ha buscado en muchos sitios, también en un distinto comportamiento ante la gravedad.";
      $enlace="https://elpais.com/ciencia/2023-09-27/un-experimento-confirma-que-la-antimateria-cae-hacia-abajo.html";
 
+     $str1="Hola";
+     $str2="Mundo";
+     $str3=$str1 . $str2;
+
+     $float=1.2;
+     $int=2;
+     $suma=$float + $int;
+     $resta=$float - $int;
+     $division=$float / $int;
+     $multiplicacion=$float * $int;
+     $potencia= pow($float,$int);
+     $result = var_dump($suma). " " .var_dump($resta).  " " .var_dump($division). " " .var_dump($multiplicacion). " " .var_dump($potencia);
+
+     $phpInfo= phpinfo();
+     $info =$phpInfo;
+
+
 ?>
 

@@ -28,7 +28,16 @@
 
         <h2><?=$titulo?></h2>
         <p><?=$parrafo?></p>
+        <div><img src="https://imagenes.elpais.com/resizer/vV6TENrPZVb_9es-tgI8XLZgvaE=/1200x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/EEWBCVE2ZJDBRIA4URJQI6WDCI.jpg" alt=""></div>
+        <br>
+    
         <p><?=$enlace?>Para saber mas</p>
+
+        <br>
+
+        <p>
+            <?= $str3 ?>
+        </p>
 
     </div>
     

@@ -19,5 +19,10 @@
      El origen de esa violación de la simetría inicial se ha buscado en muchos sitios, también en un distinto comportamiento ante la gravedad.";
      $enlace="https://elpais.com/ciencia/2023-09-27/un-experimento-confirma-que-la-antimateria-cae-hacia-abajo.html";
 
+     $str1="Hola";
+     $str2="Mundo";
+     $str3=$str1 . $str2;
+
+
 ?>
 
