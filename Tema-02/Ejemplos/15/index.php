@@ -49,7 +49,7 @@
  echo"<BR>";
 
 //Caso VI
- $var=f"";
+ $var="";
  var_dump(empty($var));
 
  echo"<BR>";
