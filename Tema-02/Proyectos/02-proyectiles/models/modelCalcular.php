@@ -22,6 +22,8 @@
 
 
 
+    #Redondeo
+
     $anguloradianesf= number_format($anguloradianes,5,",",".");
 
     $velocidadinicialhorizontalf= number_format($velocidadinicialhorizontal,2,",",".");
