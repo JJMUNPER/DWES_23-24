@@ -29,8 +29,8 @@
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" role="search" method="GET" action="buscar.php">
+                <input class="form-control me-2" type="search" placeholder="promt" aria-label="Search" name="expresion">
                 <button class="btn btn-outline-secondary" type="submit">Buscar</button>
             </form>
         </div>
