@@ -8,9 +8,9 @@
     */
 
     # Model
-    include 'model/modelAcceso.php';
+    //No necesita
 
     # Vista
     // Carga la vista principal con el formulario de registro
-    include "views/viewAcceso.php";
+    include "views/viewIndex.php";
 ?>
