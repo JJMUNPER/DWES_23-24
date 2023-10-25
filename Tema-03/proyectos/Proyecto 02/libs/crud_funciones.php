@@ -111,6 +111,7 @@ function actualizar($tabla=[],$valores,$indice){
 /** nuevo() - añadir nuevo artículo en la tabla */
 function nuevo($tabla,$valores){
 
+    //$tabla[]=registro;
     array_push($tabla,$valores);
     return $tabla;
 
@@ -131,7 +132,7 @@ function ordenar($tabla,$criterio) {
 /** ultimoId() - devolverá el último id de la tabla*/
 function ultimoId($tabla){
 
-    return end($tabla)['Id'];
+    return end($tabla)['id'];
 }
 
 ?>

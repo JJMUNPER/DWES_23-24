@@ -2,18 +2,18 @@
 <html lang="es">
 
 <head>
-    <?php include 'layouts/head.html' ?>
+    <?php include 'views/layouts/head.html' ?>
 </head>
 
 <body>
     <!-- Capa principal -->
     <div class="container">
         <!-- Cabecera -->
-        <?php include 'partials/header.php' ?>
+        <?php include 'views/partials/header.php' ?>
         <legend>Tabla con Artículos Informáticos</legend>
 
         <!-- Añadimos el menú -->
-        <?php include 'partials/menu_prin.php' ?>
+        <?php include 'views/partials/menu_prin.php' ?>
 
 
 
@@ -80,11 +80,11 @@
     </div>
 
     <!-- Pie de documento -->
-    <?php include 'partials/footer.html' ?>
+    <?php include 'views/partials/footer.html' ?>
 
 
     <!-- js bootstrap 532-->
-    <?php include 'layouts/javascript.html' ?>
+    <?php include 'views/layouts/javascript.html' ?>
 </body>
 
 </html>

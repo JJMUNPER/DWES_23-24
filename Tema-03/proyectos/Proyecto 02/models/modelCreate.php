@@ -4,7 +4,10 @@
         Descripción: Cargaremos los datos del formulario nuevo y los introducimos al array original de artículos
     */
 
+    $articulos=generar_tabla_articulos();
+    $categorias=generar_tabla_categorias();
     // Empezamos
+    $id = $_POST['id'];
     $descripcion = $_POST['descripcion'];
     $modelo = $_POST['modelo'];
     $categori = $_POST['categorias'];
@@ -25,6 +28,13 @@
         'unidades'=> $unidades,
         'precio'=> $precio
     ];
+    
     array_push($articulos, $articulo);
+
+    /**
+     * Se puede hacer tambien
+     * 
+     * $articulos[]=
+     */
 
 ?>

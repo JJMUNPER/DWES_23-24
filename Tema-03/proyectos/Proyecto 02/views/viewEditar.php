@@ -2,22 +2,22 @@
 <html lang="es">
 
 <head>
-    <?php include 'views/layouts/head.html' ?>
+    <?php require_once 'views/layouts/head.html' ?>
 </head>
 
 <body>
     <!-- Capa principal -->
     <div class="container">
         <!-- Cabecera -->
-        <?php include 'views/partials/header.php' ?>
-        <legend>Formulario nuevo articulo</legend>
+        <?php require_once 'views/partials/header.html' ?>
+        <legend>Formulario editar articulo</legend>
 
         <!-- Añadimos el menú -->
-        <?php include 'views/partials/menu_prin.php' ?>
+        <?php require_once 'views/partials/menu.php' ?>
 
        
          <!-- Formulario Nuevo Artículo -->
-         <form action="create.php" method="POST">
+         <form action="update.php?key=<?=$indice?>" method="POST">
             <!-- descripción -->
             <div class="mb-3">
                 <label class="form-label">Descripción</label>
@@ -64,11 +64,11 @@
 
     </div>
     <!-- Pie de documento -->
-     <?php include 'views/partials/footer.html' ?>
+     <?php require_once 'views/partials/footer.html' ?>
 
 
     <!-- js bootstrap 532-->
-    <?php include 'views/layouts/javascript.html' ?>
+    <?php require_once 'views/layouts/javascript.html' ?>
 </body>
 
 </html>
