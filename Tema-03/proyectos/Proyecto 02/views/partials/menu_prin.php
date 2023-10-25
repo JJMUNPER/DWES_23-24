@@ -1,35 +1,40 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- Logo y Nombre -->
-    <a class="navbar-brand" href="index.php">Articulos</a>
-
-
-    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button> -->
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="viewNuevo.php"> Nuevo <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Ordenar</a>
-            </li>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="ordenar.php?criterio=id">ID</a></li>
-                <li><a class="dropdown-item" href="ordenar.php?criterio=descripcion">DESCRIPCION</a></li>
-                <li><a class="dropdown-item" href="ordenar.php?criterio=modelo">MODELO</a></li>
-                <li><a class="dropdown-item" href="ordenar.php?criterio=categoria">CATEGORIA</a></li>
-                <li><a class="dropdown-item" href="ordenar.php?criterio=unidades">UNIDADES</a></li>
-                <li><a class="dropdown-item" href="ordenar.php?criterio=precio">PRECIO</a></li>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Artículos</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="nuevo.php">Nuevo</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Ordenar
+                    </a>
+                    <!-- Deberemos enviar el criterior de ordenacion de forma dinamica -->
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=descripcion">Descripción</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=modelo">Modelo</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=categoria">Categoría</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=stock">Stock</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=precio">Precio</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li>
             </ul>
-            </li>
-            
-        </ul>
-        <form class="form-inline my-2 my-lg-0" method="get" action="buscar.php">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+            <form class="d-flex" role="search" method="GET" action="buscar.php">
+                <input class="form-control me-2" type="search" placeholder="prompt" aria-label="Search" name="expresion">
+                <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+            </form>
+        </div>
     </div>
 </nav>

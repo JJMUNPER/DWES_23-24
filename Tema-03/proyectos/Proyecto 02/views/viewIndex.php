@@ -1,46 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <!-- Head -->
-    <?php include 'partials/header.php' ?>
-    <title>Proyecto 3.2- Gestion Articulos</title>
+    <?php include 'layouts/head.html' ?>
 </head>
 
 <body>
-    <div class="container" style="padding-top:10%;">
+    <!-- Capa principal -->
+    <div class="container">
+        <!-- Cabecera -->
+        <?php include 'partials/header.php' ?>
+        <legend>Tabla con Artículos Informáticos</legend>
 
-        <!-- Menu principal -->
-
+        <!-- Añadimos el menú -->
         <?php include 'partials/menu_prin.php' ?>
 
 
-        <table class="table" style="border:solid">
+
+        <!-- Añadimos una tabla con los artículos -->
+        <table class="table">
+            <!-- Mostremos el nombre de las columnas, para nuestra comodidad y personalizción introduciremos lo datos manualmente -->
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>id</th>
                     <th>Descripción</th>
                     <th>Modelo</th>
-                    <th>Categorías</th>
-                    <th class="text-end">Stock</th>
-                    <th class="text-end">precio</th>
+                    <th>Categoria</th>
+                    <th class="text-end">Unidades</th>
+                    <th class="text-end">Precio</th>
                     <th>Acciones</th>
-
                 </tr>
             </thead>
-
-            <!-- Mostramos cuerpo de la tabla -->
-
+            <!-- Mostraremos el contenido de cada artículo -->
             <tbody>
                 <?php foreach ($articulos as $articulo): ?>
-
                     <tr>
-                        <!-- Formatos distintos para cada columna -->
-
-                        <!-- Detalles del articulos -->
-                        <td>
+                        <th>
                             <?= $articulo['id'] ?>
-                        </td>
+                        </th>
                         <td>
                             <?= $articulo['descripcion'] ?>
                         </td>
@@ -50,34 +47,37 @@
                         <td>
                             <?= $categorias[$articulo['categoria']] ?>
                         </td>
-                        <td>
+                        <td class="text-end">
                             <?= $articulo['unidades'] ?>
                         </td>
-                        <td>
+                        <td class="text-end">
                             <?= number_format($articulo['precio'], 2, ',', '.') ?> €
                         </td>
-
-                        <!-- botones de acción -->
-
                         <td>
-                            <a href="eliminar.php?key=<?= $indice ?>"><i class="bi bi-trash"></i></a>
-                            <a href="editar.php?key=<?= $indice ?>"> <i class="bi bi-pencil"></i> </a>
-                            <a href="mostrar.php?key=<?= $indice ?>"> <i class="bi bi-eye"></i> </a>
+                            <!-- Botón eliminar -->
+                            <a href="eliminar.php?=<?= $articulo['id'] ?>">
+                                <i class="bi bi-trash-fill"></i>
+                                <!-- Botón editar -->
+                                <a href="editar.php?=<?= $articulo['id'] ?>">
+                                    <i class="bi bi-pencil-square"></i>
+                                    <!-- Botón mostrar -->
+                                    <a href="mostrar.php?=<?= $articulo['id'] ?>">
+                                        <i class="bi bi-tv"></i>
 
                         </td>
+
                     </tr>
                 <?php endforeach; ?>
             </tbody>
+            <!-- En el pie de la tabla, mostraremos el número de artículos mostrados -->
             <tfoot>
                 <tr>
-                    <td colspan="7"></td>
+                    <td colspan="7"><b>Nº de Articulos: <?= count($articulos) ?></b></td>
                 </tr>
             </tfoot>
-
         </table>
+
     </div>
-
-
 
     <!-- Pie de documento -->
     <?php include 'partials/footer.html' ?>
@@ -85,7 +85,6 @@
 
     <!-- js bootstrap 532-->
     <?php include 'layouts/javascript.html' ?>
-
 </body>
 
 </html>

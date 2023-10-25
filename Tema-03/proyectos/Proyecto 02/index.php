@@ -1,9 +1,9 @@
 <?php
 #Libreria
-include "libs/crud_funciones.php";
+include 'libs/crud_funciones.php';
 #Modelo
-include "models/modelIndex.php";
+include 'models/modelIndex.php';
 #Vista
-include "views/viewIndex.php";
+include 'views/viewIndex.php';
 ?>
 
