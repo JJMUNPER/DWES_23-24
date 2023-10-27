@@ -44,10 +44,10 @@
             <div class="mb-3">
                 <label class="form-label">Categoría</label>
                 <select type="text" name="categoria" class="form-select">
-                    <option selected disabled>Seleccione una categoría</option>
-                    <?php foreach ($categorias as $key => $categoria): ?>
+                    <option selected disabled>Seleccione una Marca</option>
+                    <?php foreach ($marcas as $key => $marcas): ?>
                         <option value="<?= $key ?>">
-                            <?= $categoria ?>
+                            <?= $marcas ?>
                         </option>
                     <?php endforeach; ?>
                 </select>

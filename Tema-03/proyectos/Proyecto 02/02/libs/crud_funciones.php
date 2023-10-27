@@ -28,7 +28,26 @@ function generar_tabla_categorias()
         'Imagen'
     ];
 
+    asort($categorias);
+
     return $categorias;
+}
+
+function generar_tabla_marcas(){
+
+    $marcas = [
+        'Accer',
+        'Asus',
+        'Apple',
+        'IBM',
+        'Xiaomi',
+        'Aoc',
+        'Intel'
+    ];
+
+    asort($marcas);
+    return $marcas;
+
 }
 
 
@@ -40,7 +59,7 @@ function generar_tabla()
             'id' => 1,
             'descripcion' => 'Portatil Lenovo',
             'modelo' => 'Xjh 44',
-            'categoria' => 0,
+            'marca' => 0,
             'unidades' => '5',
             'precio' => '680'
         ],
@@ -48,7 +67,7 @@ function generar_tabla()
             'id' => 2,
             'descripcion' => 'Portatil AMD',
             'modelo' => 'HP 255 G7',
-            'categoria' => 0,
+            'marca' => 0,
             'unidades' => '213',
             'precio' => '920'
         ],
@@ -56,7 +75,7 @@ function generar_tabla()
             'id' => 3,
             'descripcion' => 'Pc Sobremesa Lenovo Intel i5',
             'modelo' => 'ideacentre 51OS-007',
-            'categoria' => 1,
+            'marca' => 1,
             'unidades' => '340',
             'precio' => '590.76'
         ],
@@ -64,7 +83,7 @@ function generar_tabla()
             'id' => 4,
             'descripcion' => 'Pc Sobremesa Asus i9',
             'modelo' => 'TUF Revolunt G10',
-            'categoria' => 1,
+            'marca' => 1,
             'unidades' => '223',
             'precio' => '910.89'
         ],
@@ -72,7 +91,7 @@ function generar_tabla()
             'id' => 5,
             'descripcion' => 'Fuente de alimentacion',
             'modelo' => 'Tancens XR 750W',
-            'categoria' => 2,
+            'marca' => 2,
             'unidades' => '100',
             'precio' => '60.99'
         ],
@@ -80,7 +99,7 @@ function generar_tabla()
             'id' => 6,
             'descripcion' => 'Pantalla LG 4k Full HD 27"',
             'modelo' => 'ambs553',
-            'categoria' => 3,
+            'marca' => 3,
             'unidades' => '100',
             'precio' => '60'
         ],
@@ -88,7 +107,7 @@ function generar_tabla()
             'id' => 7,
             'descripcion' => 'Impresora HP',
             'modelo' => 'TRR 890',
-            'categoria' => 4,
+            'marca' => 4,
             'unidades' => '20',
             'precio' => '140'
         ]
