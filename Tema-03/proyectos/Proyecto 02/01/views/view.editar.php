@@ -2,7 +2,10 @@
 <html lang="es">
 
 <head>
+    <?php include 'views/partials/header.php' ?>
     <?php include 'views/layouts/head.php' ?>
+
+
     <!-- Incluir head -->
     <title>Tabla de artículos</title>
 </head>
@@ -27,21 +30,19 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Descripción</label>
-                <input type="text" name="descripcion" class="form-control" value="<?= $articulo['descripcion'] ?>"/>
+                <input type="text" name="descripcion" class="form-control" value="<?= $articulo['descripcion'] ?>" />
 
             </div>
             <div class="mb-3">
                 <label class="form-label">Modelo</label>
-                    <input type="text" name="modelo" class="form-control" value="<?= $articulo['modelo'] ?>"/>
+                <input type="text" name="modelo" class="form-control" value="<?= $articulo['modelo'] ?>" />
 
             </div>
             <div class="mb-3">
                 <label class="form-label">Categoría</label>
                 <select type="text" name="categoria" class="form-select">
                     <?php foreach ($categorias as $key => $categoria): ?>
-                        <option value="<?= $key ?>"
-                            <?= ($articulo['categoria'] == $key) ? 'selected' : null ?>
-                        >
+                        <option value="<?= $key ?>" <?= ($articulo['categoria'] == $key) ? 'selected' : null ?>>
                             <?= $categoria ?>
                         </option>
                     <?php endforeach; ?>
@@ -49,13 +50,13 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Unidades</label>
-                <input type="number" name="unidades" class="form-control" value="<?= $articulo['unidades'] ?>"/>
+                <input type="number" name="unidades" class="form-control" value="<?= $articulo['unidades'] ?>" />
 
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Precio (€)</label>
-                <input type="number" step="any" name="precio" class="form-control" value="<?= $articulo['precio'] ?>"/>
+                <input type="number" step="any" name="precio" class="form-control" value="<?= $articulo['precio'] ?>" />
 
             </div>
             <button type="submit" class="btn btn-primary">Actualizar</button>

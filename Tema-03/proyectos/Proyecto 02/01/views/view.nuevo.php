@@ -2,11 +2,14 @@
 <html lang="es">
 
 <head>
-    <?php include 'views/partials/header.php' ?>
+
+
     <?php include 'views/layouts/head.php' ?>
 
     <!-- Incluir head -->
-    <title><h1>Tabla de articulos</h1></title>
+    <title>
+        Tabla de articulos
+    </title>
 </head>
 
 <body>

@@ -3,6 +3,16 @@
 
 <head>
     <?php include 'views/layouts/head.php' ?>
+
+
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: solid 3px black;
+        }
+    </style>
+
     <!-- Incluir head -->
     <title>Tabla Artículos</title>
 </head>
@@ -57,9 +67,9 @@
                         </td>
                         <td>
                             <a href="eliminar.php?id=<?= $articulo['id'] ?>" title="Eliminar"><i
-                                    class="bi bi-trash"></i></a>
-                            <a href="editar.php?id=<?= $articulo['id'] ?>" title="Editar"><i class="bi bi-pencil"></i></a>
-                            <a href="mostrar.php?id=<?= $articulo['id'] ?>" title="Mostrar"><i class="bi bi-eye"></i></a>
+                                    class="bi bi-trash3-fill"></i></a>
+                            <a href="editar.php?id=<?= $articulo['id'] ?>" title="Editar"><i class="bi bi-pencil-square"></i></a>
+                            <a href="mostrar.php?id=<?= $articulo['id'] ?>" title="Mostrar"><i class="bi bi-eye-fill"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
