@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Autor:Juan Jesus Muñoz Perez
+ * 2ºDAW 23/24
  * 
  * Clase Calculadora
  * 

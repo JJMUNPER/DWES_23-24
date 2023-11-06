@@ -2,36 +2,34 @@
 
 include "class/class.calculadora.php";
 
-$operador = $_POST['operador'];
-$valor1 = $_POST['valor1'];
-$valor2 = $_POST['valor2'];
+$calculadora = new calculadora(); //Creo Objeto
 
+// var_dump($calculadora);
 
-$calculadora = new $calculadora();
+//Suma
+$calculadora->setValor1(8);
+$calculadora->setValor2(6);
+var_dump($calculadora->sumarValor());
 
-switch ($operador) {
-    case 'suma':
-        $resultado = $calculadora->sumarValor($valor1, $valor2);
-        break;
-    case 'resta':
-        $resultado = $calculadora->restarValor($valor1, $valor2);
-        break;
-    case 'multiplicacion':
-        $resultado = $calculadora->multiplicaValor($valor1, $valor2);
-        break;
+//Resta
+$calculadora->setValor1(6);
+$calculadora->setValor2(10);
+var_dump($calculadora->restarValor());
 
-        
-    case 'potencia':
-        $resultado = $calculadora->potenciaValor($valor1, $valor2);
-        break;
-    case 'division':
-        if ($valor2 != 0) {
-            $resultado = $calculadora->dividirValor($valor1, $valor2);
-        } else {
-            echo "Error: No se puede dividir por cero.";
-            exit;
-        }
-        break;
-}
+//Multiplicacion
+$calculadora->setValor1(14);
+$calculadora->setValor2(7);
+var_dump($calculadora->multiplicaValor());
+
+//Division
+$calculadora->setValor1(50);
+$calculadora->setValor2(2);
+var_dump($calculadora->dividirValor());
+
+//Potencia
+$calculadora->setValor1(4);
+$calculadora->setValor2(3);
+var_dump($calculadora->potenciaValor());
+
 
 ?>
