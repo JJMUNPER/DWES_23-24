@@ -36,6 +36,7 @@
         public function sumarValor(){
 
             $this ->resultado=$this ->valor1 + $this ->valor2;
+			return $this ->resultado;
 
         }
 
@@ -43,6 +44,7 @@
         public function restarValor(){
 
             $this ->resultado=$this ->valor1 - $this ->valor2;
+			return $this ->resultado;
         }
 
         //Metodo multiplicacion
@@ -50,6 +52,7 @@
         public function multiplicaValor(){
 
             $this ->resultado=$this ->valor1 * $this ->valor2;
+			return $this ->resultado;
         }
 
         //Metodo division
@@ -57,6 +60,8 @@
         public function dividirValor(){
 
             $this ->resultado=$this ->valor1 / $this ->valor2;
+			return $this ->resultado;
+
         }
 
         //Metodo potencia
@@ -64,6 +69,7 @@
         public function potenciaValor(){
 
             $this ->resultado=pow($this ->valor1, $this ->valor2);
+			return $this ->resultado;
         }
 
         //Set y Get de los campos de la clase
