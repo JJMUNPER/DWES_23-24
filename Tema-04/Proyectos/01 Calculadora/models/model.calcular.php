@@ -31,6 +31,6 @@
     default: echo'Operación no válida'; break;
  }
 
- var_dump($calcular);
+//  var_dump($calcular);
 
 ?>
