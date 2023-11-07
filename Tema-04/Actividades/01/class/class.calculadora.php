@@ -19,10 +19,10 @@
     //Constructor
 
     public function __construct(
-        $valor1=null, 
-        $valor2=null, 
+        $valor1=0, 
+        $valor2=0, 
         $operacion=null, 
-        $resultado=null
+        $resultado=0
         ) {
             $this->valor1 = $valor1;
             $this->valor2 = $valor2;
