@@ -1,6 +1,12 @@
 <?php 
 
-include 'libs/crud_funciones.php';
+/**
+ * Controlador:index.php 
+ * Descripción: muestra los detalles de los artículos ordenados 
+ */
+
+include 'class/class.articulo.php';
+include 'class/class.arrayArticulos.php';
 
 include 'models/modelIndex.php';
 

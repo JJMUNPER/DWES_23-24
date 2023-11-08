@@ -2,8 +2,8 @@
 <html lang="es">
 
 <head>
-    <?php include 'views/layouts/head.html' ?>
-    <title>Proyecto 3.2 - Gestión de articulos</title>
+    <?php include 'views/layouts/head.php' ?>
+    <title>Proyecto 4.2 - Gestión de Articulos</title>
 </head>
 
 <body>
@@ -36,27 +36,27 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($articulos as $articulo): ?>
+                <?php foreach ($articulos->getTabla() as $indice=>$articulo): ?>
                     <tr>
-                        <td><?= $articulo['id'] ?></td>
-                        <td><?= $articulo['descripcion'] ?></td>
-                        <td><?= $articulo['modelo'] ?></td>
-                        <td><?= $marcas[$articulo['marca']] ?></td>
-                        <td><?= implode(', ', mostrarCategorias($categorias, $articulo['categorias']))?></td>
-                        <td class="text-end"><?= $articulo['unidades'] ?></td>
-                        <td class="text-end"><?= number_format($articulo['precio'], 2, ',', '.') ?></td>
+                        <td><?= $articulo->getId() ?></td>
+                        <td><?= $articulo->getDescripcion() ?></td>
+                        <td><?= $articulo->getModelo() ?></td>
+                        <td><?= $marcas[$articulo->getMarca()] ?></td>
+                        <td><?= implode(', ', ArrayArticulos::mostrarCategorias($categorias, $articulo->getCategorias()))?></td>
+                        <td class="text-end"><?= $articulo->getUnidades() ?></td>
+                        <td class="text-end"><?= number_format($articulo->getPrecio(), 2, ',', '.') ?> € </td>
 
                         <!-- boton eliminar  -->
                         <td>
-                            <a href="eliminar.php?id=<?= $articulo['id'] ?>" title="Eliminar">
+                            <a href="eliminar.php?indice=<?= $indice ?>" title="Eliminar">
                                 <i class="bi bi-trash3"></i></a>
 
                             <!-- boton editar  -->
 
-                            <a href="editar.php?id=<?= $articulo['id'] ?>" title="Editar">
+                            <a href="editar.php?indice=<?= $indice ?>" title="Editar">
                                 <i class="bi bi-pencil-square"></i></a>
 
-                            <a href="mostrar.php?id=<?= $articulo['id'] ?>" title="Mostrar">
+                            <a href="mostrar.php?indice=<?= $indice ?>" title="Mostrar">
                                 <i class="bi bi-clipboard2-plus"></i></a>
                         </td>
                     </tr>
@@ -66,7 +66,7 @@
             <tfoot>
                 <tr>
                     <td colspan="5">Nº Articulos
-                        <?= count($articulos) ?>
+                        <?= count($articulos->getTabla()) ?>
                     </td>
                 </tr>
             </tfoot>
@@ -76,11 +76,12 @@
 
         <!-- Pie del documento  -->
         
+        <?php include 'partials/footer.php'?>
 
     </div>
 
     <!-- javascript bootstrap 532 -->
-    <?php include 'views/layouts/javascript.html' ?>
+    <?php include 'views/layouts/javascript.php' ?>
 </body>
 
 </html>
