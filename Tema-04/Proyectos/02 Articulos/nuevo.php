@@ -1,10 +1,13 @@
 <?php 
 
 #Controlador: nuevo.php
-#Descripción: mostrar un formulario que permita añadir nuevo libro
+#Descripción: mostrar un formulario que permita añadir nuevo articulo
 
 // Librería
-include 'libs/crud_funciones.php';
+include 'class/class.articulo.php';
+include 'class/class.arrayArticulos.php';
+
+
 
 include 'models/modelNuevo.php';
 

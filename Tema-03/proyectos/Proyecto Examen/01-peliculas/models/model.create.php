@@ -15,19 +15,19 @@
     $paises = getPaises();
     
 
-    $id = nuevo_id($peliculas);
-    $titulo = $_POST['titulo'];
-    $pais = $_POST['pais'];
-    $director = $_POST['director'];
-    $generosPelicula = $_POST['generos'];
-    $anno = $_POST['año'];
+    // $id = nuevo_id($peliculas);
+    // $titulo = $_POST['titulo'];
+    // $pais = $_POST['pais'];
+    // $director = $_POST['director'];
+    // $generosPelicula = $_POST['generos'];
+    // $anno = $_POST['año'];
 
 
     $registro = [
             'id' => nuevo_id($peliculas),
             'tiulo' => $_POST['titulo'],
             'director' => $_POST['director'],
-            'nacionalidad' => $_POST['nacionalidad'],
+            'pais' => $_POST['pais'],
             'generos' => $_POST['generos'],
             'año' => $_POST['año']
     ];

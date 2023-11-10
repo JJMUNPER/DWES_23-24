@@ -147,8 +147,8 @@ class ArrayArticulos
 
     #podemos declarar este metodo como estatico porque no modifica ninguna propiedad de la clase
     static public function mostrarCategorias(
-        $categorias = [],
-        $categoriasArticulo = []
+        $categorias,
+        $categoriasArticulo
     ) 
     {
         $arrayCategorias = [];
@@ -157,6 +157,16 @@ class ArrayArticulos
         }
         asort($arrayCategorias);
         return $arrayCategorias;
+    }
+
+    public function create (Articulo $data){
+        $this->tabla[] = $data;
+
+    }
+
+    public function delete ($indice){
+        unset($this->tabla[$indice]);
+        array_values($this->tabla);
     }
 }
 
