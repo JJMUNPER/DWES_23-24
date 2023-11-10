@@ -119,31 +119,21 @@ function mostrarPais($paises, $indicePaises)
     return $aux;
 }
 
-function eliminar($tabla, $indice)
-{
 
-    unset($tabla[$indice]);
-    $tabla = array_values($tabla);
-    return $tabla;
-}
 
-function nuevo($tabla, $registro)
+function nuevo_id($peliculas)
 {
-    $tabla[] = $registro;
-    return $tabla;
-}
-
-function actualizar($tabla, $registro, $indice)
-{
-    $tabla[$indice] = $registro;
-    return $tabla;
-}
-
-function nuevo_id($tabla)
-{
-    $ultimo_id = count($tabla) + 1;
+    $ultimo_id = count($peliculas) + 1;
 
     return $ultimo_id;
+}
+
+function buscar_en_tabla($tabla, $columna, $valor)
+{
+
+    $columna_valores = array_column($tabla, $columna);
+    return array_search($valor, $columna_valores, false);
+
 }
 
 

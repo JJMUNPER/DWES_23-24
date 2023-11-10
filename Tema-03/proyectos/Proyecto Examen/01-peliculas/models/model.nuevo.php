@@ -9,6 +9,7 @@
 
 $generos = getGeneros();
 $paises = getPaises();
+$peliculas = getPeliculas();
 
 
 ?>

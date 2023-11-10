@@ -15,7 +15,7 @@
         Formulario Nueva Película
       </legend>
 
-      <form action="#" method="">
+      <form action="create.php" method="POST">
             <!-- Campo ID Oculto-->
             <div class="mb3" hidden> 
                 <label class="form-label">Id</label>
@@ -36,11 +36,17 @@
             <!-- País Select -->
             <div class="mb-3">
                 <label for="pais" class="form-label">País</label>
-                <input name = "pais" type="text" select class="form-select" aria-label="Default select example" name="">
+                <select name = "pais" type="text" select class="form-select" aria-label="Default select example" name="">
                     <option selected disabled>Seleccione País</option>
                     <!-- Generar dinámicamente select  -->
-                </input>
+                    <?php foreach ($paises as $clave => $pais): ?>
+                        <option value="<?= $clave ?>">
+                            <?= $pais ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
+            
 
             <!-- Campo director -->
             <div class="mb3">

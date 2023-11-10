@@ -19,7 +19,7 @@
             Mostrar Película
         </legend>
 
-        <form action="mostrar.php?indice=<?= $indice ?>" method="POST">
+        <!-- <form action="mostrar.php?indice=<?= $indice ?>" method="POST"> -->
 
             <div class="mb3">
                 <label class="form-label">Id</label>

@@ -56,7 +56,7 @@
               <td>
                 <a href="#" Title="Eliminar"><i class="bi bi-trash-fill"></i></a>
                 <a href="#" Title="Modificar"><i class="bi bi-pencil-square"></i></a>
-                <a href="mostrar.php?indice=<?= $indice ?>" Title="Mostrar"><i class="bi bi-eye"></i></a>
+                <a href="mostrar.php?id=<?= $pelicula['id'] ?>" Title="Mostrar"><i class="bi bi-eye"></i></a>
               </td>
             <!-- Fin botones de acción -->
             
