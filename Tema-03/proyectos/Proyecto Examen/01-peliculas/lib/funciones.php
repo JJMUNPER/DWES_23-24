@@ -97,16 +97,46 @@ function mostrarGeneros($generos, $indiceGeneros)
 
     #Bucle que recorre todos los indices del array $indiceGeneros
     #Cada elemento de array se toma como indice en cada iteración
-    foreach ($indiceGeneros as $indice){
+    foreach ($indiceGeneros as $genero) {
         #Para verificar si el elemento existe se usa 'isset'
-        if (isset($generos[$indice])){
-            $aux[] = $generos[$indice];
+        if (isset($generos[$genero])) {
+            $aux[] = $generos[$genero];
         }
     }
     #Ordena los elementos almacenados
     sort($aux);
 
     return $aux;
+}
+
+function mostrarPais($paises, $indicePaises)
+{
+    $aux = [];
+    foreach ($indicePaises as $pais) {
+        $aux[] = $paises[$pais];
+    }
+
+    return $aux;
+}
+
+function eliminar($tabla, $indice)
+{
+
+    unset($tabla[$indice]);
+    $tabla = array_values($tabla);
+    return $tabla;
+}
+
+function nuevo($tabla, $registro)
+{
+    $tabla[] = $registro;
+    return $tabla;
+}
+
+function actualizar($tabla, $registro, $indice)
+{
+    $tabla[$indice] = $registro;
+    return $tabla;
 }
 
 

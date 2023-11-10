@@ -25,16 +25,21 @@
             <!-- Campo título -->
             <div class="mb3">
                 <label class="form-label">Título</label>
-                <input type="text" class="form-control" required>
+                <input name = "titulo" input type="text" class="form-control" required>
+            </div>
+
+            <div class="mb3">
+                <label class="form-label">Director</label>
+                <input name = "director" type="text" class="form-control" required>
             </div>
 
             <!-- País Select -->
             <div class="mb-3">
                 <label for="pais" class="form-label">País</label>
-                <select class="form-select" aria-label="Default select example" name="">
+                <input name = "pais" type="text" select class="form-select" aria-label="Default select example" name="">
                     <option selected disabled>Seleccione País</option>
                     <!-- Generar dinámicamente select  -->
-                </select>
+                </input>
             </div>
 
             <!-- Campo director -->
@@ -50,10 +55,15 @@
             </div>
 
              <!-- Categorías -->
-             <div class="mb-3">
+             <div class="mb3" form-check>
                 <label class="form-label">Géneros</label>
-                <div class="form-control">
-                    <!-- Generar dinámicamente lista checkbox de géneros -->
+                <div  class="form-control">
+                    <?php foreach ($generos as $key =>$genero):?>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="generos[]" value="<?=$key?>">
+                            <label class="form-check-label" for="generos"><?=$genero ?></label>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
 

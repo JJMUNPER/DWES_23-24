@@ -9,6 +9,13 @@
 
     */
 
+
+    
+    $expresion = $_GET['expresion'];
+    $generos = getGeneros();
+    $peliculas = getPeliculas();
+    $paises = getPaises();
+    $peliculas = filtrar($peliculas, $expresion);
    
     
     
