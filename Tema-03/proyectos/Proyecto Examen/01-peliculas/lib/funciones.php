@@ -139,5 +139,12 @@ function actualizar($tabla, $registro, $indice)
     return $tabla;
 }
 
+function nuevo_id($tabla)
+{
+    $ultimo_id = count($tabla) + 1;
+
+    return $ultimo_id;
+}
+
 
 ?>
