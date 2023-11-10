@@ -11,11 +11,13 @@
 
 
     
-    $expresion = $_GET['expresion'];
+    $expresion = $_GET['indice'];
+    
     $generos = getGeneros();
     $peliculas = getPeliculas();
     $paises = getPaises();
-    $peliculas = filtrar($peliculas, $expresion);
+    
+    $pelicula = $peliculas[$indice];
    
     
     

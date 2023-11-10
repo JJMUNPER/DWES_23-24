@@ -5,7 +5,7 @@
 
 <head>
     <!-- Incluimos HEAD -->
-    <?php include("partials/partial.head.php") ?>
+    <?php include("layouts/layout.head.php") ?>
     <title>Mostrar Película - CRUD Tabla Películas</title>
 </head>
 
@@ -69,7 +69,7 @@
     </div>
 
     <!-- Incluimos Partials javascript bootstrap -->
-    <?php include("partials/partial.javascript.php") ?>
+    <?php include("layouts/layout.javascript.php") ?>
 </body>
 
 </html>
