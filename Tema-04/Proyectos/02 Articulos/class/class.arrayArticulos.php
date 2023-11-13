@@ -168,6 +168,11 @@ class ArrayArticulos
         unset($this->tabla[$indice]);
         array_values($this->tabla);
     }
+
+    public function editar ($indice){
+
+        return $this->tabla[$indice];
+    }
 }
 
 ?>

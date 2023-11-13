@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    <?php include 'views/layouts/head.html' ?>
+    <?php include 'views/layouts/head.php' ?>
     <title>Proyecto 3.1 - Gestión de articulos</title>
 </head>
 
@@ -74,7 +74,7 @@
     </div>
 
     <!-- javascript bootstrap 532 -->
-    <?php include 'views/layouts/javascript.html' ?>
+    <?php include 'views/layouts/javascript.php' ?>
 </body>
 
 </html>

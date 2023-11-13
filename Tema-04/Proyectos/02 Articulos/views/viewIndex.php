@@ -58,7 +58,7 @@
                                 <i class="bi bi-pencil-square"></i></a>
 
                             <a href="mostrar.php?indice=<?= $indice ?>" title="Mostrar">
-                                <i class="bi bi-clipboard2-plus"></i></a>
+                            <i class="bi bi-eye-fill"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

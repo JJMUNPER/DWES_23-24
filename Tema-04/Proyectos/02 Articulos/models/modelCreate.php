@@ -54,6 +54,6 @@ $articulo= new Articulo(
 $articulos -> create($articulo);
 
 #genero notificacion
-$notificacion = "Articulo creado con exito";
+$notificacion = " Articulo creado con exito";
 
 ?>

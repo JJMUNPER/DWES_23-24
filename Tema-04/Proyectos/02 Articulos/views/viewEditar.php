@@ -2,71 +2,89 @@
 <html lang="es">
 
 <head>
-    <?php include 'views/layouts/head.html' ?>
+    <?php include 'views/layouts/head.php' ?>
     <title>Proyecto 3.2 - Gestión de articulos</title>
 </head>
 
 <body>
     <!-- Capa principal -->
     <div class="container">
+     
 
         <!-- cabecera documento -->
+        <?php include 'partials/header.php' ?>
         <header class="pb-3 mb-4 border-bottom">
             <i class="bi bi-calculator"></i>
             <span class="fs-6">Proyecto 3.2 - Gestión de articulos</span>
         </header>
 
+         <!-- Menú -->
+         <?php include 'partials/menu_prin.php' ?>
+
         <legend>Formulario Edición Articulo</legend>
 
         <!-- Formulario Nuevo articulo -->
-        <form action="update.php?id=<?= $id ?>" method="POST">
+        <form action="update.php?indice=<?= $indice ?>" method="POST">
             <!-- id -->
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Id</label>
-                <input type="text" class="form-control" name="id" value="<?= $articulo['id'] ?>" readonly>
+                <input type="text" class="form-control" name="id" value="<?= $articulo->getId() ?>" disabled>
                 <!-- <div class="form-text">Introduzca identificador del articulo</div> -->
             </div>
-            <!-- Título -->
+            <!-- Descripcion -->
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripcion</label>
-                <input type="text" class="form-control" name="descripcion" value="<?= $articulo['descripcion'] ?>">
+                <input type="text" class="form-control" name="descripcion" value="<?= $articulo->getDescripcion() ?>">
                 <!-- <div class="form-text">Introduzca título articulo existente</div> -->
             </div>
             <!-- modelo -->
             <div class="mb-3">
                 <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" name="modelo" value="<?= $articulo['modelo'] ?>">
+                <input type="text" class="form-control" name="modelo" value="<?= $articulo->getModelo() ?>">
                 <!-- <div class="form-text">Introduzca modelo del articulo</div> -->
+            </div>
+            <!-- marca -->
+            <div class="mb-3">
+                <label class="form-label">Marca</label>
+                <select class="form-select" aria-label="Default select example" name="marca">
+                    <?php foreach ($marcas as $key => $marca) : ?>
+                        <option value="<?= $key ?>" <?= ($articulo->getMarca() == $key) ? 'selected' : null ?>>
+                            <?= $marca ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <!-- Unidades -->
+            <div class="mb-3">
+                <label class="form-label">Unidades</label>
+                <input type="number" class="form-control" name="unidades" value="<?= $articulo->getUnidades(); ?>">
+            </div>
+            <!-- Precio -->
+            <div class="mb-3">
+                <label for="unidades" class="form-label">Stock</label>
+                <input type="number" class="form-control" name="precio"  value="<?= $articulo->getPrecio() ?>">
+                <!-- <div class="form-text">Introduzca Precio</div> -->
             </div>
             <!-- Género -->
             <div class="mb-3">
                 <label for="categoria" class="form-label">Categoría</label>
                 <select class="form-select" aria-label="Default select example" name="categoria">
                     <option selected disabled>Seleccione una categoría</option>
-                    <?php foreach ($categorias as $key => $categoria): ?>
-                        <option value="<?= $key ?>" 
-                            <?= ($articulo['categoria'] == $key) ? 'selected' : null ?>
+                    <?php foreach ($categorias as $indice => $categoria): ?>
+                        <option value="<?= $indice ?>" 
+                            <?= ($articulo['categoria'] == $indice) ? 'selected' : null ?>
                         >
                             <?= $categoria ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
             </div>
-            <!-- Precio -->
-            <div class="mb-3">
-                <label for="unidades" class="form-label">Stock</label>
-                <input type="number" class="form-control" name="unidades"  value="<?= $articulo['unidades'] ?>">
-                <!-- <div class="form-text">Introduzca Precio</div> -->
-            </div>
-            <div class="mb-3">
-                <label for="precio" class="form-label">Precio (€)</label>
-                <input type="number" class="form-control" name="precio" step="0.01" value="<?= $articulo['precio'] ?>">
-                <!-- <div class="form-text">Introduzca Precio</div> -->
-            </div>
+            
+    
 
 
             <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
-            <button type="reset" class="btn btn-danger">Borrar</button>
+
             <button type="submit" class="btn btn-primary">Actualizar</button>
 
         </form>
@@ -79,12 +97,12 @@
 
 
         <!-- Pié del documento -->
-
+        <?php include'partials/footer.php'?>
 
     </div>
 
     <!-- javascript bootstrap 532 -->
-    <?php include 'views/layouts/javascript.html' ?>
+    <?php include 'views/layouts/javascript.php' ?>
 </body>
 
 </html>
