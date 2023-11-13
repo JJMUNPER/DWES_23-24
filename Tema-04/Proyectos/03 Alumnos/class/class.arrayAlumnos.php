@@ -1,14 +1,14 @@
 <?php
 
 /**
- *  class.arrayArticulos.php
+ *  class.arrayAlumnos.php
  * 
- * tabla de articulos
+ * tabla de Alumnos
  * 
  * Es un array donde cada elementos es un objeto de la clase Articulo
  */
 
-class ArrayArticulos
+class ArrayAlumnos 
 {
     private $tabla;
 
@@ -38,65 +38,64 @@ class ArrayArticulos
         return $this;
     }
 
-    static public function getMarcas()
+    static public function getCursos()
     {
         $marcas = [
-            'Dell',
-            'Lenovo',
-            'Asus',
-            'Acer',
-            'Toshiba',
-            'Hp',
-            'Apple',
-            'MSI',
-            'Fujitsu',
-            'LG'
+            '1SMR',
+            '2SMR',
+            '1DAW',
+            '2DAW',
+            '1ADI',
+            '2ADI'
         ];
-        asort($marcas);
-        return $marcas;
+        asort($cursos);
+        return $cursos;
     }
-    static public function getCategorias()
+    static public function getAsignaturas()
     {
-        $categorias = [
-            'Portátil',
-            'PC sobremesa',
-            'Componente',
-            'Pantalla',
-            'Impresora',
-            'Imagen',
-            'Fotografia'
+        $asignaturas = [
+            '1DAW Base de Datos',
+            '1DAW Entornos de Desarrollo',
+            '1DAW Formacion y Orientación Laboral',
+            '1DAW Lenguajes de Marcas y Sistemas de Gestión de Informacón',
+            '1DAW Programación',
+            '1DAW Sistemas Informáticos',
+            '2DAW Desarrollo web Entono Cliente',
+            '2DAW Desarrollo web Entono Servidor',
+            '2DAW Despliegue Aplicaciones Web'
         ];
-        asort($categorias);
-        return $categorias;
+        asort($asignaturas);
+        return $asignaturas;
     }
 
 
     #Se crea el objeto y lo pone  en la tabla
     public function getDatos()
     {
-        #Articulo 1
-        $articulo = new Articulo(
+        #Alumno 1
+        $alumno = new Alumno(
             1,
-            'Portátil - HP 15-DB0074NS',
-            'HP 15-DB0074NS',
-            0,
-            [2, 3, 4],
-            120,
-            379
+            'Juan Manuel',
+            'Herrera Ramírez',
+            'jmherrera@gmail.com',
+            '06/03/2002',
+            2,
+            [3, 4, 7]
+            
         );
 
         #Añadir datos a la tabla
-        $this->tabla[] = $articulo;
+        $this->tabla[] = $alumno;
 
-        #Articulo 2
+        #Alumno 2
         $articulo = new Articulo(
             2,
-            'Portátil - AMD A4-9125, 8GB RAM, 125GB',
-            'HP 255 G7, 15.6',
-            3,
-            [1, 3, 2],
-            200,
-            20.5
+            'Juan Jesus',
+            'Muñoz Perez',
+            'jjmunper@gmail.com',
+            '06/03/2000',
+            2,
+            [3,2,4]
         );
 
         #Añadir datos a la tabla
@@ -146,12 +145,12 @@ class ArrayArticulos
     }
 
     #podemos declarar este metodo como estatico porque no modifica ninguna propiedad de la clase
-    static public function mostrarCategorias(
-        $categorias,
-        $categoriasArticulo
+    static public function mostrarAsignaturas(
+        $asignaturas,
+        $asignaturasAlumno
     ) 
     {
-        $arrayCategorias = [];
+        $array = [];
         foreach ($categoriasArticulo as $indice) {
             $arrayCategorias[] = $categorias[$indice];
         }
@@ -159,7 +158,7 @@ class ArrayArticulos
         return $arrayCategorias;
     }
 
-    public function create (Articulo $data){
+    public function create (Alumno $data){
         $this->tabla[] = $data;
 
     }
