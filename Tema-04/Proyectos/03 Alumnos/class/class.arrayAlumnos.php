@@ -10,7 +10,7 @@
 
 class ArrayAlumnos 
 {
-    private $tabla;
+    public $tabla;
 
 
     public function __construct()
@@ -87,61 +87,148 @@ class ArrayAlumnos
         #Añadir datos a la tabla
         $this->tabla[] = $alumno;
 
-        #Alumno 2
-        $articulo = new Articulo(
+        $alumno = new Alumno(
             2,
+            'David',
+            'Herrera Ramírez',
+            'jmherrera@gmail.com',
+            '06/03/2002',
+            2,
+            [3, 4, 7]
+        );
+        $this->tabla[] = $alumno;
+
+        $alumno = new Alumno(
+            3,
+            'Pablo',
+            'Mateos Palas',
+            'pmatpal0105@g.educaand.es',
+            '01/05/2004',
+            3,
+            [3, 7, 8]
+        );
+        $this->tabla[] = $alumno;
+
+        $alumno = new Alumno(
+            4,
+            'Antonio Jesús',
+            'Téllez Perdigones',
+            'atelper@gmail.com',
+            '10/05/1999',
+            2,
+            [6, 7, 8]
+        );
+        $this->tabla[] = $alumno;
+
+        $alumno = new Alumno(
+            5,
+            'Juan Maria',
+            'Mateos Ponce',
+            'jmherrera@gmail.com',
+            '20/10/2004',
+            4,
+            [6, 7, 8]
+        );
+        $this->tabla[] = $alumno;
+
+        $alumno = new Alumno(
+            6,
+            'Jorge',
+            'Coronil Villalba',
+            'jcorvil600@gmail.com',
+            '17/04/1997',
+            3,
+            [6, 7, 8],
+        );
+        $this->tabla[] = $alumno;
+
+        $alumno = new Alumno(
+            7,
+            "Juan Manuel",
+            "Herrera Ramírez",
+            'jmherrera@gmail.com',
+            '06/03/2002',
+            2,
+            [3, 1, 4, 2]
+        );
+        $this->tabla[] = $alumno;
+
+        $alumno = new Alumno(
+            8,
+            'Diego',
+            'González Romero',
+            'diegogonzalezromero@gmail.com',
+            '28/03/2001',
+            3,
+            [6, 7, 8]
+        );
+        $this->tabla[] = $alumno;
+
+        $alumno = new Alumno(
+            9,
+            'Adrián',
+            'Merino Gamaza',
+            'aamergam@g.educand.es',
+            '10/12/2002',
+            2,
+            [6, 7, 8]
+        );
+        $this->tabla[] = $alumno;
+
+        $alumno1 = new Alumno(
+            10,
+            'Daniel Alfonso',
+            'Rodríguez Santos',
+            'darancuga@gmail.com',
+            '27/08/1999',
+            2,
+            [0, 1, 5]
+        );
+        $this->tabla[] = $alumno1;
+
+        $alumno = new Alumno(
+            11,
+            'Ricardo',
+            'Moreno Cantea',
+            'rmorcan@g.educaand.es',
+            '13/05/2004',
+            3,
+            [6, 7, 8]
+        );
+        $this->tabla[] = $alumno;
+
+        $alumno = new Alumno(
+            12,
+            'Jonathan',
+            'León Canto',
+            'jleocan773@g.educaand.es',
+            '19/06/2000',
+            3,
+            [6, 7, 8]
+        );
+        $this->tabla[] = $alumno;
+
+        $alumno = new Articulo(
+            13,
             'Juan Jesus',
             'Muñoz Perez',
             'jjmunper@gmail.com',
             '06/03/2000',
             2,
-            [3,2,4]
+            [3, 2, 4]
         );
+        $this->tabla[] = $alumno;
 
-        #Añadir datos a la tabla
-        $this->tabla[] = $articulo;
-
-        #Articulo 3
-        $articulo = new Articulo(
-            3,
-            'PC Sobremesa - Lenovo Intel Core i3-8100',
-            'IdeaCentre 510S-07ICB',
-            5,
-            [1, 3],
-            50,
-            12.95
+        $alumno = new Alumno(
+            14,
+            'Julian',
+            'Garcia Velazquez',
+            'jgarvel076@g.educaand.es',
+            '01/12/2004',
+            2,
+            [3, 7, 8]
         );
-
-        #Añadir datos a la tabla
-        $this->tabla[] = $articulo;
-
-        #Articulo 4
-        $articulo = new Articulo(
-            4,
-            'PC Sobremesa - HP 290 APU AMD Dual-Core A6',
-            'HP 290-a0002ns',
-            4,
-            [2, 4],
-            120,
-            15.95
-        );
-
-        #Añadir datos a la tabla
-        $this->tabla[] = $articulo;
-
-        #Articulo 5
-        $articulo = new Articulo(
-            5,
-            'PC Sobremesa - Pavilion Dual-Core A6',
-            'Asus',
-            6,
-            [2, 4],
-            143,
-            500
-        );
-
-        #Añadir datos a la tabla
-        $this->tabla[] = $articulo;
+        $this->tabla[] = $alumno;
     }
 
     #podemos declarar este metodo como estatico porque no modifica ninguna propiedad de la clase
