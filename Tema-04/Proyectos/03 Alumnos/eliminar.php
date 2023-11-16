@@ -1,12 +1,12 @@
 <?php 
 
 // Clases
-include 'class/class.articulo.php';
-include 'class/class.arrayArticulos.php';
+include 'class/class.alumno.php';
+include 'class/class.arrayAlumnos.php';
 
 //Libreria
 
-include 'libs/crud_funciones.php';
+//include 'libs/crud_funciones.php';
 
 
 // Model

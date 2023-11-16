@@ -1,4 +1,7 @@
 <?php 
+
+
+
 $articulos = generar_tabla();
 $categorias = generar_categorias();
 

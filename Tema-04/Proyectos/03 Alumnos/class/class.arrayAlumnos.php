@@ -40,7 +40,7 @@ class ArrayAlumnos
 
     static public function getCursos()
     {
-        $marcas = [
+        $cursos = [
             '1SMR',
             '2SMR',
             '1DAW',
@@ -70,8 +70,9 @@ class ArrayAlumnos
 
 
     #Se crea el objeto y lo pone  en la tabla
-    public function getDatos()
+    public function getAlumnos()
     {
+        
         #Alumno 1
         $alumno = new Alumno(
             1,
@@ -208,7 +209,7 @@ class ArrayAlumnos
         );
         $this->tabla[] = $alumno;
 
-        $alumno = new Articulo(
+        $alumno = new Alumno(
             13,
             'Juan Jesus',
             'Muñoz Perez',
@@ -229,6 +230,8 @@ class ArrayAlumnos
             [3, 7, 8]
         );
         $this->tabla[] = $alumno;
+        return $this->tabla;
+    
     }
 
     #podemos declarar este metodo como estatico porque no modifica ninguna propiedad de la clase
@@ -238,11 +241,12 @@ class ArrayAlumnos
     ) 
     {
         $array = [];
-        foreach ($categoriasArticulo as $indice) {
-            $arrayCategorias[] = $categorias[$indice];
+
+        foreach ($asignaturasAlumno as $indice) {
+            $array[] = $asignaturas[$indice];
         }
-        asort($arrayCategorias);
-        return $arrayCategorias;
+        asort($array);
+        return $array;
     }
 
     public function create (Alumno $data){
@@ -257,7 +261,7 @@ class ArrayAlumnos
 
     
 
-    public function update($indice, Articulo $data)
+    public function update(Articulo $data, $indice )
     {
         $this->tabla[$indice] = $data;
     }

@@ -20,47 +20,42 @@
 */
 
 
- //Cargamos la tabla
- $categorias = ArrayArticulos::getCategorias();
- $marcas = ArrayArticulos::getMarcas();
- //creamos un objeto de la calse Array artiulos
- $articulos = new ArrayArticulos();
- //Cargo datos
- $articulos->getDatos();
- 
- //obtener indice del articulo que voy a editar
- $indice = $_GET['indice'];
+//Cargamos la tabla de alumnos con cursos y asignaturas
+$cursos = ArrayAlumnos::getCursos();
+$asignaturas = ArrayAlumnos::getAsignaturas();
+
+//creamos un objeto de la calse Array alumnos
+$alumnos = new ArrayAlumnos();
+
+//Cargo datos
+$alumnos->getAlumnos();
+
+//obtener id del articulo que voy a editar
+$id = $_GET['id'];
 
 
-// Pillo los detalles del artículo seleccionado que están en el formulario en view.editar.php
-$datosArticulo = [
-    'descripcion' => $_POST['descripcion'],
-    'modelo' => $_POST['modelo'],
-    'marca' => $_POST['marca'],
-    'categorias' => $_POST['categorias'],
-    'unidades' => $_POST['unidades'],
-    'precio' => $_POST['precio']
-];
+// Detalles del alumno seleccionado que están en el formulario en view.editar.php
+$nombre = $_POST['nombre'];
+$apellidos = $_POST['apellidos'];
+$email = $_POST['email'];
+$fecha_nacimiento = $_POST['fecha_nacimiento'];
+$fecha_nacimiento = date('d/m/Y', strtotime($fecha_nacimiento));
+$curso = $_POST['curso'];
+$asignaturasAlumno = $_POST['asignaturas'];
 
-// Creo las variables que modificaré con los setter y las igualo con las que tiene el artículo al darle click a editar
-$descripcion = $datosArticulo['descripcion'];
-$modelo = $datosArticulo['modelo'];
-$marca = $datosArticulo['marca'];
-$categoriasArt = $datosArticulo['categorias'];
-$unidades = $datosArticulo['unidades'];
-$precio = $datosArticulo['precio'];
-
-//Con los setter cambio los valores de las variables a lo que haya cambiado en el formulario
-$articulo->setDescripcion($descripcion);
-$articulo->setModelo($modelo);
-$articulo->setMarca($marca);
-$articulo->setCategorias($categoriasArt);
-$articulo->setUnidades($unidades);
-$articulo->setPrecio($precio);
+// Creo el objeto que modificaré con los setter y las igualo con las que tiene el artículo al darle click a editar
+$alumno = new Alumno(
+    $nombre,
+    $apellidos,
+    $email,
+    $fecha_nacimiento,
+    $curso,
+    $asignaturasAlumno
+);
 
 //Añadimos el artículo
-$articulos->update($indice, $articulo);
+$alumnos->update($id, $alumno);
 
 // Generar notificación
-$notificacion = "Artículo editado correctamente";
+$notificacion = "Alumno editado correctamente";
 ?>

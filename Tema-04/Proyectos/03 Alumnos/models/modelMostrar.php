@@ -1,16 +1,27 @@
-<?php 
-$articulos = generar_tabla();
-$categorias = generar_categorias();
+<?php
 
-$indice = $_GET['indice'];
+/**
+ * 
+ * Modelo: model.mostrar.php
+ * Descripcion: muestra los detalles de un artículo sin edición
+ * 
+ * Metodo GET:
+ *          - Id del alumno que quiero editar
+ * 
+ */
 
-$indice_mostrar = buscar_en_tabla($articulos, 'indice', $indice);
 
-if ($indice_mostrar !== false ) {
-    $articulo = $articulos[$indice_mostrar];
-} else {
-    echo ("articulo no encontrado");
-}
+
+$cursos = ArrayAlumnos::getCursos();
+$asignaturas = ArrayAlumnos::getAsignaturas();
+
+$alumnos = new ArrayAlumnos();
+
+$alumnos -> getAlumnos();
+
+$indice = $_GET['id'];
+
+$alumno = $alumnos->read($indice);
 
 
 ?>

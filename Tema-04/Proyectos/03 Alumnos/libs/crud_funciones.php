@@ -136,4 +136,12 @@ function mostrarCategorias($categorias = [], $categoriasArticulo = [])
     }
     return $arrayCategorias;
 }
+
+function ultimoID($tabla)
+{
+    $array_id = array_column($tabla, 'id');
+    asort($array_id);
+    return end($array_id) + 1;
+
+}
 ?>

@@ -3,7 +3,7 @@
 
 <head>
     <?php include 'views/layouts/head.php' ?>
-    <title>Proyecto 4.2 - Gestión de articulos</title>
+    <title>Proyecto 4.2 - Alumnos</title>
 </head>
 
 <body>
@@ -12,11 +12,11 @@
 
         <!-- cabecera documento -->
         <header class="pb-3 mb-4 border-bottom">
-            <i class="bi bi-calculator"></i>
-            <span class="fs-6">Proyecto 4.2 - Gestión de articulos</span>
+        <i class="bi bi-bullseye"></i>
+            <span class="fs-6">Proyecto 4.2 - Alumnos</span>
         </header>
 
-        <legend>Formulario Nuevo Articulo</legend>
+        <legend>Formulario Nuevo Alumno</legend>
 
         <!-- Formulario Nuevo Libro -->
         <form action="create.php" method="POST">
@@ -28,53 +28,50 @@
             </div>
             <!-- Descripcion -->
             <div class="mb-3">
-                <label for="descripcion" class="form-label">Descripción</label>
-                <input type="text" class="form-control" name="descripcion">
+            <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre">
                 <!-- <div class="form-text">Introduzca título libro existente</div> -->
             </div>
             <!-- Modelo -->
             <div class="mb-3">
-                <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" name="modelo">
+            <label for="apellidos" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" name="apellidos">
                 <!-- <div class="form-text">Introduzca Autor del libro</div> -->
+            </div>
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <!-- Fecha Nacimiento -->
+            <div class="mb-3">
+                <label for="fecha_nacimiento" class="form-label">Fecha Nacimiento</label>
+                <input type="date" class="form-control" name="fecha_nacimiento">
             </div>
             <!-- marca -->
             <div class="mb-3">
-                <label for="marca" class="form-label">Marca</label>
-                <select class="form-select" aria-label="Default select example" name="marca">
-                    <option selected disabled>Seleccione una marca</option>
-                    <?php foreach ($marcas as $key => $marca): ?>
-                        <option value="<?= $key ?>">
-                            <?= $marca ?>
+                <label for="curso" class="form-label">Curso</label>
+                <select class="form-select" aria-label="Default select example" name="curso">
+                    <option selected disabled>Seleccione Curso</option>
+                    <?php foreach ($cursos as $indice => $curso): ?>
+                        <option value="<?= $indice ?>">
+                            <?= $curso ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
             </div>
-            <!-- Unidades -->
-            <div class="mb-3">
-                <label for="unidades" class="form-label">Unidades</label>
-                <input type="text" class="form-control" name="unidades">
-                <!-- <div class="form-text">Género del libro</div> -->
-            </div>
-            <!-- Precio -->
-            <div class="mb-3">
-                <label for="precio" class="form-label">Precio (€)</label>
-                <input type="number" class="form-control" name="precio" step="0.01">
-                <!-- <div class="form-text">Introduzca Precio</div> -->
-            </div>
+        
             <!-- Categoria -->
             <div class="mb-3">
-                <label for="categorias" class="form-label">Seleccione Categorías</label>
-                <div class="form-control">
-                    <?php foreach ($categorias as $indice => $categoria): ?>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="<?= $indice ?>" name="categorias[]">
-                            <label class="form-check-label" for="">
-                                <?= $categoria ?>
-                            </label>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+                <label class="form-label">Asignaturas</label>
+                <?php foreach ($asignaturas as $indice => $asignatura): ?>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="asignaturas[]" value="<?= $indice ?>">
+                        <label class="form-check-label">
+                            <?= $asignatura ?>
+                        </label>
+                    </div>
+                <?php endforeach; ?>
             </div>
 
 

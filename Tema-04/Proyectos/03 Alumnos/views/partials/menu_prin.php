@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">Articulos</a>
+        <a class="navbar-brand" href="index.php">Alumnos</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -19,10 +19,12 @@
                         Ordenar
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=descripcion">Descripción</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=modelo">Modelo</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=unidades">Unidades</a></li>
-                        <li><a class="dropdown-item" href="ordenar.php?criterio=precio">Precio</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=descripcion">Nombre</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=modelo">Apellidos</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=unidades">Email</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=precio">Fecha Nac</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=precio">Curso</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=precio">Asignaturas</a></li>
                         
                     </ul>
                 </li>

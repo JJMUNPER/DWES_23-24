@@ -31,21 +31,24 @@ class Alumno
 		$this->id = $id;
 		$this->nombre = $nombre;
 		$this->apellidos = $apellidos;
-		$this->email= $email;
+		$this->email = $email;
 		$this->fecha_nacimiento = $fecha_nacimiento;
 		$this->curso = $curso;
 		$this->asignaturas = $asignaturas;
 
 	}
 
-public function getEdad(){
 
-	$fechaNacimiento = new DateTime($this->fecha_nacimiento);
-	$hoy = new DateTime();
-	$edad= $hoy->diff($fechaNacimiento)->y;
-	return $edad;
 
-}
+	public function getEdad()
+	{
+
+		$fechaNacimiento =DateTime::createFromFormat('d/m/Y', $this->fecha_nacimiento);
+		$hoy = new DateTime();
+		$edad = $hoy->diff($fechaNacimiento)->y;
+		return $edad;
+
+	}
 
 
 

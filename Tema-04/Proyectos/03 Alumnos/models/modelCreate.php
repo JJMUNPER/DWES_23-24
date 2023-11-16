@@ -14,22 +14,23 @@
  * 
  */
 #cargamos array marcas categorias
-$categorias = ArrayArticulos::getCategorias();
-$marcas = ArrayArticulos::getMarcas();
+$cursos = ArrayAlumnos::getCursos();
+$asignaturas = ArrayAlumnos::getAsignaturas();
 
 
-#cargo articulos
-$articulos =new ArrayArticulos();
-$articulos -> getDatos();
+#cargo alumnos
+$alumnos =new ArrayAlumnos();
+$alumnos -> getAlumnos();
 
-#Cargo en variables los detalles del articulo
+#Cargo en variables los detalles del alumno
 $id = $_POST['id'];
-$descripcion = $_POST['descripcion'];
-$modelo = $_POST['modelo'];
-$marca = $_POST['marca'];
-$categorias_art = $_POST['categorias'];
-$unidades = $_POST['unidades'];
-$precio = $_POST ['precio'];
+$nombre = $_POST['nombre'];
+$apellidos = $_POST['apellidos'];
+$email = $_POST['email'];
+$fecha_nacimiento = $_POST['fecha_nacimiento'];
+$fecha_nacimiento = date('d/m/Y', strtotime($fecha_nacimiento));
+$curso = $_POST['curso'];
+$asignaturasAlumno = $_POST['asignaturas'];
 
 
 #validacion
@@ -37,23 +38,23 @@ $precio = $_POST ['precio'];
 #creo un objeto clase articulo a partir de los detalles
 #del formulario
 
-$articulo= new Articulo(
+$alumno = new Alumno(
     $id,
-    $descripcion,
-    $modelo,
-    $marca,
-    $categorias_art,
-    $unidades,
-    $precio
+    $nombre,
+    $apellidos,
+    $email,
+    $fecha_nacimiento,
+    $curso,
+    $asignaturasAlumno
     
 );
 
 
 #añadimos el articulo a la tabla
 
-$articulos -> create($articulo);
+$alumnos -> create($alumno);
 
 #genero notificacion
-$notificacion = " Articulo creado con exito";
+$notificacion = " Alumno creado con exito";
 
 ?>

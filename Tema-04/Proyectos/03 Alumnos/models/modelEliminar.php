@@ -8,19 +8,18 @@ Método GET:
         - id: Identificador del elemento a eliminar
 */
 
-$categorias = ArrayArticulos::getCategorias();
+$asignaturas = ArrayAlumnos::getAsignaturas();
+$cursos = ArrayAlumnos::getCursos();
 
-$articulos = new ArrayArticulos();
-$articulos -> getDatos();
+$alumnos = new ArrayAlumnos();
+$alumnos->getAlumnos();
 
-$marcas = ArrayArticulos::getMarcas();
-
-//Obtener indice articulo
-$indice= $_GET['indice'];
-
+//Obtener indice alumno
+$indice= $_GET['id'];
 
 
-$articulos -> delete ( $indice );
+
+$alumnos -> delete ( $indice );
 
 $notificacion =" Borrado correctamente";
 ?>

@@ -7,8 +7,8 @@
  */
 
 
-$categorias = ArrayArticulos :: getCategorias();
-$marcas = ArrayArticulos :: getMarcas();
+ $cursos = ArrayAlumnos::getCursos();
+ $asignaturas = ArrayAlumnos::getAsignaturas();
 
 
 ?>

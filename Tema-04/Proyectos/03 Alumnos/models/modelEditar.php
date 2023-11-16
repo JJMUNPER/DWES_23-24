@@ -1,21 +1,21 @@
 <?php
 /**
  * Modelo:model.editar.php 
- * Desc
+ * Descripcion: edita los detalles de un alumno
  */
 
- //Cargamos la tabla
-$categorias = ArrayArticulos::getCategorias();
-$marcas = ArrayArticulos::getMarcas();
-//creamos un objeto de la calse Array artiulos
-$articulos = new ArrayArticulos();
+ //Cargamos los alumnos
+$asignaturas = ArrayAlumnos::getAsignaturas();
+$cursos = ArrayAlumnos::getCursos();
+//creamos un objeto de la calse Array alumnos
+$alumnos = new ArrayAlumnos();
 //Cargo datos
-$articulos->getDatos();
+$alumnos->getAlumnos();
 
 //obtener indice del articulo que voy a editar
-$indice = $_GET['indice'];
+$indice = $_GET['id'];
 
-$articulo =$articulos ->read($indice);
+$alumno = $alumnos->getAlumnos()[$indice];
 
 // var_dump($articulo);
 // exit;

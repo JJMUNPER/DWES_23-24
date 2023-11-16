@@ -1,8 +1,8 @@
 <?php 
 
 // Clases
-include 'class/class.arrayArticulos.php';
-include 'class/class.articulo.php';
+include 'class/class.arrayAlumnos.php';
+include 'class/class.alumno.php';
 
 // Model
 
