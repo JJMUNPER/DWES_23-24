@@ -21,5 +21,5 @@ $indice= $_GET['id'];
 
 $alumnos -> delete ( $indice );
 
-$notificacion =" Borrado correctamente";
+$notificacion ="Borrado correctamente";
 ?>

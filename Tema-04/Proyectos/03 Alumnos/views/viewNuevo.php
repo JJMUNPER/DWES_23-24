@@ -13,10 +13,11 @@
         <!-- cabecera documento -->
         <header class="pb-3 mb-4 border-bottom">
         <i class="bi bi-bullseye"></i>
+        <?php include 'views/partials/header.php' ?>
             <span class="fs-6">Proyecto 4.2 - Alumnos</span>
         </header>
 
-        <legend>Formulario Nuevo Alumno</legend>
+        <legend>Nuevo Alumno</legend>
 
         <!-- Formulario Nuevo Libro -->
         <form action="create.php" method="POST">
@@ -52,7 +53,7 @@
             <div class="mb-3">
                 <label for="curso" class="form-label">Curso</label>
                 <select class="form-select" aria-label="Default select example" name="curso">
-                    <option selected disabled>Seleccione Curso</option>
+                    <option selected disabled>Seleccion Curso</option>
                     <?php foreach ($cursos as $indice => $curso): ?>
                         <option value="<?= $indice ?>">
                             <?= $curso ?>

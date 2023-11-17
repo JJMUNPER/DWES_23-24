@@ -19,7 +19,7 @@
         </header>
 
         <!-- Menú -->
-        <?php include 'partials/menu_prin.php' ?>
+        
 
         <legend>Formulario Edición Alumno</legend>
 
@@ -62,8 +62,8 @@
                     <?php foreach ($cursos as $indiceCuso => $curso): ?>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" value="<?= $indiceCuso ?>" name="curso"
-                                <?= (in_array($indiceCuso, (array) $alumno->getCursos()) ? 'checked' : null) ?>>
-                            <label class="form-check-label">
+                            <?= (in_array($indiceCuso, (array) $alumno->curso) ? 'checked' : null) ?>>
+                             <label class="form-check-label"><!-- ArrayAlumnos::getCursos() -->
                                 <?= $curso ?>
                             </label>
                         </div>
@@ -81,7 +81,7 @@
                     <?php foreach ($asignaturas as $indiceAsignatura => $asignatura): ?>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="<?= $indiceAsignatura ?>"
-                                name="asignatura" <?= (in_array($indiceAsignatura, $alumno->getAsignaturas()) ? 'checked' : null) ?>>
+                                name="asignaturas[]" <?= (in_array($indiceAsignatura, $alumno->asignatura) ? 'checked' : null) ?>>
                             <label class="form-check-label">
                                 <?= $asignatura ?>
                             </label>

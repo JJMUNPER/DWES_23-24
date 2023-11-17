@@ -70,8 +70,10 @@ class ArrayAlumnos
 
 
     #Se crea el objeto y lo pone  en la tabla
-    public function getAlumnos()
-    {
+    public function getAlumnos(){
+
+        //Para que no salga doble la tabla le ponemos un if
+        if (empty($this->tabla)) {
         
         #Alumno 1
         $alumno = new Alumno(
@@ -230,6 +232,7 @@ class ArrayAlumnos
             [3, 7, 8]
         );
         $this->tabla[] = $alumno;
+    }
         return $this->tabla;
     
     }
@@ -261,7 +264,7 @@ class ArrayAlumnos
 
     
 
-    public function update(Articulo $data, $indice )
+    public function update($indice, Alumno $data)
     {
         $this->tabla[$indice] = $data;
     }

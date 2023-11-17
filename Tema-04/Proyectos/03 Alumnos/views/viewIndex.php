@@ -29,7 +29,7 @@
                     <th>Apellidos</th>
                     <th>Email</th>
                     <th>Fecha Nacimiento</th>
-                    <th>Edad</th></th>
+                    <th>Edad</th>
                     <th>Curso</th>
                     <th>Asignaturas</th>
                     <th>Acciones</th>
@@ -38,16 +38,34 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($alumnos->getAlumnos() as $indice=>$alumno): ?>
+                <?php foreach ($alumnos->getAlumnos() as $indice => $alumno): ?>
                     <tr>
-                        <td><?= $alumno->id ?></td>
-                        <td><?= $alumno->nombre?></td>
-                        <td><?= $alumno->apellidos ?></td>
-                        <td><?= $alumno->email ?></td>
-                        <td><?= $alumno->fecha_nacimiento ?></td>
-                        <td><?= $alumno->getEdad() ?></td>
-                        <td ><?= $alumno->curso ?> </td>
-                        <td><?= implode(', ', ArrayAlumnos::mostrarAsignaturas(ArrayAlumnos::getAsignaturas(), $alumno->asignaturas))?></td>
+                        <td>
+                            <?= $alumno->id ?>
+                        </td>
+                        <td>
+                            <?= $alumno->nombre ?>
+                        </td>
+                        <td>
+                            <?= $alumno->apellidos ?>
+                        </td>
+                        <td>
+                            <?= $alumno->email ?>
+                        </td>
+                        <td>
+                            <?= $alumno->fecha_nacimiento ?>
+                        </td>
+                        <td>
+                            <?= $alumno->getEdad()  ?>
+                        </td>
+                        <td>
+                            <?= $alumno->curso ?>
+                        </td>
+                        <td>
+                        <td>
+                        <?= implode(', ', ArrayAlumnos::mostrarAsignaturas(ArrayAlumnos::getAsignaturas(), $alumno->asignatura))?>
+
+                        </td>
 
                         <!-- boton eliminar  -->
                         <td>
@@ -60,11 +78,10 @@
                                 <i class="bi bi-pencil"></i></a>
 
                             <a href="mostrar.php?id=<?= $indice ?>" title="Mostrar">
-                            <i class="bi bi-eye-fill"></i></a>
+                                <i class="bi bi-eye-fill"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
-                </tr>
             </tbody>
             <tfoot>
                 <tr>
@@ -78,8 +95,8 @@
 
 
         <!-- Pie del documento  -->
-        
-        <?php include 'partials/footer.php'?>
+
+        <?php include 'partials/footer.php' ?>
 
     </div>
 

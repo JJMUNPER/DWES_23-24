@@ -15,7 +15,7 @@ class Alumno
 	public $email;
 	public $fecha_nacimiento;
 	public $curso;
-	public $asignaturas;
+	public $asignatura;
 
 
 	// Creamos el constructor
@@ -26,7 +26,7 @@ class Alumno
 		$email = null,
 		$fecha_nacimiento = null,
 		$curso = null,
-		$asignaturas = []
+		$asignatura = []
 	) {
 		$this->id = $id;
 		$this->nombre = $nombre;
@@ -34,7 +34,7 @@ class Alumno
 		$this->email = $email;
 		$this->fecha_nacimiento = $fecha_nacimiento;
 		$this->curso = $curso;
-		$this->asignaturas = $asignaturas;
+		$this->asignatura = $asignatura;
 
 	}
 
@@ -44,9 +44,11 @@ class Alumno
 	{
 
 		$fechaNacimiento =DateTime::createFromFormat('d/m/Y', $this->fecha_nacimiento);
+
 		$hoy = new DateTime();
 		$edad = $hoy->diff($fechaNacimiento)->y;
 		return $edad;
+		
 
 	}
 

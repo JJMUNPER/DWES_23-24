@@ -4,7 +4,7 @@
  * Modelo:modelIndex.php 
  * Descripcion: genera en array de objetos de artículos
  */
-setlocale(LC_MONETARY, "es_ES");
+// setlocale(LC_MONETARY, "es_ES");
 
 #Cargamos los arrays a partir de los metodos estaticos de la clase
 #ArrayAlumnoss. 

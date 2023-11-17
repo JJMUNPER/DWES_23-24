@@ -31,7 +31,8 @@ $alumnos = new ArrayAlumnos();
 $alumnos->getAlumnos();
 
 //obtener id del articulo que voy a editar
-$id = $_GET['id'];
+$id =$_GET['id'];
+//$id =$_GET['indice']; Con este el fallo que da es mas gordo
 
 
 // Detalles del alumno seleccionado que están en el formulario en view.editar.php
@@ -41,7 +42,7 @@ $email = $_POST['email'];
 $fecha_nacimiento = $_POST['fecha_nacimiento'];
 $fecha_nacimiento = date('d/m/Y', strtotime($fecha_nacimiento));
 $curso = $_POST['curso'];
-$asignaturasAlumno = $_POST['asignaturas'];
+$asignaturasEdit = isset($_POST['asignaturas']) ? $_POST['asignaturas'] : [];
 
 // Creo el objeto que modificaré con los setter y las igualo con las que tiene el artículo al darle click a editar
 $alumno = new Alumno(
@@ -50,7 +51,7 @@ $alumno = new Alumno(
     $email,
     $fecha_nacimiento,
     $curso,
-    $asignaturasAlumno
+    $asignaturasEdit
 );
 
 //Añadimos el artículo

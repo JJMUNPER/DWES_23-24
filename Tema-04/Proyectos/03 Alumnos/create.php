@@ -5,7 +5,7 @@
 
 // Clases
 include 'class/class.alumno.php';
-include 'class/class.arrayAlumno.php';
+include 'class/class.arrayAlumnos.php';
 
 
 //Libreria

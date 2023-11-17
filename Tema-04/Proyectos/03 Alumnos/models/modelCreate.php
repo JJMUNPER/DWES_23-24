@@ -30,7 +30,7 @@ $email = $_POST['email'];
 $fecha_nacimiento = $_POST['fecha_nacimiento'];
 $fecha_nacimiento = date('d/m/Y', strtotime($fecha_nacimiento));
 $curso = $_POST['curso'];
-$asignaturasAlumno = $_POST['asignaturas'];
+$asignaturasEdit = $_POST['asignaturas'];
 
 
 #validacion
@@ -45,7 +45,7 @@ $alumno = new Alumno(
     $email,
     $fecha_nacimiento,
     $curso,
-    $asignaturasAlumno
+    $asignaturasEdit
     
 );
 
