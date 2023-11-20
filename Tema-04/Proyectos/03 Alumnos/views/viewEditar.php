@@ -28,7 +28,7 @@
             <!-- id -->
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Id</label>
-                <input type="text" class="form-control" name="id" value="<?= $alumno->id ?>" disabled>
+                <input type="text" class="form-control" name="id" value="<?= $alumno->id ?>" readonly>
                 <!-- <div class="form-text">Introduzca identificador del articulo</div> -->
             </div>
             <!-- nombre -->

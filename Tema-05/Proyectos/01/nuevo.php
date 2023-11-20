@@ -1,11 +1,11 @@
 <?php 
 
 #Controlador: nuevo.php
-#Descripción: mostrar un formulario que permita añadir nuevo articulo
+#Descripción: mostrar un formulario que permita añadir nuevo alumno
 
 // Librería
-include 'class/class.alumno.php';
-include 'class/class.arrayAlumnos.php';
+include 'class/class.conexion.php';
+include 'class/class.fp.php';
 
 
 

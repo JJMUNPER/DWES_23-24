@@ -23,19 +23,19 @@
             <!-- id -->
             <div class="mb-3">
             <label class="form-label">id</label>
-                <input type="number" class="form-control" name="id" value="<?= $alumno->id; ?>" disabled>
+                <input type="number" class="form-control" name="id" value="<?= $alumno->id; ?>" readonly>
                 <!-- <div class="form-text">Introduzca identificador del articulo</div> -->
             </div>
             <!-- nombrr -->
             <div class="mb-3">
             <label class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" value="<?= $alumno->nombre; ?>" disabled>
+                <input type="text" class="form-control" name="nombre" value="<?= $alumno->nombre; ?>" readonly>
                 <!-- <div class="form-text">Introduzca título articulo existente</div> -->
             </div>
             <!-- apellidos -->
             <div class="mb-3">
             <label for="apellidos" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" name="apellidos" value="<?= $alumno->apellidos ?>" disabled>
+                <input type="text" class="form-control" name="apellidos" value="<?= $alumno->apellidos ?>" readonly>
                 <!-- <div class="form-text">Introduzca modelo del articulo</div> -->
             </div>
             <!-- emai -->
@@ -53,9 +53,9 @@
             <!-- Curso -->
             <div class="mb-3">
                 <label class="form-label">Curso</label>
-                <select class="form-select" aria-label="Default select example" name="curso" disabled>
+                <select class="form-select" aria-label="Default select example" name="curso" readonly>
                     <?php foreach ($cursos as $key => $curso): ?>
-                        <option value="<?= $key ?>" <?= ($alumno->curso == $key) ? 'selected' : null ?> disabled>
+                        <option value="<?= $key ?>" <?= ($alumno->curso == $key) ? 'selected' : null ?> readonly>
                             <?= $curso ?>
                         </option>
                     <?php endforeach; ?>
