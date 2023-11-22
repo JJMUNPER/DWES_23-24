@@ -39,9 +39,11 @@
             </thead>
             
             <tbody>
+                <!-- Objeto mysqli_result puede ser asignado a foreach -->
                 <?php foreach ($alumnos as $alumno): ?>
                     <tr>
                         <!-- $alumno es un objeto de la clase mysqli_result -->
+                        <!-- Detalles de alumnos -->
                         <td><?= $alumno['id'] ?></td>
                         <td><?= $alumno['alumno'] ?></td>
                         <td class="text-end"><?= $alumno['edad'] ?></td>
@@ -52,6 +54,7 @@
                         <td ><?= $alumno['curso'] ?> </td>
 
 
+                        <!-- Botones de accion -->
                         <!-- boton eliminar  -->
                         <td>
                             <a href="eliminar.php?id=<?= $alumno['id'] ?>" title="Eliminar">

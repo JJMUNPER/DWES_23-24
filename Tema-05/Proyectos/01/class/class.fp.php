@@ -53,7 +53,7 @@ class Fp extends Conexion
 
         #Mediante Plantilla SQL o Prepare
         //Objeto de la clase mysqli_stmt
-        $stmt =$this->db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
 
         //ejecuto
         $stmt->execute();
@@ -64,7 +64,8 @@ class Fp extends Conexion
         return $result;
     }
 
-    public function getCursos(){
+    public function getCursos()
+    {
 
         $sql = "SELECT
         id,
