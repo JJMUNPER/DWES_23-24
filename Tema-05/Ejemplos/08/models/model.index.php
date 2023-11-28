@@ -12,7 +12,7 @@
 
      #Asignamos valores a las propiedades del objeto
 
-     $curso->nome = "Primero Desarrollo Aplicaciones Multiplataformas";
+     $curso->nombre = "Primero Desarrollo Aplicaciones Multiplataformas";
      $curso->ciclo = "Desarrollo Aplicaciones Multiplataforma";
      $curso->nombreCorto = "1DAM";
      $curso->nivel = "1";

@@ -14,7 +14,7 @@
     public function __construct(){
 
         try {
-            $dsn = "mysql:host =" . SERVER . ";dbname= " . DB;
+            $dsn = "mysql:host =" . SERVER . ";dbname= " . BD;
 
             $options = [
                 
@@ -24,7 +24,7 @@
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES " . CHARSET . " COLLATE " . COLLECTION
             ];
 
-            $this -> pdo = new PDO ($dsn, USER, PASS, $options);
+            $this->pdo = new PDO ($dsn, USER, PASS, $options);
 
         }
         catch (PDOException $e) {
