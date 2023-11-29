@@ -10,9 +10,8 @@
     //Conecto a la base de datos Fp?
     $conexion = new Alumnos();
 
-    #Extraigo los valores de los alumnos
-    //objeto clase pdostatement
-    $alumnos = $conexion->getAlumnos();
+    #Extraigo los valores para generar dinámicamente el select de cursos
+    $cursos = $conexion->getCursos();
 
   
 
