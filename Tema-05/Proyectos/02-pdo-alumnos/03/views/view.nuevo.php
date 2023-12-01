@@ -2,8 +2,7 @@
 <html lang="es">
 
 <head>
-    <?php include 'views/layouts/head.html' ?>
-    <title>Proyecto 5.2 - Gestión Alumnos PDO</title>
+    <?php include 'layouts/head.html' ?>
 </head>
 
 <body>
@@ -11,7 +10,7 @@
     <div class="container">
 
         <!-- cabecera documento -->
-        <?php include 'views/partials/header.php' ?>
+        <?php include 'views/partials/header.html' ?>
 
         <legend>Formulario Nuevo Alumnos</legend>
 
@@ -20,9 +19,9 @@
 
             <!-- id -->
             <!-- <div class="mb-3">
-        <label for="titulo" class="form-label">Id</label>
-        <input type="text" class="form-control" name="id">
-    </div>  -->
+                <label for="titulo" class="form-label">Id</label>
+                <input type="text" class="form-control" name="id">
+            </div>  -->
             <!-- Nombre -->
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
@@ -80,8 +79,8 @@
                 <select class="form-select" aria-label="Default select example" name="id_curso">
                     <option selected disabled>Seleccione Curso</option>
                     <?php foreach ($cursos as $data): ?>
-                        <option value="<?= $data->id ?>">
-                            <?= $data->curso ?>
+                        <option value="<?= $data['id'] ?>">
+                            <?= $data['curso'] ?>
                         </option>
                     <?php endforeach; ?>
                 </select>

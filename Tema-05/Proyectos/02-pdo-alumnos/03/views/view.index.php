@@ -80,7 +80,7 @@
             <tfoot>
                 <tr>
                     <td colspan="7">Nº Artículos
-                        <?= $alumnos->rowCOUNT(); ?>
+                        <?= $alumnos-> rowCount(); ?>
                     </td>
                 </tr>
             </tfoot>

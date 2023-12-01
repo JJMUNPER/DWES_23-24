@@ -1,48 +1,71 @@
 <?php
 
+/*
 
-//Pillamos el id del elemento que se va a editar a través de la variable indice del index
-$id_alumno = $_GET['indice']; // Capturar el ID del alumno desde la URL
+    Modelo: model.update.php
+    Descripcion: actualiza los detalles de un  artículo
 
-//Conectamos a la base de datos
-$conexion = new Alumnos();  
+    Método POST:
+                    - id 
+                    - nombre
+                    - apellidos
+                    - email
+                    - telefono
+                    - direccion
+                    - poblacion
+                    - provincia
+                    - nacionalidad
+                    - dni
+                    - fechaNac
+                    - id_curso
+    
 
-//Le metemos los datos
-$alumnos = $conexion->getAlumnos();
-$cursos = $conexion->getCursos();
+    Método GET:
+                - id -> id  del alummno que quiero editar
 
+*/
+
+# obtener id del alumno
+$id_editar = $_GET['id'];
+
+# Cargamos en varibales detalles del  formulario
+// $id             = $_GET['id'];
+$nombre         = $_POST['nombre'];
+$apellidos      = $_POST['apellidos'];
+$email          = $_POST['email'];
+$telefono       = $_POST['telefono'];
+$direccion      = $_POST['direccion'];
+$poblacion      = $_POST['poblacion'];
+$provincia      = $_POST['provincia'];
+$nacionalidad   = $_POST['nacionalidad'];
+$dni            = $_POST['dni'];
+$fechaNac       = $_POST['fechaNac'];
+$id_curso       = $_POST['id_curso'];
+
+# Creamos un  objeto de la clase Alumno
 $alumno = new Alumno();
 
-//Tomamos los valores del formulario
-$nombreEditar = $_POST['nombre'];
-$apellidosEditar = $_POST['apellidos'];
-$emailEditar = $_POST['email'];
-$telefonoEditar = $_POST['telefono'];
-$direccionEditar = $_POST['direccion'];
-$poblacionEditar = $_POST['poblacion'];
-$provinciaEditar = $_POST['provincia'];
-$nacionalidadEditar = $_POST['nacionalidad'];
-$dniEditar = $_POST['dni'];
-$fechaNacEditar = $_POST['fechaNac'];
-$id_cursoEditar = $_POST['id_curso'];
+# Asignamos valores a las propiedades
+$alumno->id = null;
+$alumno->nombre = $nombre;
+$alumno->apellidos = $apellidos;
+$alumno->email = $email;
+$alumno->telefono = $telefono;
+$alumno->direccion = $direccion;
+$alumno->poblacion = $poblacion;
+$alumno->provincia = $provincia;
+$alumno->nacionalidad = $nacionalidad;
+$alumno->dni = $dni;
+$alumno->fechaNac = $fechaNac;
+$alumno->id_curso = $id_curso;
 
-$alumno->nombre = $nombreEditar;
-$alumno->apellidos = $apellidosEditar;
-$alumno->email = $emailEditar;
-$alumno->telefono = $telefonoEditar;
-$alumno->direccion = $direccionEditar;
-$alumno->poblacion = $poblacionEditar;
-$alumno->provincia = $provinciaEditar;
-$alumno->nacionalidad = $nacionalidadEditar;
-$alumno->dni = $dniEditar;
-$alumno->fechaNac = $fechaNacEditar;
-$alumno->id_curso = $id_cursoEditar;
+# Validación
 
+# actualizamos datos
 
-//Con el método crearAlumno creamos el alumno a partir de los detalles del formulario
-$conexion->update_alumno($alumno, $id_alumno);
+$alumnos = new Alumnos();
+$alumnos-> update_alumno($alumno, $id_editar);
 
-//Generar notificacion
-$notificacion = "Alumno editado correctamente";
+// Quitamos la redirección. Se encuentra en el controlador
 
 ?>

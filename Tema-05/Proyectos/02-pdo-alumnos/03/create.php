@@ -21,7 +21,11 @@
 
 
     # Redirecciono controlador principal
-    header("location: index.php");
+    include 'views/view.index.php';
+
+        # Redirecciono controlador principal
+        header("location: index.php");
+    
     
 
 ?>

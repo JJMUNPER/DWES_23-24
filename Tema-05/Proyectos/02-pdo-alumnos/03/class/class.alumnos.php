@@ -235,5 +235,27 @@ public function update_alumno(Alumno $alumno, $id_alumno)
             exit();
         }
     }
+
+    public function read_alumno($id)
+    {
+        try {
+
+            $sql = "SELECT * FROM alumnos WHERE id = :id LIMIT 1";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $data = $stmt->fetch(PDO::FETCH_OBJ);
+
+            if (!$data) {
+                throw new Exception('Alumno No Encontrado');
+            }
+
+            return $data;
+        } catch (Exception $e) {
+            include('views/partials/errorDB.php');
+            exit();
+        }
+    }
 }
 ?>

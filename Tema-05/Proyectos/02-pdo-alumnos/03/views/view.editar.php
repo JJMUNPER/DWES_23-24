@@ -9,115 +9,102 @@
     <!-- Capa principal -->
     <div class="container">
 
-        <!-- Cabecera documento -->
-        <?php include 'partials/header.php' ?>
+        <!-- cabecera documento -->
+        <?php include 'views/partials/header.php' ?>
 
         <legend>Formulario Editar Alumno</legend>
 
-        <!-- Menú -->
-        <?php include 'partials/menu_prin.php' ?>
-
-
-        <!-- Formulario Editar Alumno -->
-        <form action="update.php?indice=<?= $alumno->id ?>" method="POST">
-
-            <!-- ID -->
-            <div class="mb-3">
-                <label class="form-label">ID</label>
-                <input type="number" class="form-control" name="id" value="<?= $alumno->id; ?>" disabled>
-            </div>
+        <!-- Formulario para editar alumno -->
+        <form action="update.php?id=<?= $alumno->id ?>" method="POST">
+            <!-- id oculto -->
+            <!-- <label for="titulo" class="form-label">Id</label> -->
+            <input type="hydeen" class="form-control" name="id" value="<?= $alumno->id ?>" hidden>
 
             <!-- Nombre -->
-
             <div class="mb-3">
-                <label class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" value="<?= $alumno->nombre; ?>">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre" value="<?= $alumno->nombre ?>">
             </div>
-
             <!-- Apellidos -->
             <div class="mb-3">
-                <label for="titulo" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" name="apellidos" value="<?= $alumno->apellidos; ?>">
+                <label for="apellidos" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" name="apellidos" value="<?= $alumno->apellidos ?>">
+            </div>
+            <!-- Fecha Nacimiento -->
+            <div class="mb-3">
+                <label for="fechaNac" class="form-label">Fecha Nacimiento</label>
+                <input type="date" class="form-control" name="fechaNac" value="<?= $alumno->fechaNac ?>">
+            </div>
+            <!-- Dni -->
+            <div class="mb-3">
+                <label for="dni" class="form-label">Dni</label>
+                <input type="text" class="form-control" name="dni" value="<?= $alumno->dni ?>">
             </div>
 
             <!-- Email -->
             <div class="mb-3">
-                <label for="titulo" class="form-label">Email</label>
-                <input type="text" class="form-control" name="email" value="<?= $alumno->email; ?>">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" value="<?= $alumno->email ?>">
             </div>
-
-            <!-- Teléfono -->
+            <!-- Telefono -->
             <div class="mb-3">
-                <label class="form-label">Teléfono</label>
-                <input type="text" class="form-control" name="telefono" value="<?= $alumno->telefono; ?>">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" name="telefono" value="<?= $alumno->telefono ?>">
             </div>
-
             <!-- Dirección -->
             <div class="mb-3">
-                <label for="precio" class="form-label">Dirección </label>
-                <input type="text" class="form-control" name="direccion" value="<?= $alumno->direccion; ?>">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" name="direccion" value="<?= $alumno->direccion ?>">
             </div>
-
             <!-- Población -->
             <div class="mb-3">
-                <label for="precio" class="form-label">Población </label>
-                <input type="text" class="form-control" name="poblacion" value="<?= $alumno->poblacion; ?>">
+                <label for="poblacion" class="form-label">Población</label>
+                <input type="text" class="form-control" name="poblacion" value="<?= $alumno->poblacion ?>">
             </div>
-
             <!-- Provincia -->
             <div class="mb-3">
-                <label for="precio" class="form-label">Provincia </label>
-                <input type="text" class="form-control" name="provincia" value="<?= $alumno->provincia; ?>">
+                <label for="provincia" class="form-label">Provincia</label>
+                <input type="text" class="form-control" name="provincia" value="<?= $alumno->provincia ?>">
             </div>
-
             <!-- Nacionalidad -->
             <div class="mb-3">
-                <label for="precio" class="form-label">Nacionalidad </label>
-                <input type="text" class="form-control" name="nacionalidad" value="<?= $alumno->nacionalidad; ?>">
+                <label for="nacionalidad" class="form-label">Nacionalidad</label>
+                <input type="text" class="form-control" name="nacionalidad" value="<?= $alumno->nacionalidad ?>">
             </div>
-
-            <!-- DNI -->
+            <!-- Curso Select -->
             <div class="mb-3">
-                <label for="precio" class="form-label">DNI </label>
-                <input type="text" class="form-control" name="dni" value="<?= $alumno->dni; ?>">
-            </div>
-
-            <!-- Fecha de Nacimiento -->
-            <div class="mb-3">
-                <label for="precio" class="form-label">Fecha de Nacimiento </label>
-                <input type="text" class="form-control" name="fechaNac" value="<?= $alumno->fechaNac; ?>">
-            </div>
-
-            <!-- Curso -->
-            <div class="mb-3">
-                <label class="form-label">Curso</label>
+                <label for="id_curso" class="form-label">Curso</label>
                 <select class="form-select" aria-label="Default select example" name="id_curso">
-                    <?php foreach ($cursos as $curso) : ?>
-                        <option value="<?= $curso->id ?>" <?= ($alumno->id_curso == $curso->id) ? 'selected' : null ?>>
-                            <?= $curso->curso ?>
+                    <option selected disabled>Seleccione Curso</option>
+                    <?php foreach ($cursos as $data) : ?>
+                        <option value="<?= $data->id ?>" <?= ($data->id == $alumno->id_curso)? 'selected': null ?>>
+                            <?= $data->curso ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
             </div>
 
-
-
+            <!-- botones de acción -->
             <a class="btn btn-secondary" href="index.php" role="button">Cancelar</a>
+            <button type="reset" class="btn btn-danger">Restablecer</button>
             <button type="submit" class="btn btn-primary">Actualizar</button>
 
         </form>
+
         <br>
         <br>
         <br>
 
+
+
+
+        <!-- Pié del documento -->
+        <?php include 'views/partials/footer.html' ?>
 
     </div>
-    <!-- Pie de documento -->
-    <?php include 'partials/footer.html' ?>
 
-
-    <!-- js bootstrap 532-->
-    <?php include 'layouts/javascript.html' ?>
+    <!-- javascript bootstrap 532 -->
+    <?php include 'views/layouts/javascript.html' ?>
 </body>
 
 </html>
