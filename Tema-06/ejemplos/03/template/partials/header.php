@@ -1,11 +1,4 @@
-<header>
-    <hgroup>
-        <!-- Titulos y subtitulos -->
-        <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h4 class="display-7">Model Vista Controlador </h4>
-            <p class="lead">Tema 6 - DWES - Curso 23/24</p>
-        </div>
-        </div>
-    </hgroup>
+<header class="pb-3 mb-4 border-bottom">
+    <i class="bi bi-pc-display"></i>
+    <span class="fs-3">Proyecto 5.2- Gestión de Alumnos</span>
 </header>

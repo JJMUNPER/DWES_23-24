@@ -22,6 +22,13 @@
          * Creamos un nuevo alumno
          */
         function new(){
+            #etiqueta title de la vista
+            $this->view->title="Añadir - Gestión Alumnos";
+
+            #obtener los cursos para generar diámicamente lista cursos
+            $this->view->cursos = $this->model->getCursos();
+
+            #Cargo la vista con el formulario nuevo alumno
             $this->view->render('alumno/new/index');
         }
         /**

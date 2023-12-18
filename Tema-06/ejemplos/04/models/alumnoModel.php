@@ -59,5 +59,42 @@ ORDER BY id";
             exit();
         }
     }
-}
+
+    public function getCursos(){
+
+        try{
+            #plantilla
+            $sql= "
+            SELECT
+                    id,
+                    nombreCorto curso
+            FROM
+                    cursos
+            ORDER BY
+                    nombreCorto
+                    ";
+                    
+            // Conectamos con la base de datos
+            // $this->db es un objeto de la clase database
+            // Ejecutamos el  método connecto de esa clase
+            $conexion = $this->db->connect();
+
+            // Preparamos la consulta
+            $pdostmt = $conexion->prepare($sql);
+
+            // Establecemos el tipo de fetch
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+
+            // Ejecutamos la consulta
+            $pdostmt->execute();
+
+            // Devolvemos el objeto de tipo PDOStatement
+            return $pdostmt;
+        } catch (PDOException $e) {
+            include 'template/partials/errorDB.php';
+            exit();
+        }
+        }
+    }
+
 ?>
