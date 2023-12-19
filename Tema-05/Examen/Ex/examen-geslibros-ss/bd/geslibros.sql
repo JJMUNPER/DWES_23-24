@@ -12,15 +12,17 @@ CREATE TABLE IF NOT EXISTS temas (
 );
 
 INSERT INTO temas (id, tema) VALUES
-(1,'Informática'),
-(2,'Matemáticas'),
-(3,'Novela'),
-(4,'Viajes'),
-(5,'Belleza'),
-(6,'Deportes'),
-(7,'Astronomía'),
-(8,'Música'),
-(9, 'Ciencia');
+(1, 'Informática'),
+(2, 'Matemáticas'),
+(3, 'Novela'),
+(4, 'Viajes'),
+(5, 'Belleza'),
+(6, 'Deportes'),
+(7, 'Astronomía'),
+(8, 'Música'),
+(9, 'Ciencia'),
+(10, 'Idiomas'),
+(11, 'Salud');
 
 DROP TABLE IF EXISTS provincias;
 CREATE TABLE provincias (
@@ -84,7 +86,6 @@ INSERT INTO Provincias (id, provincia) VALUES
 (50, 'Zaragoza'),
 (51, 'Ceuta'),
 (52, 'Melilla');
- 
  
  DROP TABLE IF EXISTS editoriales;
 CREATE TABLE IF NOT EXISTS editoriales (
