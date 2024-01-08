@@ -29,6 +29,13 @@
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="expresion">
                     <button class="btn btn-outline-secondary" type="submit">Buscar</button>
                 </form>
+
+                <!-- Filtrado 8==D -->
+                <form action="filtrar.php" method="GET">
+    <label for="filtrar">Búsqueda:</label>
+    <input type="text" name="filtrar" id="libro">
+    <button type="submit">Buscar</button>
+</form>
                 </div>
             </div>
         </nav>

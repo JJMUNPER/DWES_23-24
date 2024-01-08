@@ -24,7 +24,7 @@ class Database
 
         try {
 
-            $dbh = "mysql:host=" . $this->host . ";dbname=" . $this->db;
+            $dbh = "mysql:host=" . $this->host . "dbname=" . $this->db;
             $charset = $this->charset;
             $opciones = [
 

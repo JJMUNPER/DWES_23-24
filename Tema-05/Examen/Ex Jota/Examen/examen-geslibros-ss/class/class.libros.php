@@ -102,6 +102,17 @@ class Libros extends Conexion
             return $pdostmt;
 
     }
+
+    public function filtrar(){
+        $sql = "SELECT * FROM geslibros";
+        
+        $stmt = $this->libro->prepare($sql);
+        $expresion = "%" . $libros . "%";
+        $stmt->bindParam(':expresion', $libro, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
 }
 
 

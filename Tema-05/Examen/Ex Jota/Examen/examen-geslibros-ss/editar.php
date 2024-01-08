@@ -10,7 +10,7 @@
     */
 
     #Cargamos constante
-    include 'config/config.php';
+    include 'config/db.php';
 
     #Clases
     include 'class/class.conexion.php';

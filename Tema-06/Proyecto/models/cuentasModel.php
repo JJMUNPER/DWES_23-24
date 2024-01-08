@@ -20,7 +20,7 @@ class cuentasModel extends Model
                 cl.nombre, 
                 cl.apellidos
             FROM 
-                cuentas as c inner join clientes as cl on c.id_cliente=cl.id order by c.id;";
+                cuentas as c INNER JOIN clientes as cl on c.id_cliente=cl.id order by c.id";
 
             $conexion = $this->db->connect();
 

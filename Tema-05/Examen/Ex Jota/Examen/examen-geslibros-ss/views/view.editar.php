@@ -14,7 +14,7 @@
         <?php  include 'views/partials/partial.header.php'?>
         <legend>Formulario Nuevo Libro</legend>
 
-        <form action="update.php?id=<?=$libro->id?>" method="POST">
+        <form action="update.php?id=<?=$libro->id?>" method='POST'>
             <!-- título -->
             <div class="mb-3">
                 <label for="titulo" class="form-label">Titulo</label>

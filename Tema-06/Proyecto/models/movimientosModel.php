@@ -7,9 +7,7 @@ class movimientosModel extends Model
     public function get($idCuenta)
     {
         try {
-            // plantilla
-            // id, id_cuenta, fecha_hora, concepto, tipo, cantidad, saldo
-
+            
             $sql = " 
             SELECT 
                 m.id,
@@ -47,7 +45,7 @@ class movimientosModel extends Model
     public function getCuenta($idCuenta)
     {
         try {
-            // plantilla
+            
 
             $sql = " 
             SELECT 
@@ -66,7 +64,7 @@ class movimientosModel extends Model
             $result = $conexion->prepare($sql);
 
             $result->bindParam(':id', $idCuenta);
-            //Establez como quiero q devuelva el resultado 
+            
 
             $result->setFetchMode(PDO::FETCH_OBJ);
 
@@ -83,7 +81,7 @@ class movimientosModel extends Model
     public function create($mov, $id,)
     {
         try {
-            // plantilla 
+            
             $sql =
                 " INSERT INTO movimientos (id_cuenta,fecha_hora,concepto,tipo,cantidad) 
                     values( 
@@ -126,7 +124,7 @@ class movimientosModel extends Model
                     id=(select id from movimientos order by id desc limit 1)";
 
             $pdoSt3 = $conexion->prepare($sql3);
-            // $pdoSt3->bindParam(":id", $id, PDO::PARAM_INT);
+            
 
             // ejecuto
             $pdoSt->execute();
