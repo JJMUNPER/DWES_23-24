@@ -14,7 +14,7 @@
         <?php require_once "template/partials/menu.php"; ?>
 
         <?php
-        include "views/cuentas/partials/cabecera.php" ?>
+        include "views/cuentas/partials/header.php" ?>
 
 
         <!-- Menu principal -->

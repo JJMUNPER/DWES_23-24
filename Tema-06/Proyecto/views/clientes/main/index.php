@@ -1,74 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 
-<head>
-    <!-- head -->
-    <?php require_once("template/partials/head.php");  ?>
+<!-- Head -->
 
+<head>
+	<?php require_once("template/partials/head.php") ?>
+	<title><?= $this->title ?></title>
 </head>
 
 <body>
+	<!-- Menú Proyecto -->
+	<?php require_once("template/partials/menu.php") ?>
+	<br><br><br>
+	<!-- Page Content -->
+	<div class="container">
 
-    <div class="container" style="padding-top: 2%;">
+		<!-- Cabecera -->
+		<?php require_once("views/cliente/partials/header.php") ?>
 
-        <?php require_once "template/partials/menu.php"; ?>
+		<!-- Mensajes -->
+		<?php require_once("template/partials/notify.php") ?>
 
-        <?php
-        include "views/clientes/partials/cabecera.php" ?>
+		<!-- Erorres -->
+		<?php require_once("template/partials/error.php") ?>
 
+		<!-- Estilo card de bootstrap -->
+		<div class="card">
+			<div class="card-header">
+				Tabla de Clientes
+			</div>
+			<div class="card-header">
+				<!-- Menú -->
+				<?php require_once("views/cliente/partials/menu.php") ?>
+			</div>
+			<div class="card-body">
 
-        <!-- Menu principal -->
-        <?php require_once "views/clientes/partials/menu.php" ?>
-        <table class="table">
-            <thead>
-                <tr>
-                
-                    <th>Id </th>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Email</th>
-                    <th>Telefono</th>
-                    <th>Ciudad</th>
-                    <th>DNI</th>
-                    <th>Acciones</th>
+				<!-- Muestra datos de la tabla -->
+				<table class="table">
+					<!-- Encabezado tabla -->
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nombre</th>
+							<th>Apellidos</th>
+							<th>Email</th>
+							<th>Telefono</th>
+							<th>Ciudad</th>
+							<th>DNI</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<!-- Mostramos cuerpo de la tabla -->
+					<tbody>
+						<?php while ($cliente = $this->clientes->fetch()) : ?>
+							<tr>
+								<!-- Mostrar datos de clientes -->
+								<td><?= $cliente->id ?></td>
+								<td><?= $cliente->nombre ?></td>
+								<td><?= $cliente->apellidos ?></td>
+								<td><?= $cliente->email ?></td>
+								<td><?= $cliente->telefono ?></td>
+								<td><?= $cliente->ciudad ?></td>
+                                <td><?= $cliente->dni ?></td>
 
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($this->clientes as $cliente) : ?>
-                    <tr>
-                        <td><?= $cliente->id ?></td>
-                        <td><?= $cliente->nombre ?></td>
-                        <td><?= $cliente->apellidos ?></td>
-                        <td><?= $cliente->email ?></td>
-                        <td><?= $cliente->telefono ?></td>
-                        <td><?= $cliente->ciudad ?></td>
-                        <td><?= $cliente->dni ?></td>
-                        <td>
-                            <a href="<?= URL ?>clientes/delete/<?= $cliente->id ?>" title="Eliminar" onclick="return confirm('¿Quieres Borrar?')"> <i class="bi bi-trash"></i> </a>
-                            <a href="<?= URL ?>clientes/editar/<?= $cliente->id ?>" title="Editar"> <i class="bi bi-pencil"></i> </a>
-                            <a href="<?= URL ?>clientes/mostrar/<?= $cliente->id ?>" title="Mostrar"> <i class="bi bi-eye"></i> </a>
+								<!-- botones de acción -->
+								<td>
+									<!-- botón  eliminar -->
+									<a href="<?= URL ?>cliente/delete/<?= $cliente->id ?>" title="Eliminar">
+										<i class="bi bi-trash-fill"></i></a>
 
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="8">Nº Registros: <?= $this->clientes->rowCount() ?> </td>
-                </tr>
-            </tfoot>
-            <caption>Tabla de clientes </caption>
+									<!-- botón  editar -->
+									<a href="<?= URL ?>cliente/edit/<?= $cliente->id ?>" title="Editar">
+										<i class="bi bi-pencil-square"></i></a>
 
-        </table>
+									<!-- botón  mostrar -->
+									<a href="<?= URL ?>cliente/show/<?= $cliente->id ?>" title="Mostrar">
+										<i class="bi bi-card-text"></i></a>
+								</td>
 
-    </div>
+							</tr>
+						<?php endwhile; ?>
 
-    <!-- footer -->
-    <?php require_once "template/partials/footer.php" ?>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer">
+				<small class="text-muted">
+					<td colspan="9">Nº Clientes: <?= $this->clientes->rowCount() ?></td>
+				</small>
+			</div>
+		</div>
+	</div>
 
-    <!-- Bootstrap JS y popper -->
-    <?php require_once "template/partials/javascript.php" ?>
+	<!-- /.container -->
+
+	<?php require_once("template/partials/footer.php") ?>
+	<?php require_once("template/partials/javascript.php") ?>
 
 </body>
 

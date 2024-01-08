@@ -13,7 +13,7 @@
         
     <div class="container">
         
-        <?php include "views/clientes/partials/cabecera.php" ?>
+        <?php include "views/clientes/partials/header.php" ?>
 
         <div class="mb-3">
             <form action="<?=URL?>clientes/create" method="POST">

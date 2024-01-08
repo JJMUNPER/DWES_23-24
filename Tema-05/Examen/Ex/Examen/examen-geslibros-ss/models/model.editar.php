@@ -7,7 +7,7 @@
         para autores y editoriales
     */
 
-    # tomamos por GET el id  a editar
+    # tomamos por GET el id  a editar  (8===D--)
     $id_editar = $_GET['id'];
 
 

@@ -10,7 +10,7 @@
     <!-- Capa Principal -->
     <div class="container">
 
-        <!-- partial.header -->
+        <!-- partial.header  (8===D--)-->
         <?php include ('views/partials/partial.header.php'); ?>   
          
         <!-- partial.menu -->
@@ -47,7 +47,7 @@
                             <td class="text-end"><?=number_format($libro->coste,2,',')?> €</td>
                             <td class="text-end"><?=number_format($libro->pvp,2,',')?> €</td>
                             
-                            <!-- Columna de acciones -->
+                            <!-- Columna de acciones (8===D--)-->
                             <td>
                                 <a href="eliminar.php?id=<?=$libro->id?>" title="Eliminar" ><i class="bi bi-trash-fill" onclick="return confirm('Confimar elimación del libro')"></i></a>
                                 <a href="editar.php?id=<?=$libro->id?>" title="Editar"><i class="bi bi-pencil-fill"></i></a>
@@ -64,7 +64,7 @@
     </div>
     <br><br><br>
 
-    <!-- Cerrar la conexion -->
+    <!-- Cerrar la conexion (8===D--)-->
     <?php $libros = null;?>
 
     <!-- partial.footer -->

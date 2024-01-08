@@ -1,289 +1,279 @@
 <?php
 
+/*
+        clienteModel.php
 
-class cuentasModel extends Model
+        Modelo del controlador cuentas
+
+        Definir los métodos de acceso a la base de datos
+
+        - insert
+        - update
+        - select
+        - delete
+        - etc
+    
+        */
+
+class cuentaModel extends Model
 {
+
+    /*
+        Extrae los detalles de las cuentas
+    */
 
     public function get()
     {
         try {
-            // plantilla
-            $sql = " 
-            SELECT 
-                c.id,
-                c.num_cuenta,
-                c.id_cliente,
-                c.fecha_alta,
-                c.fecha_ul_mov,
-                c.num_movtos,
-                c.saldo,
-                cl.nombre, 
-                cl.apellidos
-            FROM 
-                cuentas as c INNER JOIN clientes as cl on c.id_cliente=cl.id order by c.id";
+            //Sentencia SQL
+            $sql = "SELECT 
+            cuentas.id,
+            cuentas.num_cuenta,
+            clientes.nombre AS nombreCuenta,
+            clientes.apellidos AS apellidosCuenta,
+            cuentas.fecha_alta,
+            cuentas.fecha_ul_mov,
+            cuentas.num_movtos,
+            cuentas.saldo
+            FROM gesbank.cuentas
+            INNER JOIN clientes ON cuentas.id_cliente = clientes.id
+            ORDER BY cuentas.id";
 
+            //Conectamos a la base de datos
+            //$this->db es un objeto de la clase Database
+            //Este objeto usará el método connect de esta clase
             $conexion = $this->db->connect();
 
-            $result = $conexion->prepare($sql);
-            //Establez como quiero q devuelva el resultado 
+            //Ejecutamos con un prepare
+            $pdostmt = $conexion->prepare($sql);
 
-            $result->setFetchMode(PDO::FETCH_OBJ);
+            //Establecemos tipo fetch
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
 
-            // ejecuto
-            $result->execute();
+            //Ejecutamos
+            $pdostmt->execute();
 
-            return $result;
+            //Devolvemos el objeto pdostatement
+            return $pdostmt;
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            include_once('template/partials/error.php');
             exit();
         }
     }
 
-    public function create($cuenta)
+    public function create(classCuenta $cuenta)
     {
         try {
-            // plantilla 
-            $sql =
-                " INSERT INTO cuentas (num_cuenta,id_cliente,fecha_alta,fecha_ul_mov,num_movtos,saldo) values( 
-                    :num_cuenta,
-                    :id_cliente,
-                    :fecha_alta,
-                    :fecha_ul_mov,
-                    :num_movtos,
-                    :saldo
-                )";
 
+            //Creamos la query de SQL
+            $sql = "INSERT INTO gesbank.cuentas VALUES (
+                null,
+                :num_cuenta,
+                :id_cliente,
+                :fecha_alta,
+                :fecha_ul_mov,
+                :num_movtos,
+                :saldo,
+                now(),
+                now()
+            )";
+
+            //Conectamos a la base de datos
+            //$this->db es un objeto de la clase Database
+            //Este objeto usará el método connect de esta clase
             $conexion = $this->db->connect();
-            $pdoSt = $conexion->prepare($sql);
 
-            //Bindeamos parametros
-            $pdoSt->bindParam(":num_cuenta", $cuenta->num_cuenta, PDO::PARAM_INT);
-            $pdoSt->bindParam(":id_cliente", $cuenta->id_cliente, PDO::PARAM_INT);
-            $pdoSt->bindParam(":fecha_alta", $cuenta->fecha_alta);
-            $pdoSt->bindParam(":fecha_ul_mov", $cuenta->fecha_ul_mov);
-            $pdoSt->bindParam(":num_movtos", $cuenta->num_movtos, PDO::PARAM_INT);
-            $pdoSt->bindParam(":saldo", $cuenta->saldo, PDO::PARAM_INT);
+            //Ejecutamos con un prepare
+            $pdostmt = $conexion->prepare($sql);
 
-            // ejecuto
-            $pdoSt->execute();
+            //Vinculamos los parámetros
+            $pdostmt->bindParam(':num_cuenta', $cuenta->num_cuenta, PDO::PARAM_STR, 20);
+            $pdostmt->bindParam(':id_cliente', $cuenta->id_cliente, PDO::PARAM_INT, 10);
+            $pdostmt->bindParam(':fecha_alta', $cuenta->fecha_alta);
+            $pdostmt->bindParam(':fecha_ul_mov', $cuenta->fecha_ul_mov);
+            $pdostmt->bindParam(':num_movtos', $cuenta->num_movtos);
+            $pdostmt->bindParam(':saldo', $cuenta->saldo, PDO::PARAM_STR);
+
+            //Ejecutamos
+            $pdostmt->execute();
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            include_once('template/partials/error.php');
             exit();
         }
     }
 
-
-    public function getClientes()
+    public function read(int $id)
     {
         try {
-            // plantilla
-            $sql = " 
-            SELECT 
-                id,
-                apellidos,
-                nombre,
-                telefono,
-                ciudad,
-                dni,
-                email
-            FROM 
-                clientes;";
 
+            //Creamos la query de SQL
+            $sql = "SELECT * FROM gesbank.cuentas WHERE id=:id";
+
+            //Conectamos a la base de datos
+            //$this->db es un objeto de la clase Database
+            //Este objeto usará el método connect de esta clase
             $conexion = $this->db->connect();
 
-            $result = $conexion->prepare($sql);
-            //Establez como quiero q devuelva el resultado 
+            //Creamos un objeto pdostatement
+            $pdostmt = $conexion->prepare($sql);
 
-            $result->setFetchMode(PDO::FETCH_OBJ);
+            //Vincular los parámetros con valores
+            $pdostmt->bindParam(':id', $id, PDO::PARAM_INT);
 
-            // ejecuto
-            $result->execute();
+            //Establecemos tipo fetch
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
 
-            return $result;
+            //Ejecutamos
+            $pdostmt->execute();
+
+            return $pdostmt->fetch();
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            include('template/partials/errorDB.php');
             exit();
         }
     }
 
-
-    public function delete($id)
+    public function update(int $id, classCuenta $cuenta)
     {
         try {
-            // plantilla
-            $sql = " 
-                   DELETE FROM cuentas WHERE id=:id;";
+            // Creamos la consulta a ejecutar
+            $sql = "UPDATE gesbank.cuentas SET
+                num_cuenta = :num_cuenta,
+                id_cliente = :id_cliente,
+                fecha_alta = :fecha_alta,
+                fecha_ul_mov = :fecha_ul_mov,
+                num_movtos = :num_movtos,
+                saldo = :saldo,        
+                update_at = now()   
+            WHERE id = :id
+            ";
 
+            // Preparamos la consulta   
             $conexion = $this->db->connect();
 
+            $pdostmt = $conexion->prepare($sql);
 
-            $result = $conexion->prepare($sql);
+            // Vinculamos las parámetros
+            $pdostmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $pdostmt->bindParam(':num_cuenta', $cuenta->num_cuenta, PDO::PARAM_STR, 20);
+            $pdostmt->bindParam(':id_cliente', $cuenta->id_cliente, PDO::PARAM_INT, 10);
+            $pdostmt->bindParam(':fecha_alta', $cuenta->fecha_alta);
+            $pdostmt->bindParam(':fecha_ul_mov', $cuenta->fecha_ul_mov);
+            $pdostmt->bindParam(':num_movtos', $cuenta->num_movtos);
+            $pdostmt->bindParam(':saldo', $cuenta->saldo, PDO::PARAM_STR);
 
-            $result->bindParam(":id", $id, PDO::PARAM_INT);
-
-            // ejecuto
-            $result->execute();
-
-            return $result;
-        } catch (PDOException $error) {
-            require_once("template/partials/errorDB.php");
+            // Ejecutamos la sentencia
+            $pdostmt->execute();
+        } catch (PDOException $e) {
+            include 'template/partials/errorDB.php';
             exit();
         }
     }
-    public function getCuenta($id)
+
+    public function order(int $criterioOrdenacion)
     {
         try {
-            // plantilla
-            $sql = " 
-            SELECT 
-                c.id,
-                c.num_cuenta,
-                c.id_cliente,
-                c.fecha_alta,
-                c.fecha_ul_mov,
-                c.num_movtos,
-                c.saldo
-            FROM 
-                cuentas as c where id=:id;";
+            $sql = "SELECT 
+                cuentas.id,
+                cuentas.num_cuenta,
+                clientes.nombre AS nombreCuenta,
+                clientes.apellidos AS apellidosCuenta,
+                cuentas.fecha_alta,
+                cuentas.fecha_ul_mov,
+                cuentas.num_movtos,
+                cuentas.saldo
+            FROM gesbank.cuentas INNER JOIN clientes ON cuentas.id_cliente = clientes.id
+            ORDER BY :criterioORdenacion";
 
+            //Conectamos a la base de datos
+            //$this->db es un objeto de la clase Database
+            //Este objeto usará el método connect de esta clase
             $conexion = $this->db->connect();
 
-            $result = $conexion->prepare($sql);
-            //Establez como quiero q devuelva el resultado 
-            $result->bindParam(":id", $id, PDO::PARAM_INT);
-            $result->setFetchMode(PDO::FETCH_OBJ);
+            //Ejecutamos con un prepare
+            $pdostmt = $conexion->prepare($sql);
 
-            // ejecuto
-            $result->execute();
+            //bindParam para que no se pueda introducir código en criterio
+            $pdostmt->bindParam(':criterioOrdenacion', $criterioOrdenacion, PDO::PARAM_INT);
 
-            return $result->fetch();
+            //Establecemos tipo fetch
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
+
+            //Ejecutamos
+            $pdostmt->execute();
+
+            //Devolvemos el objeto pdostatement
+            return $pdostmt;
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            include_once('template/partials/error.php');
             exit();
         }
     }
-    public function update($id, $cuenta)
-    {
-        try {
-            // plantilla
-            $sql = " UPDATE cuentas
-                    SET
-                    num_cuenta=:num_cuenta,
-                    id_cliente=:id_cliente,
-                    fecha_alta=:fecha_alta,
-                    saldo=:saldo,
-                    update_at = now()
-
-                    WHERE
-                        id=:id";
-
-            $conexion = $this->db->connect();
-
-            $pdoSt = $conexion->prepare($sql);
-
-            //Bindeamos parametros
-
-            $pdoSt->bindParam(":num_cuenta", $cuenta->num_cuenta, PDO::PARAM_STR, 30);
-            $pdoSt->bindParam(":id_cliente", $cuenta->id_cliente, PDO::PARAM_STR, 50);
-            $pdoSt->bindParam(":fecha_alta", $cuenta->fecha_alta, PDO::PARAM_STR, 50);
-            $pdoSt->bindParam(":saldo", $cuenta->saldo, PDO::PARAM_STR, 9);
-            $pdoSt->bindParam(":id", $id, PDO::PARAM_INT);
-
-            // ejecuto
-            $pdoSt->execute();
-        } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
-            exit();
-        }
-    }
-
-
-
-
-    public function order($criterio)
-    {
-        try {
-            // plantilla
-            $sql = " SELECT 
-            c.id,
-            c.num_cuenta,
-            c.id_cliente,
-            c.fecha_alta,
-            c.fecha_ul_mov,
-            c.num_movtos,
-            c.saldo,
-            cl.nombre, 
-            cl.apellidos
-        FROM 
-            cuentas as c inner join clientes as cl on c.id_cliente=cl.id order by $criterio ";
-
-            $conexion = $this->db->connect();
-
-            $result = $conexion->prepare($sql);
-
-            // $result->bindParam(":criterio", $criterio, PDO::PARAM_STR);
-
-            //Establez como quiero q devuelva el resultado 
-            $result->setFetchMode(PDO::FETCH_OBJ);
-
-            // ejecuto
-            $result->execute();
-
-            return $result;
-        } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
-            exit();
-        }
-    }
-
 
     public function filter($expresion)
     {
         try {
-            // plantilla
             $sql = "SELECT 
-                        c.id,
-                        c.num_cuenta,
-                        c.id_cliente,
-                        c.fecha_alta,
-                        c.fecha_ul_mov,
-                        c.num_movtos,
-                        c.saldo,
-                        cl.nombre, 
-                        cl.apellidos
-                    FROM 
-                        cuentas as c inner join clientes as cl on c.id_cliente=cl.id
-                    WHERE 
+            cuentas.id,
+            cuentas.num_cuenta,
+            clientes.nombre AS nombreCuenta,
+            clientes.apellidos AS apellidosCuenta,
+            cuentas.fecha_alta,
+            cuentas.fecha_ul_mov,
+            cuentas.num_movtos,
+            cuentas.saldo
+            FROM gesbank.cuentas
+            INNER JOIN clientes ON cuentas.id_cliente = clientes.id
+                WHERE CONCAT_WS(' ', cuentas.id, cuentas.num_cuenta, nombreCuenta, apellidosCuenta,
+                                     cuentas.fecha_alta, cuentas.fecha_ul_mov, cuentas.num_movtos, cuentas.saldo) 
+                LIKE :expresion";
 
-                        concat_ws(' ',
-                        c.num_cuenta,
-                        c.id_cliente,
-                        c.fecha_alta,
-                        c.fecha_ul_mov,
-                        c.num_movtos,
-                        c.saldo,
-                        cl.nombre,
-                        cl.apellidos)
-                        like ? ";
-
-            $expresion = "%" . $expresion . "%";
-
+            //Conectamos a la base de datos
+            //$this->db es un objeto de la clase Database
+            //Este objeto usará el método connect de esta clase
             $conexion = $this->db->connect();
 
-            $result = $conexion->prepare($sql);
+            //Ejecutamos con un prepare
+            $pdostmt = $conexion->prepare($sql);
 
-            $result->bindParam(1, $expresion, PDO::PARAM_STR);
+            //bindValue para que no se pueda introducir código en expresion
+            $expresion = '%' . $expresion . '%';
+            $pdostmt->bindParam(":expresion", $expresion);
 
+            //Establecemos tipo fetch
+            $pdostmt->setFetchMode(PDO::FETCH_OBJ);
 
-            //Establez como quiero q devuelva el resultado 
-            $result->setFetchMode(PDO::FETCH_OBJ);
+            //Ejecutamos
+            $pdostmt->execute();
 
-            // ejecuto
-            $result->execute();
-
-            return $result;
+            //Devolvemos el objeto pdostatement
+            return $pdostmt;
         } catch (PDOException $e) {
-            require_once("template/partials/errorDB.php");
+            include_once('template/partials/errorDB.php');
+        }
+    }
+
+    public function delete(int $id)
+    {
+        try {
+            //Sentencia SQL
+            $sql = "DELETE FROM gesbank.cuentas WHERE cuentas.id=:id";
+
+            //Conectamos a la base de datos
+            //$this->db es un objeto de la clase Database
+            //Este objeto usará el método connect de esta clase
+            $conexion = $this->db->connect();
+
+            //Ejecutamos con un prepare
+            $pdostmt = $conexion->prepare($sql);
+
+            //Vinculamos los parámetros
+            $pdostmt->bindParam(":id", $id, PDO::PARAM_INT);
+
+            //Ejecutamos
+            $pdostmt->execute();
+        } catch (PDOException $e) {
+            include 'template/partials/errorDB.php';
             exit();
         }
     }

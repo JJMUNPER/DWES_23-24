@@ -10,7 +10,7 @@
     <div class="container">
 	<br><br><br><br>
 
-		<?php require_once("template/partials/mensaje.php") ?>
+		<?php require_once("template/partials/notify.php") ?>
 		
 
 		<!-- Estilo card de bootstrap -->
@@ -20,7 +20,7 @@
 			</div>
 			<div class="card-body">
 				
-                <?php require_once("template/partials/cabecera.php") ?>
+                <?php require_once("template/partials/header.php") ?>
 
 			</div>
 		</div>

@@ -3,46 +3,31 @@
 
 // No respeta la propiedad de encapsulamiento
 
-class Cliente
+class classCliente
 {
-
     public $id;
     public $apellidos;
-    public $nombre;       
+    public $nombre;
     public $telefono;
     public $ciudad;
     public $dni;
     public $email;
-    public $create_at;
-    public $update_at;
-    
 
-    function __construct(
-
+    public function __construct(
         $id = null,
         $apellidos = null,
         $nombre = null,
         $telefono = null,
         $ciudad = null,
         $dni = null,
-        $email = null,
-        $create_at = null,
-        $update_at = null,
-
-
+        $email = null
     ) {
-
-        $this->id=$id;
-        $this->nombre=$nombre;
-        $this->apellidos= $apellidos;
-        $this->email=$email;
-        $this->telefono= $telefono;
-        $this->dni= $dni;
-        $this->ciudad= $ciudad;
-        $this->create_at= $create_at;
-        $this->update_at= $update_at;
-
-        $this->sql = "select * from alumnos";
+        $this->id = $id;
+        $this->apellidos = $apellidos;
+        $this->nombre = $nombre;
+        $this->telefono = $telefono;
+        $this->ciudad = $ciudad;
+        $this->dni = $dni;
+        $this->email = $email;
     }
-
 }
