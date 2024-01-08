@@ -15,10 +15,10 @@
     $conexion = new Libros();
 
     # extraigo los valores  
-    $autor = $conexion->getAutores();
+    $libros = $conexion->getLibros(); 
 
     #editar
-    $editorial = $conexion->getEditoriales();
+    $libro = $conexion->getLibros($id_editar);
 
    
     

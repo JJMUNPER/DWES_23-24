@@ -14,12 +14,13 @@
                         Ordenar
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href=""></a></li>
-                        <li><a class="dropdown-item" href=""></a></li>
-                        <li><a class="dropdown-item" href=""></a></li>
-                        <li><a class="dropdown-item" href=""></a></li>
-                        <li><a class="dropdown-item" href=""></a></li>
-                        <li><a class="dropdown-item" href=""></a></li>
+                    <li><a class="dropdown-item" href="ordenar.php?criterio=1">Id</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=2">Título</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=3">Autor</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=4">Editorial</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=5">Unidades</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=6">Coste</a></li>
+                        <li><a class="dropdown-item" href="ordenar.php?criterio=7">PVP</a></li>
                        
                     </ul>
                     </li>
@@ -31,11 +32,12 @@
                 </form>
 
                 <!-- Filtrado 8==D -->
-                <form action="filtrar.php" method="GET">
+                
+                <!-- <form action="filtrar.php" method="GET">
     <label for="filtrar">Búsqueda:</label>
     <input type="text" name="filtrar" id="libro">
     <button type="submit">Buscar</button>
-</form>
+</form> -->
                 </div>
             </div>
         </nav>

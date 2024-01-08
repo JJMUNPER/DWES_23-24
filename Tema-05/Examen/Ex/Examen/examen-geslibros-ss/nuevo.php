@@ -8,20 +8,17 @@
         y mostrar el formulario que permitirá añadir nuevo libro.
 
     */
+    // Cargamos las constantes necesarias
+    include 'config/config.php';
 
-    #Cargamos constante
-    include 'config/db.php';
-
-    #Clases
+    // Cargamos las clases necesarias
     include 'class/class.conexion.php';
-    include 'class/class.libro.php';
     include 'class/class.libros.php';
 
-    #Modelos
-    include 'models/model.editar.php';
+    // Cargamos el modelo correspondiente
+    include 'models/model.nuevo.php';
 
-    #Vista
-    include 'views/view.editar.php'
-
+    // Cargamos la vista principal
+    include 'views/view.nuevo.php';
 
 ?>
