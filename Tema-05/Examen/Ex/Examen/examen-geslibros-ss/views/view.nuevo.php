@@ -3,7 +3,7 @@
 
 <head>
     <!-- loyout.head -->
-    <?php include("views/layouts/layout.head.html")?>
+    <?php include("views/layouts/layout.head.html") ?>
 
     <title>Nuevo - Gestión Libros </title>
 </head>
@@ -12,7 +12,7 @@
     <!-- Capa Principal -->
     <div class="container">
         <!-- partial.header -->
-        <?php include("partials/partial.header.php")?>
+        <?php include("partials/partial.header.php") ?>
 
         <legend>Formulario Nuevo Libro</legend>
 
@@ -40,11 +40,11 @@
                 <label for="" class="form-label">Autor</label>
                 <select class="form-select" name="autor_id">
                     <option selected disabled>Seleccione Autor</option>
-                    <?php foreach($autores AS $autor):?>
-                    <option value="<?=$autor->id?>">
-                    <?=$autor->nombre?>
-                    </option>
-                    <?php endforeach;?>
+                    <?php foreach ($autores as $autor): ?>
+                        <option value="<?= $autor->id ?>">
+                            <?= $autor->nombre ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
 
@@ -53,11 +53,11 @@
                 <label for="" class="form-label">Editorial</label>
                 <select class="form-select" name="editorial_id">
                     <option selected disabled>Seleccione Editorial</option>
-                    <?php foreach ($editoriales AS $editorial):?>
-                    <option value="<?=$editorial->id?>">
-                    <?=$editorial->nombre?>
-                    </option>
-                    <?php endforeach;?>
+                    <?php foreach ($editoriales as $editorial): ?>
+                        <option value="<?= $editorial->id ?>">
+                            <?= $editorial->nombre ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
 
@@ -70,13 +70,15 @@
             <!-- precio_coste -->
             <div class="mb-3">
                 <label for="" class="form-label">Precio Coste</label>
-                <input type="number" class="form-control" aria-describedby="emailHelpId" step="0.01" placeholder=0.00 name="precio_coste">
+                <input type="number" class="form-control" aria-describedby="emailHelpId" step="0.01" placeholder=0.00
+                    name="precio_coste">
             </div>
 
             <!-- precio_venta -->
             <div class="mb-3">
                 <label for="" class="form-label">Precio Venta</label>
-                <input type="number" class="form-control" aria-describedby="emailHelpId" step="0.01" placeholder=0.00 name="precio_venta">
+                <input type="number" class="form-control" aria-describedby="emailHelpId" step="0.01" placeholder=0.00
+                    name="precio_venta">
             </div>
 
 
@@ -90,10 +92,10 @@
         <br><br><br>
 
         <!-- partial.footer -->
-        <?php include("views/partials/partial.footer.html")?>
+        <?php include("views/partials/partial.footer.html") ?>
 
         <!-- layout.javascript -->
-        <?php include("views/layouts/layout.javascript.html");?>
+        <?php include("views/layouts/layout.javascript.html"); ?>
 
 </body>
 
