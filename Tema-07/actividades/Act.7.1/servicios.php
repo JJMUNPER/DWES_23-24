@@ -7,17 +7,16 @@
 session_start();
 
 if (isset($_SESSION['num_visitas_home'])){
-    $num_visitas =  $_SESSION['num_visitas_home'];
-    $num_visitas = $num_visitas + 1;
+    $_SESSION['num_visitas_home'] ++;
+    
 } else {
     $_SESSION['num_visitas_home'] = 1;
-    $num_visitas = 1;
 }
 
 if (isset($_SESSION['fecha_hora_visita'])){
     $fecha_hora = $_SESSION['fecha_hora_visita'];
 } else  {
-    $fecha_hora = date('D, d M Y H:i:s');
+    $fecha_hora = date('d M Y H:i:s');
     $_SESSION['fecha_hora_visita'] = $fecha_hora;
 }
 
@@ -35,10 +34,10 @@ if (isset($_SESSION['fecha_hora_visita'])){
     <title>Actividad 7.1</title>
 </head>
 <body>
-    <h1>Numero Visitas: <?=$num_visitas?></h1>
+    <h1>Numero Visitas: <?=$_SESSION['num_visitas_home']?></h1>
     <li>
         <ul>
-            <a href="#">Home</a>
+            <a href="index.php">Home</a>
         </ul>
         <ul>
             <a href="acercade.php">A cerca de</a>
@@ -56,7 +55,7 @@ if (isset($_SESSION['fecha_hora_visita'])){
 
     <h3>Detalles de la pagina</h3>
     <ul>
-        <li>Página: Home</li>
+        <li>Página: Servicios</li>
         <li>SID: <?= session_id() ?></li>
         <li>Nombre Sesion: <?= session_name()?></li>
         <!-- Para estas dos variables de sesion -->

@@ -56,7 +56,7 @@ if (isset($_SESSION['fecha_hora_visita'])){
 
     <h3>Detalles de la pagina</h3>
     <ul>
-        <li>Página: Home</li>
+        <li>Página: Close</li>
         <li>SID: <?= session_id() ?></li>
         <li>Nombre Sesion: <?= session_name()?></li>
         <!-- Para estas dos variables de sesion -->

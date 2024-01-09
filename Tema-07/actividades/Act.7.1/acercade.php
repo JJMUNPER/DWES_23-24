@@ -38,7 +38,7 @@ if (isset($_SESSION['fecha_hora_visita'])){
     <h1>Numero Visitas: <?=$num_visitas?></h1>
     <li>
         <ul>
-            <a href="#">Home</a>
+            <a href="index.php">Home</a>
         </ul>
         <ul>
             <a href="acercade.php">A cerca de</a>
@@ -56,7 +56,7 @@ if (isset($_SESSION['fecha_hora_visita'])){
 
     <h3>Detalles de la pagina</h3>
     <ul>
-        <li>Página: Home</li>
+        <li>Página: A cerca de</li>
         <li>SID: <?= session_id() ?></li>
         <li>Nombre Sesion: <?= session_name()?></li>
         <!-- Para estas dos variables de sesion -->
