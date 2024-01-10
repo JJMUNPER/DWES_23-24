@@ -6,18 +6,14 @@
 
 session_start();
 
-if (isset($_SESSION['num_visitas_home'])){
-    $_SESSION['num_visitas_home'] ++;
-    
+if (isset($_SESSION['num_visitas_servicios'])) {
+    $_SESSION['num_visitas_servicios']++;
 } else {
-    $_SESSION['num_visitas_home'] = 1;
+    $_SESSION['num_visitas_servicios'] = 1;
 }
 
-if (isset($_SESSION['fecha_hora_visita'])){
-    $fecha_hora = $_SESSION['fecha_hora_visita'];
-} else  {
-    $fecha_hora = date('d M Y H:i:s');
-    $_SESSION['fecha_hora_visita'] = $fecha_hora;
+if (!isset($_SESSION['fecha_hora_visita'])) {
+    $_SESSION['fecha_hora_visita'] = date("Y-m-d H:i:s");
 }
 
 
@@ -28,13 +24,15 @@ if (isset($_SESSION['fecha_hora_visita'])){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividad 7.1</title>
 </head>
+
 <body>
-    <h1>Numero Visitas: <?=$_SESSION['num_visitas_home']?></h1>
+    
     <li>
         <ul>
             <a href="index.php">Home</a>
@@ -56,12 +54,21 @@ if (isset($_SESSION['fecha_hora_visita'])){
     <h3>Detalles de la pagina</h3>
     <ul>
         <li>Página: Servicios</li>
-        <li>SID: <?= session_id() ?></li>
-        <li>Nombre Sesion: <?= session_name()?></li>
+        <li>SID:
+            <?= session_id() ?>
+        </li>
+        <li>Nombre Sesion:
+            <?= session_name() ?>
+        </li>
         <!-- Para estas dos variables de sesion -->
-        <li>Fecha/Hora Inicio Sesion: <?= $_SESSION['fecha_hora_visita']?></li>
-        <li>Visitas Home: <?= $_SESSION['num_visitas_home']?></li>
+        <li>Fecha/Hora Inicio Sesion:
+            <?= $_SESSION['fecha_hora_visita'] ?>
+        </li>
+        <li>Visitas Servicios:
+            <?= $_SESSION['num_visitas_servicios'] ?>
+        </li>
     </ul>
-    
+
 </body>
+
 </html>
