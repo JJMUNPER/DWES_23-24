@@ -428,10 +428,10 @@
             $conexion = $this->db->connect();
             $pdost = $conexion->prepare($sql);
             #Vinculamos
-            $pdost->bindParam(':id', $id_curso, PDO::PARAM_INT);
+            $pdost->bindParam(':id_curso', $id_curso, PDO::PARAM_INT);
             $pdost->execute();
 
-            if($pdost->rowCount() !=1){
+            if($pdost->rowCount() ==1){
                 return true;
             }
             return false;

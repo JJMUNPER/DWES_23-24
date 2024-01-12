@@ -11,6 +11,15 @@
 
         function render() {
 
+            #Inicio o continuo sesion
+            session_start();
+
+            #Comprobar si existe mensaje
+            if (isset($_SESSION['mensaje'])){
+                $this->view->mensaje = $_SESSION['mensaje'];
+                unset($_SESSION['mensaje']);
+            }
+
             # Creo la propiedad title de la vista
             $this->view->title = "Home - Panel Control Alumnos";
             
@@ -22,6 +31,29 @@
         }
 
         function new() {
+
+            #Iniciar o continuar sesion
+            session_start();
+
+            #Creamos un objeto alumno vacio
+            $this->view->alumno = new classAlumno();
+
+            # Comprobar si vuelvo de un registro no valido
+            if(isset($_SESSION['error'])){
+                #Mensaje de error
+                $this->view->error = $_SESSION['error'];
+
+                #Autorellenar el formulario con los detalles del alumno
+                $this-view->alumno = unserialize ($_SESSION['alumno']);
+
+                #Recupero el arry errores específicos
+                $this-view->errores = $_SESSION['errores'];
+
+                #Elimino las variables de sesion
+                unset($_SESSION['error']);
+                unset($_SESSION['alumno']);
+                unset($_SESSION['errores']);
+            }
 
             # etiqueta title de la vista
             $this->view->title = "Añadir - Gestión Alumnos";
@@ -36,6 +68,7 @@
         function create ($param = []) {
 
             #Inciamos sesion 
+            session_start();
 
             #1. Seguridad. Sanemaos los datos del formulario
         
@@ -82,13 +115,13 @@
             }
 
             // FechaNac: obligatorio
-            $valores = explode ('/', $fechaNac);
+            // $valores = explode ('/', $fechaNac);
 
-            if (empty($fechaNac)){
-                $errores['fechaNac'] = 'Campo obligatorio';
-            } else if (!checkdate($valores[1], $valores[0], $valores[2])){
-                $errores ['fechaNac'] = 'Fecha no válida';
-            }
+            // if (empty($fechaNac)){
+            //     $errores['fechaNac'] = 'Campo obligatorio';
+            // } else if (!checkdate($valores[1], $valores[0], $valores[2])){
+            //     $errores ['fechaNac'] = 'Fecha no válida';
+            // }
 
             //email: obligatorio, formato válido y clave secundaria
             if (empty($email)){
@@ -103,7 +136,7 @@
             //dni: obligatorio, formato válido y clave secundaria
             $options = [
                 'options' => [
-                    'regexp' => '/^(\d{8})([A-Z])$/'
+                    'regexp' => '/^(\d{8})([A-Za-z])$/'
                 ]
                 ];
             
@@ -131,7 +164,13 @@
 
             if (!empty($errores)){
                 //errores de validacion
+                //Variables de sesion no admite objetos
                 $_SESSION['alumno'] = serialize($alumno);
+                $_SESSION['error'] = "Formulario no ha sido validado";
+                $_SESSION['errores'] = $errores;
+
+                #Redireccionamos a new
+                header ('location:' . URL. 'alumno/new');
 
             }else {
                 //

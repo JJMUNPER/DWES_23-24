@@ -1,8 +1,11 @@
-<?php if (isset($this->mensaje)):?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Mensaje </strong> <?= $this->mensaje; ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>   
+
+
+<?php if (isset($this->error)): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error </strong>
+                <?= $this->error; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
         </div>
-<?php endif;?>
+<?php endif; ?>

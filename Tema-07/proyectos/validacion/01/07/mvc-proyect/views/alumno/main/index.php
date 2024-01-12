@@ -15,6 +15,7 @@
 
 	<!-- Page Content -->
 	<div class="container">
+	
 		<!-- cabecera  -->
 		<?php require_once("views/alumno/partials/header.php") ?>
 
