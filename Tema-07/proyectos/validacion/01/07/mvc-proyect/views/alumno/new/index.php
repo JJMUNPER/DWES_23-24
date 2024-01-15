@@ -37,20 +37,34 @@
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" name="nombre" value=<?= $this->alumno->nombre ?>>
+            
+            <!-- Mostrar error Nombre -->
+            <?php if (isset($this->errores['nombre'])) : ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['nombre'] ?>
+                    </span>
+                <?php endif; ?>
             </div>
             <!-- Apellidos -->
             <div class="mb-3">
                 <label for="apellidos" class="form-label">Apellidos</label>
                 <input type="text" class="form-control" name="apellidos" value=<?= $this->alumno->apellidos ?>>
+            
+            <!-- Mostrar error Apellidos -->
+            <?php if (isset($this->errores['apellidos'])) : ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['apellidos'] ?>
+                    </span>
+                <?php endif; ?>
             </div>
             <!-- Fecha Nacimiento -->
             <div class="mb-3">
                 <label for="fechaNac" class="form-label">Fecha Nacimiento</label>
                 <input type="date" class="form-control" name="fechaNac" value=<?= $this->alumno->fechaNac ?>>
                 <!-- Mostrar posible error -->
-                <?php if (isset($this->errores['dni'])):?>
+                <?php if (isset($this->errores['fechaNac'])):?>
                     <span class="form-text text-danger" role="alert">
-                    <?=$this->errores['dni']?>
+                    <?=$this->errores['fechaNac']?>
                     </span>
 
                     <?php endif;?>
@@ -59,27 +73,52 @@
             <div class="mb-3">
                 <label for="dni" class="form-label">Dni</label>
                 <input type="text" class="form-control" name="dni" value=<?= $this->alumno->dni ?>>
+            
+            <!-- Mostrar posible error -->
+            <?php if (isset($this->errores['dni'])) : ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['dni'] ?>
+                    </span>
+                <?php endif; ?>
             </div>
 
             <!-- Email -->
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" name="email" value=<?= $this->alumno->email ?>>
+                <?php if (isset($this->errores['email'])) : ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['email'] ?>
+                    </span>
+                <?php endif; ?>
             </div>
             <!-- Telefono -->
             <div class="mb-3">
                 <label for="telefono" class="form-label">Teléfono</label>
                 <input type="tel" class="form-control" name="telefono" value=<?= $this->alumno->telefono ?>>
+                <!-- Error -->
+                <?php if (isset($this->errores['telefono'])) : ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['telefono'] ?>
+                    </span>
+                <?php endif; ?>
             </div>
             <!-- Dirección -->
             <div class="mb-3">
                 <label for="direccion" class="form-label">Dirección</label>
                 <input type="text" class="form-control" name="direccion" value=<?= $this->alumno->direccion ?>>
+            
             </div>
             <!-- Población -->
             <div class="mb-3">
                 <label for="poblacion" class="form-label">Población</label>
                 <input type="text" class="form-control" name="poblacion" value=<?= $this->alumno->poblacion ?>>
+            <!-- Mostrar error -->
+            <?php if (isset($this->errores['poblacion'])) : ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['poblacion'] ?>
+                    </span>
+                <?php endif; ?>
             </div>
             <!-- Provincia -->
             <div class="mb-3">
@@ -102,6 +141,13 @@
                         </option>
                     <?php endforeach; ?>
                 </select>
+
+                <!-- Mostrar error -->
+                <?php if (isset($this->errores['id_curso'])) : ?>
+                    <span class="form-text text-danger" role="alert">
+                        <?= $this->errores['id_curso'] ?>
+                    </span>
+                <?php endif; ?>
             </div>
 
             <!-- botones de acción -->

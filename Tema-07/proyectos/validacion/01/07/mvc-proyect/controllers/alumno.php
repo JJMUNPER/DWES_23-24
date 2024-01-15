@@ -44,10 +44,10 @@
                 $this->view->error = $_SESSION['error'];
 
                 #Autorellenar el formulario con los detalles del alumno
-                $this-view->alumno = unserialize ($_SESSION['alumno']);
+                $this->view->alumno = unserialize ($_SESSION['alumno']);
 
                 #Recupero el arry errores específicos
-                $this-view->errores = $_SESSION['errores'];
+                $this->view->errores = $_SESSION['errores'];
 
                 #Elimino las variables de sesion
                 unset($_SESSION['error']);
