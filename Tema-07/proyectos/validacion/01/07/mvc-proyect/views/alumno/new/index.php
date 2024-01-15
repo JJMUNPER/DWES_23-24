@@ -136,7 +136,7 @@
                 <select class="form-select" aria-label="Default select example" name="id_curso">
                     <option selected disabled>Seleccione Curso</option>
                     <?php foreach ($this->cursos as $data): ?>
-                        <option value="<?= $data->id ?>" <?= ($this->alumno->id_curso == $data->$id) ? 'slected' : null ?>>
+                        <option value="<?= $data->id ?>" <?= ($this->alumno->id_curso == $data->$id) ? 'selected' : null ?>>
                             <?= $data->curso ?>
                         </option>
                     <?php endforeach; ?>

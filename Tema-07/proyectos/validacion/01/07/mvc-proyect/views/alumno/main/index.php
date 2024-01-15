@@ -92,7 +92,7 @@
 								<!-- botones de acción -->
 								<td>
 									<!-- botón  eliminar -->
-									<a href="<?= URL ?>alumno/delete/<?= $alumno->id ?>" title="Eliminar">
+									<a href="<?= URL ?>alumno/delete/<?= $alumno->id ?>" title="Eliminar" onclick="return confirm ('Confirmar eliminacion del alumno')">
 										<i class="bi bi-trash-fill"></i></a>
 
 									<!-- botón  editar -->

@@ -105,6 +105,7 @@
             $errores = [];
 
             //nombre: obligatorio
+            
             if (empty($nombre)){
                 $errores['nombre'] = 'El campo nombre es obligatorio';
             }
@@ -187,6 +188,9 @@
 
         function edit($param = []) {
 
+            #iniciamos sesion
+            session_start();
+
             # obtengo el id del alumno que voy a editar
             // alumno/edit/4
 
@@ -204,6 +208,24 @@
             # obtener los cursos
             $this->view->cursos = $this->model->getCursos();
 
+            #Comprobar si el formulario viene de una no validacion
+            if(isset($_SESSION['error'])){
+                #Mensaje de error
+                $this->view->error = $_SESSION['error'];
+
+                #Autorellenar el formulario con los detalles del alumno
+                $this->view->alumno = unserialize ($_SESSION['alumno']);
+
+                #Recupero el arry errores específicos
+                $this->view->errores = $_SESSION['errores'];
+
+                #Elimino las variables de sesion
+                unset($_SESSION['error']);
+                unset($_SESSION['alumno']);
+                unset($_SESSION['errores']);
+            }
+
+
             # cargo la vista
             $this->view->render('alumno/edit/index');
 
@@ -213,34 +235,126 @@
 
         public function update($param = []) {
 
-            # Cargo id del alumno
-            $id = $param[0];
+            #iniciar sesion
+            session_start();
 
-            # Con los detalles formulario creo objeto alumno
-            $alumno = new classAlumno (
+            # 1. Saneamos los datos del formulario Filer_sanitize
+            $nombre = filter_var($_POST['nombre'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+            $apellidos = filter_var($_POST['apellidos'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+            $email = filter_var ($_POST ['email'] ??='', FILTER_SANITIZE_EMAIL);
+            $telefono = filter_var ($_POST['telefono'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+            $poblacion = filter_var ($_POST['telefono'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+            $dni = filter_var ($_POST['dni'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+            $fechaNac = filter_var ($_POST['fechaNac'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
+            $id_curso = filter_var ($_POST['id_curso'] ??= '', FILTER_SANITIZE_NUMBER_INT);
 
+            #2. 
+
+            $alumno = new classAlumno(
                 null,
-                $_POST['nombre'],
-                $_POST['apellidos'],
-                $_POST['email'],
-                $_POST['telefono'],
+                $nombre,
+                $apellidos,
+                $email,
+                $telefono,
                 null,
-                $_POST['poblacion'],
+                $poblacion,
                 null,
                 null, 
-                $_POST['dni'],      
-                $_POST['fechaNac'],
-                $_POST['id_curso']
-
+                $dni,      
+                $fechaNac,
+                $id_curso
             );
 
-            # Actualizo base  de datos
-            $this->model->update($alumno, $id);
+            # Cargo id del alumno que voy actualizar
+            $id = $param[0];
 
-            # Cargo el controlador principal de alumno
-            header('location:'. URL.'alumno');
+            #Obtengo el objeto alumno original
+            $alumno_orig = $this->model->read($id);
 
+            # 3. Validacion
+            //Solo si es necesario
+            //Solo en caso de modificación de campo
+
+            $errores = [];
+
+            //Validar NOmbre
+            if (strcmp ($nombre, $alumno_orig->nombre) !==0){
+                if (empty($nombre)){
+                    $errores['nombre'] = 'El campo nombre es obligatorio';
+                }
+            }
+
+            //Validar Apellidos
+            if (strcmp ($apellidos, $alumno_orig->apellidos) !==0){
+                if (empty($apellidos)){
+                    $errores['apellidos'] = 'El campo nombre es obligatorio';
+                }
+            }
+
+             //Email: obligatorio, formato válido y clave secundaria
+             if (strcmp ($email, $alumno_orig->email)){
+                $errores['email'] = 'El campo email es obligatorio';
+            } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                $errores['email'] = 'Formato de email incorrecto';
+
+            } else if (!$this->model->validateUniqueEmail($email)){
+                $errores['email'] = 'Email existente';
+            }
+
+            //dni: obligatorio, formato válido y clave secundaria
+            if (strcmp ($alumno->dni, $alumno_orig->dni)){
+            $options = [
+                'options' => [
+                    'regexp' => '/^(\d{8})([A-Za-z])$/'
+                ]
+                ];
+            
+            if (empty($dni)){
+                $errores['dni'] = 'El campo DNI es obligatorio';
+            } else if (!filter_var($dni, FILTER_VALIDATE_REGEXP, $options)){
+                $errores['dni'] = 'Formato DNI incorrecto';
+
+            } else if (!$this->model->validateUniqueDNI($dni)){
+                $errores['dni'] = 'DNI existente';
+            }
         }
+            //id_curso: obligatorio, entero, existe
+            if (strcmp ($nombre, $alumno_orig->nombre) !==0){
+            if (empty($id_curso)){
+                $errores['id_curso'] = 'Debe seleccionar un curso';
+            } else if (!filter_var($id_curso, FILTER_VALIDATE_INT)){
+                $errores['id_curso'] = 'Curso no valido';
+
+            } else if (!$this->model->validateCurso($id_curso)){
+                $errores['id_curso'] = 'Curso no existente';
+            }
+        }
+        
+
+        # 4. Comprobar validacion
+
+        if (!empty($errores)){
+            //errores de validacion
+            //Variables de sesion no admite objetos
+            $_SESSION['alumno'] = serialize($alumno);
+            $_SESSION['error'] = "Formulario no ha sido validado";
+            $_SESSION['errores'] = $errores;
+
+            #Redireccionamos a edit
+            header ('location:' . URL. 'alumno/edit/'.$id);
+
+        }else {
+            //
+        # Añadir registro a la tabla
+        $this->model->update($alumno,$id);
+
+        #mensaje
+        $_SESSION['mensaje'] = "Alumno actualizado correctamente";
+
+        # Redirigimos al main de alumnos
+        header('location:'.URL.'alumno');
+        }
+  }
 
         public function order($param = []) {
 
@@ -271,6 +385,24 @@
 
             # Cargo la vista principal de alumno
             $this->view->render('alumno/main/index');
+        }
+
+
+        public function delete($param = []) {
+
+            session_start();
+
+            #obtengo el id del alumno
+            $id = $param[0];
+            
+            #Eliminar alumno
+            $this->model->delete($id);
+
+            #gerenar mensaje
+            $_SESSION['notify'] = 'Alumno eliminado correctamente';
+
+            # redirecciono al main de alumnos
+            header ('location:'.URL.'alumno');
         }
     }
 

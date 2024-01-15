@@ -443,6 +443,20 @@
         }
     }
 
+    public function delete ($id){
+        try{
+            $sql = "DELETE FROM alumnos WHERE id = :id limit 1";
+            $conexion = $this->db->
+
+        } catch (PDOException $e) {
+
+            include_once('template/partials/errorDB.php');
+                exit();
+        }
+
+
+    }
+
 
 
     }  
