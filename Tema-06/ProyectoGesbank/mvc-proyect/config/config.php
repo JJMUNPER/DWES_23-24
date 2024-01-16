@@ -3,12 +3,11 @@
 
 # Ruta absoluta
 
-
-define('URL', 'C:\xampp\htdocs\DWES\Tema-06\Proyecto');
+define('URL', 'http://localhost/DWES/Tema-06/ProyectoGesbank/mvc-proyect/');
 
 # Constante de la Base de Datos
 define('HOST', 'localhost');
-define('DB', 'gesbank');
+define('DB', 'maratoon');
 define('USER', 'root');
 define('PASSWORD', '');
 define('CHARSET', 'utf8mb4');
