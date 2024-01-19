@@ -13,10 +13,10 @@
             $this->view->password = null;
 
             # Control de los mensajes
-            if (isset($_SESSION['mensaje'])) {
+            if (isset($_SESSION['notify'])) {
 
-                $this->view->mensaje = $_SESSION['mensaje'];
-                unset($_SESSION['mensaje']);
+                $this->view->mensaje = $_SESSION['notify'];
+                unset($_SESSION['notify']);
 
                 # Autorelleno en caso de registro con éxito
 
@@ -62,8 +62,8 @@
             session_start();
 
             # Saneamos el formulario
-            $email = filter_var($_POST['email'],FILTER_SANITIZE_EMAIL);
-	        $password = filter_var($_POST['password'],FILTER_SANITIZE_STRING);
+            $email = filter_var($_POST['email'] ??='',FILTER_SANITIZE_EMAIL);
+	        $password = filter_var($_POST['password'] ??='',FILTER_SANITIZE_STRING);
 
             # Validaciones
 
@@ -89,6 +89,7 @@
                 $errores['password'] = "Password no es correcto";
                 $_SESSION['errores'] = $errores;
 
+                //Estos dos campos de abajo es para el autocomplete//
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
 
@@ -106,7 +107,7 @@
 
                 $_SESSION['mensaje'] = "Usuario ". $user->name. " ha iniciado sesión" ;
                 
-                header("location:". URL. "alumnos");
+                header("location:". URL. "alumno");
             }
 
 
