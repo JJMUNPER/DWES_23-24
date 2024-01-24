@@ -2,7 +2,7 @@
 # Configuración básica aplicación MVC
 
 # Ruta absoluta
-define('URL', 'http://localhost/DWES/Tema-07/proyectos/validacion/validacion-Gesbank/');
+define('URL', 'http://localhost/DWES/Tema-07/proyectos/validacion/validacion-Gesbank-7.1/');
 
 # Constante de la Base de Datos
 define('HOST', 'localhost');
