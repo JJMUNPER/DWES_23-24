@@ -260,7 +260,8 @@ class clientesModel extends Model
     //-------------------------Validacion-------------------------------//
 
     # Validar DNI
-    public function validateUniqueDni($dni){
+    public function validateUniqueDni($dni)
+    {
         try {
             // Creamos la sentencia
             $sql = "SELECT * FROM gesbank.clientes WHERE dni = :dni";
@@ -277,7 +278,7 @@ class clientesModel extends Model
             // Ejecutamos la sentencia
             $pdostmt->execute();
 
-            if($pdostmt->rowCount() != 0){
+            if ($pdostmt->rowCount() != 0) {
                 return false;
             }
             return true;
@@ -288,7 +289,8 @@ class clientesModel extends Model
     }
 
     #Validamos Email
-    public function validateUniqueEmail($email){
+    public function validateUniqueEmail($email)
+    {
         try {
             // Creamos la sentencia
             $sql = "SELECT * FROM gesbank.clientes WHERE email = :email";
@@ -305,7 +307,7 @@ class clientesModel extends Model
             // Ejecutamos la sentencia
             $pdostmt->execute();
 
-            if($pdostmt->rowCount() != 0){
+            if ($pdostmt->rowCount() != 0) {
                 return false;
             }
             return true;

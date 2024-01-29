@@ -63,8 +63,7 @@ class Clientes extends Controller
         } else if (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['new'])) {
             // Mensaje usuario
             $_SESSION['mensaje'] = "No tienes privilegios para realizar dicha operación";
-
-            // Redireccionamos a la vista principal de clientes puesto que actualmente no tiene permisos
+            // Redirecciono
             header('location:' . URL . 'clientes');
         } else {
             # Creamos un objeto vacio
@@ -115,6 +114,8 @@ class Clientes extends Controller
         } else if (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['new'])) {
             // Mensaje para el usuario
             $_SESSION['mensaje'] = "No tienes privilegios para realizar dicha operación";
+            //Redirecciono
+            header('location:'. URL .'clientes');
         } else {
             # 2. Saneamiento de los datos del formulario
             $apellidos = filter_var($_POST["apellidos"] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -246,6 +247,8 @@ class Clientes extends Controller
         } else {
             $id = $param[0];
             $this->model->delete($id);
+            //Feedback usuario
+            $_SESSION['mensaje'] = "Cliente eliminado con correctamente";
             header("Location:" . URL . "clientes");
         }
 
@@ -312,9 +315,9 @@ class Clientes extends Controller
     public function update($param = [])
     {
 
-        //--------------------------Validación/Autentificación----------------------------------//
+        //--------------------------Validación/Autentificación/Gestion----------------------------------//
 
-        # 1. Inicio/continuación de sesión
+        # 1. Inicio o continuamos sesion
         session_start();
 
         # Comprobamos si el usuario está autentificado
