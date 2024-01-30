@@ -260,7 +260,12 @@ class clientesModel extends Model
     //-------------------------Validacion-------------------------------//
 
     # Validar DNI
+<<<<<<<< HEAD:Tema-07/proyectos/validacion/Gesbank/GesbankValidacion 01/mvc-proyect/models/clientesModel.php
     public function validateUniqueDni($dni){
+========
+    public function validateUniqueDni($dni)
+    {
+>>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f:Tema-07/proyectos/validacion/Gesbank/GesbankGestion de Perfiles  03/mvc-proyect/models/clientesModel.php
         try {
             // Creamos la sentencia
             $sql = "SELECT * FROM gesbank.clientes WHERE dni = :dni";
@@ -277,7 +282,11 @@ class clientesModel extends Model
             // Ejecutamos la sentencia
             $pdostmt->execute();
 
+<<<<<<<< HEAD:Tema-07/proyectos/validacion/Gesbank/GesbankValidacion 01/mvc-proyect/models/clientesModel.php
             if($pdostmt->rowCount() != 0){
+========
+            if ($pdostmt->rowCount() != 0) {
+>>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f:Tema-07/proyectos/validacion/Gesbank/GesbankGestion de Perfiles  03/mvc-proyect/models/clientesModel.php
                 return false;
             }
             return true;
@@ -288,7 +297,12 @@ class clientesModel extends Model
     }
 
     #Validamos Email
+<<<<<<<< HEAD:Tema-07/proyectos/validacion/Gesbank/GesbankValidacion 01/mvc-proyect/models/clientesModel.php
     public function validateUniqueEmail($email){
+========
+    public function validateUniqueEmail($email)
+    {
+>>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f:Tema-07/proyectos/validacion/Gesbank/GesbankGestion de Perfiles  03/mvc-proyect/models/clientesModel.php
         try {
             // Creamos la sentencia
             $sql = "SELECT * FROM gesbank.clientes WHERE email = :email";
@@ -305,7 +319,11 @@ class clientesModel extends Model
             // Ejecutamos la sentencia
             $pdostmt->execute();
 
+<<<<<<<< HEAD:Tema-07/proyectos/validacion/Gesbank/GesbankValidacion 01/mvc-proyect/models/clientesModel.php
             if($pdostmt->rowCount() != 0){
+========
+            if ($pdostmt->rowCount() != 0) {
+>>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f:Tema-07/proyectos/validacion/Gesbank/GesbankGestion de Perfiles  03/mvc-proyect/models/clientesModel.php
                 return false;
             }
             return true;
