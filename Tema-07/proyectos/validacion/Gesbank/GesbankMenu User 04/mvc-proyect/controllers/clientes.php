@@ -12,6 +12,7 @@ class Clientes extends Controller
         session_start();
 
         # Comprobamos si el usuario está autentificado
+        # Comprobamos si el usuario está autentificado
         if (!isset($_SESSION['id'])) {
             // Añadimo el siguiente aviso al usuario: 
             $_SESSION['mensaje'] = "Usuario debe autentificarse";
@@ -19,10 +20,11 @@ class Clientes extends Controller
             // Redireccionamos al login
             header('location:' . URL . 'login');
         } else if (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['main'])) {
-            // Mensaje usuario
+            // Añadimos un mensaje, que indicará que el usuario actual no tiene permmisos para
+            // usar esta funcionalidad
             $_SESSION['mensaje'] = "No tienes privilegios para realizar dicha operación";
 
-            // Redirecciono
+            // Redireccionamos al index, puesto que actualmente no tiene ningún privilegio
             header('location:' . URL . 'index');
         } else {
             # Si existe un mensaje lo mostramos
@@ -61,7 +63,12 @@ class Clientes extends Controller
         } else if (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['new'])) {
             // Mensaje usuario
             $_SESSION['mensaje'] = "No tienes privilegios para realizar dicha operación";
+<<<<<<< HEAD
+
+            // Redireccionamos a la vista principal de clientes puesto que actualmente no tiene permisos
+=======
             // Redirecciono
+>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f
             header('location:' . URL . 'clientes');
         } else {
             # Creamos un objeto vacio
@@ -112,8 +119,11 @@ class Clientes extends Controller
         } else if (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['new'])) {
             // Mensaje para el usuario
             $_SESSION['mensaje'] = "No tienes privilegios para realizar dicha operación";
+<<<<<<< HEAD
+=======
             //Redirecciono
             header('location:'. URL .'clientes');
+>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f
         } else {
             # 2. Saneamiento de los datos del formulario
             $apellidos = filter_var($_POST["apellidos"] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -245,8 +255,11 @@ class Clientes extends Controller
         } else {
             $id = $param[0];
             $this->model->delete($id);
+<<<<<<< HEAD
+=======
             //Feedback usuario
             $_SESSION['mensaje'] = "Cliente eliminado con correctamente";
+>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f
             header("Location:" . URL . "clientes");
         }
 
@@ -313,9 +326,15 @@ class Clientes extends Controller
     public function update($param = [])
     {
 
+<<<<<<< HEAD
+        //--------------------------Validación/Autentificación----------------------------------//
+
+        # 1. Inicio/continuación de sesión
+=======
         //--------------------------Validación/Autentificación/Gestion----------------------------------//
 
         # 1. Inicio o continuamos sesion
+>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f
         session_start();
 
         # Comprobamos si el usuario está autentificado

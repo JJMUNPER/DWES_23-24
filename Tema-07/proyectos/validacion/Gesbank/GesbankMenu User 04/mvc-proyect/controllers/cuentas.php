@@ -4,7 +4,12 @@ class Cuentas extends Controller
 {
 
     # Método render
+<<<<<<< HEAD
+    # Principal del controlador Cuentas
+    # Muestra los detalles de la tabla Cuentas
+=======
     # Principal del controlador Cuentas, muestra los detalles
+>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f
     function render($param = [])
     {
         //-----------------------------Validación/Auten/gestion------------------------///
@@ -107,7 +112,11 @@ class Cuentas extends Controller
 
         # Comprobamos si el usuario está autentificado
         if (!isset($_SESSION['id'])) {
+<<<<<<< HEAD
+            // Añadimo el siguiente aviso al usuario: 
+=======
             // feedback usuario
+>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f
             $_SESSION['mensaje'] = "Usuario debe autentificarse";
 
             // Redireccionamos al login
@@ -179,7 +188,11 @@ class Cuentas extends Controller
                 $_SESSION['error'] = 'Formulario no validado';
                 $_SESSION['errores'] = $errores;
 
+<<<<<<< HEAD
+                // Redireccionamos de nuevo al formulario
+=======
                 // Redireccionamos al formulario
+>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f
                 header('location:' . URL . 'cuentas/nuevo/index');
             } else {
                 # Añadimos el registro a la tabla
@@ -198,7 +211,11 @@ class Cuentas extends Controller
     # Permite eliminar una cuenta de la tabla
     function delete($param = [])
     {
+<<<<<<< HEAD
+        //---------------Auten----------------------//
+=======
         //---------------Auten/gestion----------------------//
+>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f
         # Iniciamos o continuamos sesión
         session_start();
 
@@ -228,23 +245,34 @@ class Cuentas extends Controller
     # Sólo se podrá modificar el titular o cliente de la cuenta
     function editar($param = [])
     {
+<<<<<<< HEAD
+        //-----------------Validacion/autentificación-----------//
+=======
         //-----------------Validacion/autentificación/Gestion-----------//
+>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f
         # Iniciamos o continuamos la sesión
         session_start();
 
         # Comprobamos si el usuario está autentificado
         if (!isset($_SESSION['id'])) {
+<<<<<<< HEAD
+            // Añadimo el siguiente aviso al usuario: 
+=======
             // Mensaje usuario 
+>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f
             $_SESSION['mensaje'] = "Usuario debe autentificarse";
 
             // Redireccionamos al login
             header('location:' . URL . 'login');
+<<<<<<< HEAD
+=======
         } else if (!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['edit'])) {
             //Feedback usuario
             $_SESSION['mensaje'] = "No tienes privilegios para realizar dicha operación";
 
             // Redirecciono
             header('location:' . URL . 'cuentas');
+>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f
         } else {
 
             # Obtengo el id de la cuenta a editar
@@ -302,12 +330,15 @@ class Cuentas extends Controller
 
             // Redireccionamos al login
             header('location:' . URL . 'login');
+<<<<<<< HEAD
+=======
         } else if (!in_array($_SESSION['id_rol'], $GLOBALS['cuentas']['edit'])) {
             //Feedback usuario
             $_SESSION['mensaje'] = "No tienes privilegios para realizar dicha operación";
 
             // Redirecciono 
             header('location:' . URL . 'cuentas');
+>>>>>>> 5b10e65174ce6aef1664ce77c4d88b9b790ba63f
         } else {
 
             # 1. Saneamos los datos del formulario
