@@ -17,7 +17,7 @@ $observaciones=filter_var($_POST['observaciones'] ??= null, FILTER_SANITIZE_SPEC
 $fichero = $_FILES['fichero'];
 
 #genero un array de error de fichero
-$phpFileUploadErrors = array(
+$FileUploadErrors = array(
     0 => 'There is no error, the file uploaded with success',
     1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
     2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
@@ -34,6 +34,12 @@ $errores =[];
 
 if (($fichero['error']) !== UPLOAD_ERR_OK){
 
+    #Comprobar que error se ha producido
+    if(is_null($fichero)){
+        $errores['fichero'] = $FileUploadErrors[1];
+
+    }
+    
 } else if (is_uploaded_file($fichero['tmp_name'])){
 
     #validar tamaño maximo

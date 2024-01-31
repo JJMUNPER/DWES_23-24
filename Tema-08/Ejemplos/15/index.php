@@ -1,3 +1,40 @@
+<?php
+
+#iniciamos o continuamos sesion
+session_start();
+
+#iniciar los campos del formulario
+$nombre = null;
+$observaciones = null;
+$fichero = null;
+
+#Compruebo si existe algun error
+if(isset($_SESSION['error'])){
+    $error = $_SESSION['error'];
+    $errores = $_SESSION['errores'];
+
+    //autocompletar formulario
+    $nombre = $_SESSION ['nombre'];
+    $observaciones = $_SESSION['observaciones'];
+    $fichero = $_SESSION ['fichero'];
+
+    //elimino variables de sesion afectadas
+    unset($_SESSION['error']);
+    unset($_SESSION['errores']);
+    unset($_SESSION['nombre']);
+    unset($_SESSION['observaciones']);
+    unset($_SESSION['fichero']);
+}
+
+#Compruebo si existe algun mensaje
+if(isset($_SESSION['mensaje'])){
+    $mensaje = $_SESSION['mensaje'];  #guardamos el mensaje
+
+}
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -21,17 +58,17 @@
             <!-- Nombre -->
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-                <input type="text" name="nombre" class="form-control" id="exampleFormControlInput1" placeholder="nombre completo">
+                <input type="text" name="nombre" class="form-control" id="exampleFormControlInput1" placeholder="nombre completo" value="<?=$nombre?>">
             </div>
             <!-- Observaciones -->
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Observaciones</label>
-                <textarea name="Observaciones" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea name="Observaciones" class="form-control" id="exampleFormControlTextarea1" rows="3"><?= $observaciones?></textarea>
             </div>
             <!-- fichero con validacion cliente mediante parámetro accept -->
             <div class="mb-3">
                 <label for="formfile" class="form-label">Seleccione Archivo</label>
-                <input class="form-control" type="file" name="fichero" id="formFile" accept="image/*">
+                <input class="form-control" type="file" name="fichero" id="formFile" accept="image/*" value=<?=$fichero?>>
             </div>
             <!-- Botones de accion -->
             <button class="btn btn-primary" type="submit">Enviar</button>
