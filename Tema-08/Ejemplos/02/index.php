@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Ejemplo 1
+ * Ejemplo 2
  * 
- * Crear archivo texto plano
+ * Añadir texto
  */
 
 #Crear archivo para escritura
