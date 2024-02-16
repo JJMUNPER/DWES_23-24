@@ -14,9 +14,9 @@
             }
 
             # Capa mensaje
-            if (isset($_SESSION['mensaje'])) {
-                $this->view->mensaje = $_SESSION['mensaje'];
-                unset($_SESSION['mensaje']);
+            if (isset($_SESSION['notify'])) {
+                $this->view->mensaje = $_SESSION['notify'];
+                unset($_SESSION['notify']);
             }
 
 
@@ -37,17 +37,20 @@
             # Capa de autentificación
             if (!isset($_SESSION['id'])) { 
 
+                $_SESSION['notify'] = "Usuario debe autentificarse";
+
                 header('location:'.URL. 'login');
 
-            }
+            } else {
 
             # Comprobamos si existe mensaje
-            if (isset($_SESSION['mensaje'])) {
+            if (isset($_SESSION['notify'])) {
 
-                $this->view->mensaje = $_SESSION['mensaje'];
-                unset($_SESSION['mensaje']);
+                $this->view->mensaje = $_SESSION['notify'];
+                unset($_SESSION['notify']);
 
             }
+        
 
             # Obtenemos objeto User con los detalles del usuario
             $this->view->user = $this->model->getUserId($_SESSION['id']);
@@ -74,6 +77,7 @@
 
 
         }
+    }
 
         # Valida el formulario de modificación de perfil
         public function valperfil() {
@@ -142,9 +146,9 @@
                 $this->model->update($user);
 
                 $_SESSION['name_user'] = $name;
-                $_SESSION['mensaje'] = 'Usuario modificado correctamente';
+                $_SESSION['notify'] = 'Usuario modificado correctamente';
 
-                header('location:'.URL.'perfil');
+                header('location:'.URL.'album');
 
             }
 
@@ -161,12 +165,12 @@
 
                 header('location:'.URL. 'login');
 
-            }
+            } else {
 
             # Comprobamos si existe mensaje
-            if (isset($_SESSION['mensaje'])) {
-                $this->view->mensaje = $_SESSION['mensaje'];
-                unset($_SESSION['mensaje']);
+            if (isset($_SESSION['notify'])) {
+                $this->view->mensaje = $_SESSION['notify'];
+                unset($_SESSION['notify']);
             }
 
             # Capa no validación formulario
@@ -188,6 +192,7 @@
 
 
         }
+    }
 
         # Validación cambio password
         public function valpass() {
@@ -202,7 +207,7 @@
             }
     
             # Saneamos el formulario
-            $password_form = filter_var($_POST['password_actual'] ??= null,FILTER_SANITIZE_SPECIAL_CHARS);
+            $password_actual = filter_var($_POST['password_actual'] ??= null,FILTER_SANITIZE_SPECIAL_CHARS);
             $password = filter_var($_POST['password'] ??= null,FILTER_SANITIZE_SPECIAL_CHARS);
             $password_confirm = filter_var($_POST['password_confirm'] ??= null,FILTER_SANITIZE_SPECIAL_CHARS);
 
@@ -210,10 +215,10 @@
             $user = $this->model->getUserId($_SESSION['id']);
     
             # Validaciones
-            $errores = array();
+            $errores = [];
     
             # Validar password actual
-            if (!password_verify($password_form, $user->password)) { 
+            if (!password_verify($password_actual, $user->password)) { 
                     $errores['password_actual'] = "Password actual no es correcto";
             }
     
@@ -247,10 +252,10 @@
                 # Actualiza password
                 $this->model->updatePass($user);
         
-                $_SESSION['mensaje'] = "Password modificado correctamente";
+                $_SESSION['notify'] = "Password modificado correctamente";
                 
                 #Vuelve corredores
-                header("location:". URL. "perfil");
+                header("location:". URL. "album");
             }
             
     
@@ -283,6 +288,9 @@
             }
            
         }
+
+
+        ///Hacer show?///
 
 
 

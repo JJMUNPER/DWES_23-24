@@ -21,7 +21,7 @@
 
         <legend>Formulario subida imagenes</legend>
         
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" action="<?=URL?>/album/upload/<?=$this->id?>">
             <!-- Campo oculto validar tamaño (5 MB)-->
             <input type="hidden" name="MAX_FILE_SIZE" value="5242880">
             
@@ -36,7 +36,7 @@
             </div>
             <!-- Botones de acción -->
             <div class="mb-3">
-                <button class="btn btn-primary" type="submit" formaction="validar.php">Enviar</button>
+                <button class="btn btn-primary" type="submit">Enviar</button>
             </div>
         </form>
     </div>

@@ -51,9 +51,11 @@
 								<th>Titulo</th>
 								<th>Descripción</th>
 								<th>Autor</th>
-								<th class="text-end">Fecha</th>
+								<th>Fecha</th>
 								<th>Categoria</th>
 								<th>Etiquetas</th>
+								<th>Numero Fotos</th>
+								<th>Numero Visitas</th>
 								<th>Acciones</th>
 							</tr>
 						</thead>
@@ -70,9 +72,11 @@
 									<td><?= $album->titulo ?></td>
 									<td><?= $album->descripcion ?></td>
 									<td><?= $album->autor ?></td>
-									<td class="text-end"><?= $album->fecha ?></td>
+									<td><?= $album->fecha ?></td>
 									<td><?= $album->categoria ?></td>
 									<td><?= $album->etiquetas ?></td>
+									<td><?= $album->num_fotos ?></td>
+									<td><?= $album->num_visitas ?></td>
 
 									<!-- botones de acción -->
 									<td>
@@ -96,6 +100,12 @@
 											<?= (!in_array($_SESSION['id_rol'], $GLOBALS['album']['show'])) ?
 												'disabled' : null ?>">
 											<i class="bi bi-card-text"></i>
+										</a>
+										<!-- Subir archivo -->
+										<a href="<?= URL ?>album/agregar/<?= $album->id ?> ?>" title="Subir imagenes" class="btn btn-success
+											<?= (!in_array($_SESSION['id_rol'], $GLOBALS['album']['update'])) ?
+												'disabled' : null ?>">
+											<i class="bi bi-cloud-plus"></i>
 										</a>
 
 									</td>
