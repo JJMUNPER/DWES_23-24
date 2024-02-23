@@ -11,7 +11,7 @@ class Album extends Controller
 
     }
 
-    function render($param = [])
+    function render()
     {
 
         # inicio o continuo sesión
@@ -44,7 +44,7 @@ class Album extends Controller
 
     }
 
-    function new($param = [])
+    function new()
     {
 
         # iniciar o continuar  sesión
@@ -159,6 +159,8 @@ class Album extends Controller
             // Fecha
             if (empty($fecha)) {
                 $errores['fecha'] = 'El campo fecha es  obligatorio';
+            } else if (!$this->model->validateFecha($fecha)){
+                $errores['fecha'] = 'Formato no valido';
             }
 
             // Luegar
@@ -175,9 +177,9 @@ class Album extends Controller
 
             // Carpeta
             if (empty($carpeta)) {
-                $errores['carpeta'] = 'El campo carpeta es  obligatorio';
-            } #Sin espacion en blanco
-            elseif (strpos($carpeta, "") !== false) {
+                $errores['carpeta'] = 'El campo carpeta es obligatorio';
+            } #Sin espacios en blanco
+            else if (strpos($carpeta, " ") !== false) {
                 $errores['carpeta'] = "No se permiten espacios en blanco";
             }
 
@@ -204,7 +206,7 @@ class Album extends Controller
                 $this->model->create($album);
 
                 # Mensaje
-                $_SESSION['notify'] = "Alumno creado correctamente";
+                $_SESSION['notify'] = "Album creado correctamente";
 
                 # Redirigimos al main de alumnos
                 header('location:' . URL . 'album');
@@ -226,21 +228,23 @@ class Album extends Controller
             header("location:" . URL . "login");
 
         } else if ((!in_array($_SESSION['id_rol'], $GLOBALS['album']['edit']))) {
-            $_SESSION['mensaje'] = "Operación sin privilegios";
+            $_SESSION['notify'] = "Operación sin privilegios";
             header('location:' . URL . 'album');
         } else {
 
             # obtengo el id del album que voy a editar
-            // album/edit
+            // album/edit/4
             # asigno id a una propiedad de la vista
 
-            $this->view->id = $param[0];
+            //$this->view->id = $param[0];
+            $id = $param[0];
+            $this->view->id = $id;
 
             # title
             $this->view->title = "Editar - Panel de control Albun";
 
             # obtener objeto de la clase album
-            $this->view->album = $this->model->getAlbum($this->view->id);
+            $this->view->album = $this->model->getAlbum($id);//getAlbum($this->view->id);
 
             # Comprobar si el formulario viene de una no validación
             if (isset($_SESSION['error'])) {
@@ -293,7 +297,7 @@ class Album extends Controller
             $carpeta = filter_var($_POST['carpeta'] ??= '', FILTER_SANITIZE_SPECIAL_CHARS);
 
             # 2. Creamos el objeto album a partir de  los datos saneados del  formuario
-            $edit_album = new classAlbum(
+            $album = new classAlbum(
                 null,           #Id
                 $titulo,
                 $descripcion,
@@ -320,7 +324,7 @@ class Album extends Controller
             $errores = [];
 
             //Validar titulo
-            if (strcmp($album_orig->titulo, $titulo) !== 0) {
+            if (strcmp($titulo, $album_orig->titulo) !== 0) {
                 // título obligatorio y menor que 100
                 if (empty($titulo)) {
                     $errores["titulo"] = "Campo obligatorio.";
@@ -347,8 +351,9 @@ class Album extends Controller
             if (strcmp($album_orig->fecha, $fecha) !== 0) {
                 if (empty($fecha)) {
                     $errores['fecha'] = 'El campo fecha es  obligatorio';
+                } else if (!$this->model->validateFecha($fecha)){
+                    $errores['fecha'] = 'Formato no valido';
                 }
-                //Validar fecha?
             }
 
             //Validar lugar
@@ -372,7 +377,7 @@ class Album extends Controller
                 if (empty($carpeta)) {
                     $errores['carpeta'] = 'El campo carpeta es  obligatorio';
                 } #Sin espacion en blanco
-                elseif (strpos($carpeta, "") !== false) {
+                elseif (strpos($carpeta, " ") !== false) {
                     $errores['carpeta'] = "No se permiten espacios en blanco";
                 }
             }
@@ -382,7 +387,7 @@ class Album extends Controller
             if (!empty($errores)) {
                 # errores de validación
                 // variables sesión no admiten objetos
-                $_SESSION['album'] = serialize($edit_album);
+                $_SESSION['album'] = serialize($album);
                 $_SESSION['error'] = 'Formulario no ha sido validado';
                 $_SESSION['errores'] = $errores;
 
@@ -393,11 +398,14 @@ class Album extends Controller
             } else {
 
                 # Actualizo registro
-                $this->model->update($param[0], $edit_album);//($id, $edit_album, $album_orig);
+                //$this->model->update($param[0], $album);//($id, $edit_album, $album_orig);
                 $this->view->title = "Tabla albumes";
+                //Creo variable carpeta de origen para poder cambiarla
+                $carOrig = $album_orig->carpeta;
+                $this -> model -> update($id, $album, $carOrig); //album_orig??
                 
                 # Uso rename() para cambiar el nombre de un directorio
-                rename("imagenes/" . $album_orig->carpeta, "imagenes/" . $edit_album->carpeta);
+                //rename("imagenes/" . $album_orig->carpeta, "imagenes/" . $album->carpeta);
 
 
                 # Mensaje
@@ -435,7 +443,7 @@ class Album extends Controller
 
             # Creo la propiedad alumnos dentro de la vista
             # Del modelo asignado al controlador ejecuto el método get();
-            $this->view->alumnos = $this->model->order($criterio);
+            $this->view->albumes = $this->model->order($criterio);
 
             # Cargo la vista principal de album
             $this->view->render('album/main/index');
@@ -488,11 +496,12 @@ class Album extends Controller
 
             # obtenemos id del  album
             $id = $param[0];
-            $album = $this->model->getAlbum($id);
+            $carpetaAlbum = $this->model->getAlbum($id);
 
             # eliminar album
-            $this->model->delete($id);
-            $this->model->deleteCarpeta($album->carpeta);
+            //$this->model->delete($id);
+            //$this->model->deleteCarpeta($carpetaAlbum->carpeta);
+            $this->model->delete($id, $carpetaAlbum->carpeta);
 
             # generar mensaje
             $_SESSION['notify'] = 'Alumno eliminado correctamente';
@@ -535,8 +544,10 @@ class Album extends Controller
 
             # etiqueta title de la vista
             $this->view->title = "Subir Archivos - Gestión Album";
-            $this->view->id = $param[0];
-            $this->view->album = $this->model->getAlbum($this->view->id);
+            //$this->view->id = $param[0];
+            //$this->view->album = $this->model->getAlbum($this->view->id);
+            $id = $param[0];
+            $this->view->id = $id; //isset($id) ? $id : null;
 
 
             # cargo la vista con el formulario nuevo alumno
@@ -609,13 +620,13 @@ class Album extends Controller
             $this->view->title = "Detalles del álbum";
             $this->view->nombreAlbum = $album->carpeta;
     
-            $this->view->album = $this->model->read($id);
+            $this->view->album = $this->model->getAlbum($id);
             
             // Imagenes (Lista de imagenes)
             $ruta = 'imagenes/' . $album->carpeta . '/';
             $imagenes = array_diff(scandir($ruta), array('..', '.')); 
     
-            
+            //Visitas del album
             $this->model->visitaNueva($id);
 
             // Pasamos las imagenes para la vista 

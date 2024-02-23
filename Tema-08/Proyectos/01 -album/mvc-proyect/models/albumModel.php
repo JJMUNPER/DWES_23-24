@@ -161,7 +161,7 @@ class albumModel extends Model
 
     }
 
-    public function read($id)
+    public function getAlbum($id)
     {
 
         try {
@@ -233,6 +233,9 @@ class albumModel extends Model
             $pdoSt->bindParam(':carpeta', $album->carpeta, PDO::PARAM_STR, 75);
 
             $pdoSt->execute();
+
+            //Cambiar el nombre al album
+            rename("imagenes/$album_orig", "imagenes/$album->carpeta");
 
         } catch (PDOException $e) {
             include_once('template/partials/errorDB.php');
@@ -357,7 +360,7 @@ class albumModel extends Model
 
     //             SELECT * FROM alumnos 
     //             WHERE email = :email
-            
+
     //         ";
 
     //         # conectamos con la base de datos
@@ -390,7 +393,7 @@ class albumModel extends Model
 
     //             SELECT * FROM alumnos 
     //             WHERE dni = :dni
-            
+
     //         ";
 
     //         # conectamos con la base de datos
@@ -423,7 +426,7 @@ class albumModel extends Model
 
     //             SELECT * FROM cursos 
     //             WHERE id = :id_curso
-            
+
     //         ";
 
     //         # conectamos con la base de datos
@@ -451,11 +454,20 @@ class albumModel extends Model
     {
         try {
 
-            $sql = "DELETE FROM album WHERE id = :id limit 1";
+            $sql = "DELETE FROM albumes WHERE id = :id limit 1";
             $conexion = $this->db->connect();
             $pdost = $conexion->prepare($sql);
             $pdost->bindParam(':id', $id, PDO::PARAM_INT);
             $pdost->execute();
+
+            # Para poder borrar la carpeta hay que iterar sobre la ruta para que los elimine poco a poco
+            $archivos = glob('imagenes/' . $album . '/*.*');
+            foreach ($archivos as $archivo) {
+                if (is_file($archivo)) {
+                    unlink($archivo);
+                }
+            }
+            rmdir('imagenes/' . $album);
 
         } catch (PDOException $e) {
 
@@ -466,113 +478,116 @@ class albumModel extends Model
     }
 
     public function uploadFicheros($archivos, $carpeta)
-{
-    # Generar un array de errores de fichero (lo he traducido)
-    $fileUploadErrors = array(
-        0 => 'No hay errores, el archivo se cargó con éxito',
-        1 => 'El archivo subido excede la directiva upload_max_filesize en php.ini',
-        2 => 'El archivo subido excede la directiva MAX_FILE_SIZE especificada en el formulario HTML',
-        3 => 'El archivo subido se cargó solo parcialmente',
-        4 => 'No se cargó ningún archivo',
-        6 => 'Falta una carpeta temporal',
-        7 => 'Error al escribir el archivo en el disco.',
-        8 => 'Una extensión de PHP detuvo la carga del archivo.',
-    );
+    {
+        # Generar un array de errores de fichero (lo he traducido)
+        $fileUploadErrors = array(
+            0 => 'No hay errores, el archivo se cargó con éxito',
+            1 => 'El archivo subido excede la directiva upload_max_filesize en php.ini',
+            2 => 'El archivo subido excede la directiva MAX_FILE_SIZE especificada en el formulario HTML',
+            3 => 'El archivo subido se cargó solo parcialmente',
+            4 => 'No se cargó ningún archivo',
+            6 => 'Falta una carpeta temporal',
+            7 => 'Error al escribir el archivo en el disco.',
+            8 => 'Una extensión de PHP detuvo la carga del archivo.',
+        );
 
-    // Almacenará los errores encontrados en los archivos
-    $errores = [];
+        // Almacenará los errores encontrados en los archivos
+        $errores = [];
 
-    # Validar cada archivo subido
-    foreach ($archivos['name'] as $index => $nombreArchivo) {
-        # Comprobar si hay errores
-        if ($archivos['error'][$index] !== UPLOAD_ERR_OK) {
-            $errores[] = $fileUploadErrors[$archivos['error'][$index]];
-        } else {
-            # Validar el tamaño máximo
-            $maxSize = 5 * 1024 * 1024; // 5 MB
-            if ($archivos['size'][$index] > $maxSize) {
-                $errores[] = "El tamaño del archivo '$nombreArchivo' excede el límite de 5MB.";
+        # Validar cada archivo subido
+        foreach ($archivos['name'] as $index => $nombreArchivo) {
+            # Comprobar si hay errores
+            if ($archivos['error'][$index] !== UPLOAD_ERR_OK) {
+                $errores[] = $fileUploadErrors[$archivos['error'][$index]];
+            } else {
+                # Validar el tamaño máximo
+                $maxSize = 5 * 1024 * 1024; // 5 MB
+                if ($archivos['size'][$index] > $maxSize) {
+                    $errores[] = "El tamaño del archivo '$nombreArchivo' excede el límite de 5MB.";
+                }
+
+                # Validar el tipo de archivo
+                $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+                $fileInfo = new SplFileInfo($nombreArchivo);
+                $extension = $fileInfo->getExtension();
+
+                if (!in_array(strtolower($extension), $allowedExtensions)) {
+                    $errores[] = "El archivo '$nombreArchivo' no es una imagen JPG, JPEG, PNG o GIF.";
+                }
             }
+        }
 
-            # Validar el tipo de archivo
-            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-            $fileInfo = new SplFileInfo($nombreArchivo);
-            $extension = $fileInfo->getExtension();
+        # Si hay errores en algún archivo, cancelar la subida de todos los archivos
+        if (!empty($errores)) {
+            $_SESSION['error'] = implode(PHP_EOL, $errores);
+            return; // Terminar el proceso de subida de archivo
+        }
 
-            if (!in_array(strtolower($extension), $allowedExtensions)) {
-                $errores[] = "El archivo '$nombreArchivo' no es una imagen JPG, JPEG, PNG o GIF.";
-            }
+        # Si no hay errores, se procede a mover los archivos a la carpeta del álbum
+        foreach ($archivos['name'] as $index => $nombreArchivo) {
+            move_uploaded_file($archivos['tmp_name'][$index], 'imagenes/' . $carpeta . '/' . $nombreArchivo);
+        }
+
+        # Añadimos un mensaje  de confirmación
+        $_SESSION['notify'] = "Imagenes subidas correctamente.";
+    }
+
+    public function visitaNueva($id)
+    {
+        try {
+            // Creamos la consulta sql
+            $sql = "UPDATE albumes SET num_visitas=num_visitas+1 WHERE id = :id limit 1";
+
+            // Creamos la conexión
+            $conexion = $this->db->connect();
+
+            // Preparamos la consulta
+            $pdost = $conexion->prepare($sql);
+
+            // Vinculamos la variable
+            $pdost->bindParam(':id', $id);
+
+            // Ejecutamos la consulta
+            $pdost->execute();
+
+        } catch (PDOException $e) {
+
+            include_once('template/partials/errorDB.php');
+            exit();
+
+        }
+    }
+    public function totalImagenes($id, $numImagenes)
+    {
+        try {
+            // Creamos la consulta sql
+            $sql = "UPDATE albumes SET num_fotos=:numFotos WHERE id = :id limit 1";
+
+            // Creamos la conexión
+            $conexion = $this->db->connect();
+
+            // Preparamos la consulta
+            $pdost = $conexion->prepare($sql);
+
+            // Vinculamos la variable
+            $pdost->bindParam(':id', $id);
+            $pdost->bindParam(':numFotos', $numImagenes);
+
+            // Ejecutamos la consulta
+            $pdost->execute();
+
+        } catch (PDOException $e) {
+
+            include_once('template/partials/errorDB.php');
+            exit();
+
         }
     }
 
-    # Si hay errores en algún archivo, cancelar la subida de todos los archivos
-    if (!empty($errores)) {
-        $_SESSION['error'] = implode(PHP_EOL, $errores);
-        return; // Terminar el proceso de subida de archivo
-    }
-
-    # Si no hay errores, se procede a mover los archivos a la carpeta del álbum
-    foreach ($archivos['name'] as $index => $nombreArchivo) {
-        move_uploaded_file($archivos['tmp_name'][$index], 'imagenes/'.$carpeta . '/' . $nombreArchivo);
-    }
-    
-    # Añadimos un mensaje  de confirmación
-    $_SESSION['mensaje'] = "Se han subido correctamente las imagenes";
-}
-
-public function visitaNueva($id){
-    try {
-        // Creamos la consulta sql
-        $sql= "UPDATE albumes SET num_visitas=num_visitas+1 WHERE id = :id limit 1";
-
-        // Creamos la conexión
-        $conexion = $this->db->connect();
-
-        // Preparamos la consulta
-        $pdost = $conexion->prepare($sql);
-
-        // Vinculamos la variable
-        $pdost->bindParam(':id', $id);
-
-        // Ejecutamos la consulta
-        $pdost->execute();
-    
-    } catch (PDOException $e) {
-
-        include_once('template/partials/errorDB.php');
-        exit();
-
-    }
-}
- public function totalImagenes($id, $numImagenes){
-    try {
-        // Creamos la consulta sql
-        $sql= "UPDATE albumes SET num_fotos=:numFotos WHERE id = :id limit 1";
-
-        // Creamos la conexión
-        $conexion = $this->db->connect();
-
-        // Preparamos la consulta
-        $pdost = $conexion->prepare($sql);
-
-        // Vinculamos la variable
-        $pdost->bindParam(':id', $id);
-        $pdost->bindParam(':numFotos', $numImagenes);
-
-        // Ejecutamos la consulta
-        $pdost->execute();
-    
-    } catch (PDOException $e) {
-
-        include_once('template/partials/errorDB.php');
-        exit();
-
-    }
- }
-
- public function  obtenerIdAlbum($albumId){
-    try {
-        $sql = "
+    public function obtenerIdAlbum($albumId)
+    {
+        try {
+            $sql = "
                     SELECT 
                             carpeta
                     FROM 
@@ -581,23 +596,32 @@ public function visitaNueva($id){
                             id = :id
             ";
 
-        # Conectar con la base de datos
-        $conexion = $this->db->connect();
+            # Conectar con la base de datos
+            $conexion = $this->db->connect();
 
 
-        $pdoSt = $conexion->prepare($sql);
+            $pdoSt = $conexion->prepare($sql);
 
-        $pdoSt->bindParam(':id', $albumId, PDO::PARAM_INT);
-        $pdoSt->setFetchMode(PDO::FETCH_OBJ);
-        $pdoSt->execute();
+            $pdoSt->bindParam(':id', $albumId, PDO::PARAM_INT);
+            $pdoSt->setFetchMode(PDO::FETCH_OBJ);
+            $pdoSt->execute();
 
-        return $pdoSt->fetch();
+            return $pdoSt->fetch();
 
-    } catch (PDOException $e) {
-        include_once('template/partials/errorDB.php');
-        exit();
+        } catch (PDOException $e) {
+            include_once('template/partials/errorDB.php');
+            exit();
+        }
     }
-}
+
+    public function validateFecha($fecha)
+    {
+        if (date('Y-m-d', strtotime($fecha)) == $fecha) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 

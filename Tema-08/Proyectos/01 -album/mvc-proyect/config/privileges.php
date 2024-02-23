@@ -24,7 +24,7 @@
     $GLOBALS['album']['show'] = [1, 2, 3];
     $GLOBALS['album']['filter'] = [1, 2, 3];
     $GLOBALS['album']['order'] = [1, 2, 3];
-    #Agregamos nuevo privilegio para los perfiles
+    #Agregamos permisos para las nuevas funciones a los perfiles
     $GLOBALS['album']['agregar'] = [1, 2, 3];
     $GLOBALS['album']['upload'] = [1, 2];
 

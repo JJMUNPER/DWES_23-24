@@ -10,7 +10,7 @@
                 <li class="nav-item">
                     <a class="nav-link 
                     <?= in_array($_SESSION['id_rol'], $GLOBALS['album']['new'])? 'active': 'disabled' ?>" 
-                    href="<?= URL ?>alumno/new">Nuevo</a>
+                    href="<?= URL ?>album/new">Nuevo</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle
