@@ -11,22 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('alumnos', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
             $table->id();
             //name varchar(35)
-            $table->string('nombre', 35);//Si no se especifica el tamaño maximo es 255
-            $table->string('apellidos', 45);
-            $table->date('fecha_nacimiento');
-            $table->char('telefono', 13)->nullable(false);
-            $table->string('poblacion', 20);
+            $table->string('name', 35);//Si no se especifica el tamaño maximo es 255
+            $table->string('lastname', 45);
+            $table->date('birth_date');
+            $table->char('phone', 13)->nullable(false);
+            $table->string('city', 20);
             $table->char('dni', 9)->unique()->nullable(false);//Lo de unique es para que no se repita.
             $table->string( 'email', 40 )->unique();
-            $table->unsignedBigInteger('curso_id');
+            $table->unsignedBigInteger('course_id');
             $table->timestamps();
 
             //restricciones
-            $table->foreign('curso_id')
-                ->references('id')->on('cursos')
+            $table->foreign('course_id')
+                ->references('id')->on('courses')
                 ->onDelete('restrict')
                 ->onUpdate('cascade');
         });
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('alumnos');
+        Schema::dropIfExists('students');
     }
 };
