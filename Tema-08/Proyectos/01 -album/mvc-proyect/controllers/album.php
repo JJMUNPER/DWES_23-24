@@ -237,7 +237,7 @@ class Album extends Controller
             // album/edit/4
             # asigno id a una propiedad de la vista
 
-            //$this->view->id = $param[0];// Da error  por no tener un indice 0
+            //$this->view->id = $param[0];
             $id = $param[0];
             $this->view->id = $id;
 
@@ -316,7 +316,7 @@ class Album extends Controller
             $id = $param[0];
 
             # Obtengo el  objeto album original
-            $album_orig = $this->model->getAlbum($id);
+            $albumOrig = $this->model->getAlbum($id);
 
             # 3. Validación
             // Sólo si es necesario
@@ -325,7 +325,7 @@ class Album extends Controller
             $errores = [];
 
             //Validar titulo
-            if (strcmp($titulo, $album_orig->titulo) !== 0) {
+            if (strcmp($titulo, $albumOrig->titulo) !== 0) {
                 // título obligatorio y menor que 100
                 if (empty($titulo)) {
                     $errores["titulo"] = "Campo obligatorio.";
@@ -335,21 +335,21 @@ class Album extends Controller
             }
 
             //Validar descripcioon 
-            if (strcmp($album_orig->descripcion, $descripcion) !== 0) {
+            if (strcmp($albumOrig->descripcion, $descripcion) !== 0) {
                 if (empty($descripcion)) {
                     $errores['descripcion'] = 'El campo titulo es  obligatorio';
                 }
             }
 
             ///Validar autor
-            if (strcmp($album_orig->autor, $autor) !== 0) {
+            if (strcmp($albumOrig->autor, $autor) !== 0) {
                 if (empty($autor)) {
                     $errores['autor'] = 'El campo autor es  obligatorio';
                 }
             }
 
             //Validar fecha
-            if (strcmp($album_orig->fecha, $fecha) !== 0) {
+            if (strcmp($albumOrig->fecha, $fecha) !== 0) {
                 if (empty($fecha)) {
                     $errores['fecha'] = 'El campo fecha es  obligatorio';
                 } else if (!$this->model->validateFecha($fecha)){
@@ -358,14 +358,14 @@ class Album extends Controller
             }
 
             //Validar lugar
-            if (strcmp($album_orig->lugar, $lugar) !== 0) {
+            if (strcmp($albumOrig->lugar, $lugar) !== 0) {
                 if (empty($lugar)) {
                     $errores['lugar'] = 'El campo fecha es  obligatorio';
                 }
             }
 
             //Validar categoria
-            if (strcmp($album_orig->categoria, $categoria) !== 0) {
+            if (strcmp($albumOrig->categoria, $categoria) !== 0) {
                 if (empty($categoria)) {
                     $errores['categoria'] = 'El campo categoria es  obligatorio';
                 }
@@ -374,7 +374,7 @@ class Album extends Controller
             //ETIQUETAS no obligatorio ///
 
             //Validar carpeta
-            if (strcmp($album_orig->carpeta, $carpeta) !== 0) {
+            if (strcmp($albumOrig->carpeta, $carpeta) !== 0) {
                 if (empty($carpeta)) {
                     $errores['carpeta'] = 'El campo carpeta es  obligatorio';
                 } #Sin espacion en blanco
@@ -402,8 +402,8 @@ class Album extends Controller
                 //$this->model->update($param[0], $album);//($id, $edit_album, $album_orig);
                 $this->view->title = "Tabla albumes";
                 //Creo variable carpeta de origen para poder cambiarla
-                $carOrig = $album_orig->carpeta;
-                $this -> model -> update($id, $album, $carOrig); //album_orig??
+                $carOrig = $albumOrig->carpeta;
+                $this->model->update($id, $album, $carOrig); //album_orig??//Se la quito?? Y lo de las dobles validaciones
                 
                 # Uso rename() para cambiar el nombre de un directorio
                 //rename("imagenes/" . $album_orig->carpeta, "imagenes/" . $album->carpeta);
@@ -577,7 +577,7 @@ class Album extends Controller
             $carpetaAlbum = $this->model->getAlbum($id);
     
             // Validación y subida de archivos
-            $this->model->uploadFicheros($_FILES['ficheros'], $carpetaAlbum->carpeta);
+            $this->model->uploadFicheros($_FILES['fichero'], $carpetaAlbum->carpeta);
     
             // Verificar si hay errores
             if (isset($_SESSION['error'])) {

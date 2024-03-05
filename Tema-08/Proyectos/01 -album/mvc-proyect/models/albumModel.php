@@ -193,7 +193,7 @@ class albumModel extends Model
 
     }
 
-    public function update(classAlbum $album, $id, $carOrig) //Carpeta de Origen o  album origen?
+    public function update(classAlbum $album, $id) //Carpeta de Origen o  album origen?
     {
 
         try {
@@ -236,7 +236,7 @@ class albumModel extends Model
 
             //Cambiar el nombre al album
             //rename("imagenes/$album_orig", "imagenes/$album->carpeta");
-            $rutaOrig = "imagenes/".$carOrig;
+            $rutaOrig = "imagenes/".$album->carpeta;
             $rutaDest =  "imagenes/" .$album->carpeta; //"/";
             rename($rutaOrig , $rutaDest);
 
@@ -357,104 +357,7 @@ class albumModel extends Model
 
     }
 
-    // # Validación email único
-    // public function validateUniqueEmail($email)
-    // {
-    //     try {
-
-    //         $sql = " 
-
-    //             SELECT * FROM alumnos 
-    //             WHERE email = :email
-
-    //         ";
-
-    //         # conectamos con la base de datos
-    //         $conexion = $this->db->connect();
-    //         $pdost = $conexion->prepare($sql);
-    //         $pdost->bindParam(':email', $email, PDO::PARAM_STR);
-    //         $pdost->execute();
-
-    //         if ($pdost->rowCount() != 0) {
-    //             return FALSE;
-    //         }
-
-    //         return TRUE;
-
-
-    //     } catch (PDOException $e) {
-
-    //         include_once('template/partials/errorDB.php');
-    //         exit();
-
-    //     }
-    // }
-
-    // # Validación dni único
-    // public function validateUniqueDNI($dni)
-    // {
-    //     try {
-
-    //         $sql = " 
-
-    //             SELECT * FROM alumnos 
-    //             WHERE dni = :dni
-
-    //         ";
-
-    //         # conectamos con la base de datos
-    //         $conexion = $this->db->connect();
-    //         $pdost = $conexion->prepare($sql);
-    //         $pdost->bindParam(':dni', $dni, PDO::PARAM_STR);
-    //         $pdost->execute();
-
-    //         if ($pdost->rowCount() != 0) {
-    //             return FALSE;
-    //         }
-
-    //         return TRUE;
-
-
-    //     } catch (PDOException $e) {
-
-    //         include_once('template/partials/errorDB.php');
-    //         exit();
-
-    //     }
-    // }
-
-    // # Validación curso
-    // public function validateCurso($id_curso)
-    // {
-    //     try {
-
-    //         $sql = " 
-
-    //             SELECT * FROM cursos 
-    //             WHERE id = :id_curso
-
-    //         ";
-
-    //         # conectamos con la base de datos
-    //         $conexion = $this->db->connect();
-    //         $pdost = $conexion->prepare($sql);
-    //         $pdost->bindParam(':id_curso', $id_curso, PDO::PARAM_INT);
-    //         $pdost->execute();
-
-    //         if ($pdost->rowCount() == 1) {
-    //             return TRUE;
-    //         }
-
-    //         return FALSE;
-
-
-    //     } catch (PDOException $e) {
-
-    //         include_once('template/partials/errorDB.php');
-    //         exit();
-
-    //     }
-    // }
+    
 
     public function delete($id, $album)
     {
@@ -485,7 +388,7 @@ class albumModel extends Model
 
     public function uploadFicheros($archivos, $carpeta)
     {
-        # Generar un array de errores de fichero (lo he traducido)
+        # Generar un array de errores de fichero
         $fileUploadErrors = array(
             0 => 'No hay errores, el archivo se cargó con éxito',
             1 => 'El archivo subido excede la directiva upload_max_filesize en php.ini',
@@ -602,14 +505,15 @@ class albumModel extends Model
                             id = :id
             ";
 
-            # Conectar con la base de datos
+            # Conectaxion con la base de datos
             $conexion = $this->db->connect();
 
-
+            #Preparaamos
             $pdoSt = $conexion->prepare($sql);
 
             $pdoSt->bindParam(':id', $albumId, PDO::PARAM_INT);
             $pdoSt->setFetchMode(PDO::FETCH_OBJ);
+            #Ejecutamos
             $pdoSt->execute();
 
             return $pdoSt->fetch();
