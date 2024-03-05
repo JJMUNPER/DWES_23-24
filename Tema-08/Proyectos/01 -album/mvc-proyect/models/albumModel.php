@@ -193,7 +193,7 @@ class albumModel extends Model
 
     }
 
-    public function update(classAlbum $album, $id, $album_orig) //Carpeta de Origen?
+    public function update(classAlbum $album, $id, $carOrig) //Carpeta de Origen o  album origen?
     {
 
         try {
@@ -232,10 +232,16 @@ class albumModel extends Model
             $pdoSt->bindParam(':etiquetas', $album->etiquetas, PDO::PARAM_STR, 100);
             $pdoSt->bindParam(':carpeta', $album->carpeta, PDO::PARAM_STR, 75);
 
-            $pdoSt->execute();
+            //$pdoSt->execute();
 
             //Cambiar el nombre al album
-            rename("imagenes/$album_orig", "imagenes/$album->carpeta");
+            //rename("imagenes/$album_orig", "imagenes/$album->carpeta");
+            $rutaOrig = "imagenes/".$carOrig;
+            $rutaDest =  "imagenes/" .$album->carpeta; //"/";
+            rename($rutaOrig , $rutaDest);
+
+            //Ejecutamos al final la consulta
+            $pdoSt->execute();
 
         } catch (PDOException $e) {
             include_once('template/partials/errorDB.php');

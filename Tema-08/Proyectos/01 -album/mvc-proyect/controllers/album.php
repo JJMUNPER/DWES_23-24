@@ -62,7 +62,7 @@ class Album extends Controller
             header('location:' . URL . 'album');
         } else {
 
-            # Crear un objeto album vacio
+            # Crear un objeto album para enviarlo a la vista (vacio)
             $this->view->album = new classAlbum();
 
             # Comprobar si vuelvo de  un registro no validado
@@ -179,6 +179,7 @@ class Album extends Controller
             if (empty($carpeta)) {
                 $errores['carpeta'] = 'El campo carpeta es obligatorio';
             } #Sin espacios en blanco
+            //else if (strpos($carpeta, "") !== false)// Si no se le pone espacio da error
             else if (strpos($carpeta, " ") !== false) {
                 $errores['carpeta'] = "No se permiten espacios en blanco";
             }
@@ -236,7 +237,7 @@ class Album extends Controller
             // album/edit/4
             # asigno id a una propiedad de la vista
 
-            //$this->view->id = $param[0];
+            //$this->view->id = $param[0];// Da error  por no tener un indice 0
             $id = $param[0];
             $this->view->id = $id;
 
@@ -246,7 +247,7 @@ class Album extends Controller
             # obtener objeto de la clase album
             $this->view->album = $this->model->getAlbum($id);//getAlbum($this->view->id);
 
-            # Comprobar si el formulario viene de una no validación
+            # Comprobar si el formulario viene de una NO validación
             if (isset($_SESSION['error'])) {
 
                 # Mensaje de error
@@ -333,7 +334,7 @@ class Album extends Controller
                 }
             }
 
-            //Validar apellidos
+            //Validar descripcioon 
             if (strcmp($album_orig->descripcion, $descripcion) !== 0) {
                 if (empty($descripcion)) {
                     $errores['descripcion'] = 'El campo titulo es  obligatorio';
@@ -370,7 +371,7 @@ class Album extends Controller
                 }
             }
 
-            //ETIQUETAS ///
+            //ETIQUETAS no obligatorio ///
 
             //Validar carpeta
             if (strcmp($album_orig->carpeta, $carpeta) !== 0) {
@@ -539,6 +540,7 @@ class Album extends Controller
 
                 # Elimino las variables de sesión
                 unset($_SESSION['error']);
+                //unset($_SESSION['album']);
                 unset($_SESSION['errores']);
             }
 
@@ -567,7 +569,7 @@ class Album extends Controller
             header('location:' . URL . 'album');
         } else {
             if (isset($_SESSION['notify'])) {
-                $this->view->mensaje = $_SESSION['notify'];
+                $this->view->notify = $_SESSION['notify']; //mensaje?
                 unset($_SESSION['notify']);
             }
     
@@ -590,7 +592,7 @@ class Album extends Controller
                 $numImagenes = count(glob('imagenes/'.$carpetaAlbum->carpeta."/*"));
                 $this->model->totalImagenes($id,$numImagenes);
 
-                // Si no hay errores, redirigir al usuario
+                // Si no hay errores redirigir
                 header('location:' . URL . 'album');
             }
         }
