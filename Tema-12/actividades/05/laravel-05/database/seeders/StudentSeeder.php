@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use App\Models\Student;
 
 class StudentSeeder extends Seeder
 {
@@ -26,5 +28,7 @@ class StudentSeeder extends Seeder
                 'course_id' => 1
             ]
         ]);
+
+        $students = Student::factory()->count(100)->create();
     }
 }

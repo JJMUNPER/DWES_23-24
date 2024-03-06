@@ -102,8 +102,8 @@
 											<i class="bi bi-card-text"></i>
 										</a>
 										<!-- Subir archivo -->
-										<a href="<?= URL ?>album/agregar/<?= $album->id ?> ?>" title="Subir imagenes" class="btn btn-success
-											<?= (!in_array($_SESSION['id_rol'], $GLOBALS['album']['show'])) ?
+										<a href="<?= URL ?>album/agregar/<?= $album->id ?>" title="Subir imagenes" class="btn btn-success
+											<?= (!in_array($_SESSION['id_rol'], $GLOBALS['album']['agregar'])) ?
 												'disabled' : null ?>">
 											<i class="bi bi-cloud-plus"></i>
 										</a>
