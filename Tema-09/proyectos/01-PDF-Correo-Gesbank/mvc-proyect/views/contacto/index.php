@@ -23,7 +23,6 @@
 
         <!-- Mensaje de Error -->
         <?php include 'template/partials/error.php' ?>
-        <?php require_once 'template/partials/mensaje.php' ?>
 
         <!-- Formulario  -->
         <form action="<?= URL ?>contacto/validar" method="POST">
