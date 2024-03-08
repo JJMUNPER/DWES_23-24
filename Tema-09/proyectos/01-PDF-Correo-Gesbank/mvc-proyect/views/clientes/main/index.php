@@ -11,15 +11,20 @@
     <div class="container" style="padding-top: 2%;">
         <!-- menu fijo superior -->
         <?php require_once "template/partials/menuAut.php"; ?>
+        <br><br>
+
         <!-- cabecera  -->
         <?php include "views/clientes/partials/header.php" ?>
 
-        <!-- Mensajes -->
-        <?php include "template/partials/notify.php"?>
-        <!-- Errores -->
-        <?php include "template/partials/error.php"?>
+        <!-- Mensaje de Error -->
+        <?php include 'template/partials/mensaje.php' ?>
+
         <!-- Menu principal -->
         <?php require_once "views/clientes/partials/menu.php" ?>
+
+        <!-- Modal -->
+        <?php require "views/clientes/partials/modal.php" ?>
+
         <!-- tabla clientes -->
         <table class="table">
             <thead>
@@ -42,20 +47,25 @@
                         <td><?= $cliente->telefono ?></td>
                         <td><?= $cliente->ciudad ?></td>
                         <td><?= $cliente->dni ?></td>
-                        <td>
-                            <!-- botones de acción -->
-                            <a href="<?= URL ?>clientes/delete/<?= $cliente->id ?>" title="Eliminar"
-                                onclick="return confirm('¿Quieres Borrar?')" Class="btn btn-danger
-                                            <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['delete'])) ?
-                                                'disabled' : null ?>"> <i class="bi bi-trash"></i> </a>
 
-                            <a href="<?= URL ?>clientes/editar/<?= $cliente->id ?>" title="Editar" Class="btn btn-primary
-                                            <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['edit'])) ?
-                                                'disabled' : null ?>"> <i class="bi bi-pencil"></i> </a>
-                            <a href="<?= URL ?>clientes/mostrar/<?= $cliente->id ?>" title="Mostrar" Class="btn btn-primary
-                                            <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['show'])) ?
-                                                'disabled' : null ?>"> <i class="bi bi-eye"></i> </a>
+                        <!-- botones de acción -->
+                        <td>
+                            <!-- botón eliminar -->
+                            <a href="<?= URL ?>clientes/delete/<?= $cliente->id ?>" title="Eliminar" class="btn btn-danger <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['delete'])) ? 'disabled' : '' ?>" onclick="return confirm('Confirmar eliminación del Cliente')">
+                                <i class="bi bi-trash"></i>
+                            </a>
+
+                            <!-- botón editar -->
+                            <a href="<?= URL ?>clientes/editar/<?= $cliente->id ?>" title="Editar" class="btn btn-primary <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['editar'])) ? 'disabled' : '' ?>">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+
+                            <!-- botón mostrar -->
+                            <a href="<?= URL ?>clientes/mostrar/<?= $cliente->id ?>" title="Mostrar" class="btn btn-warning <?= (!in_array($_SESSION['id_rol'], $GLOBALS['clientes']['mostrar'])) ? 'disabled' : '' ?>">
+                                <i class="bi bi-card-text"></i>
+                            </a>
                         </td>
+
                     </tr>
                 <?php endforeach; ?>
             </tbody>

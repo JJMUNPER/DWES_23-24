@@ -14,15 +14,15 @@
     <div class="container">
         
         <!-- header -->
-        <?php include 'views/clientes/partials/header.php' ?>
+        <?php include 'views/cuentas/partials/header.php' ?>
 
         <!-- comprobamos si existe error -->
         <?php include 'template/partials/error.php' ?>
         <?php include 'template/partials/notify.php' ?>
 
-        <legend>Formulario Subida de nuevos clientes (csv)</legend>
+        <legend>Formulario Subida de nuevas cuentas (csv)</legend>
         
-        <form method="POST" action="<?=URL?>clientes/validarCSV" enctype="multipart/form-data">
+        <form method="POST" action="<?=URL?>cuentas/validarCSV" enctype="multipart/form-data">
             
             <!-- Fichero con validación cliente mediante parametro accept -->
             <div class="mb-3">
