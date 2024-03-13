@@ -1,5 +1,5 @@
 <?php
 
 //Definimos una constante USER
-define('USUARIO', 'jonyleoncanto@gmail.com');
-define('PASS', 'joyx fwgy pnqk poyv');
+define('USUARIO', 'jjmunper@gmail.com'); //corre
+define('PASS', ' '); //Password

@@ -22,9 +22,6 @@
         <!-- Menu principal -->
         <?php require_once "views/clientes/partials/menu.php" ?>
 
-        <!-- Modal -->
-        <?php require "views/clientes/partials/modal.php" ?>
-
         <!-- tabla clientes -->
         <table class="table">
             <thead>

@@ -251,136 +251,146 @@ class clientesModel extends Model
         }
     }
 
-    //Validación de email único
-    public function validateUniqueEmail($email)
+    //-------------------------Validacion-------------------------------//
+
+    # Validar DNI
+    public function validateUniqueDni($dni)
     {
         try {
-            $sql = "SELECT * FROM clientes 
-                    WHERE email = :email";
+            // Creamos la sentencia
+            $sql = "SELECT * FROM gesbank.clientes WHERE dni = :dni";
 
-
-            //Conectar con la base de datos
+            // Nos conectamos a la base de datos
             $conexion = $this->db->connect();
 
-            $pdost = $conexion->prepare($sql);
-            $pdost->bindParam(':email', $email, PDO::PARAM_STR);
+            // Preparamos la consulta
+            $pdostmt = $conexion->prepare($sql);
 
-            $pdost->execute();
+            // Vinculamos la variable
+            $pdostmt->bindParam(':dni', $dni, PDO::PARAM_STR);
 
-            if ($pdost->rowCount() != 0) {
+            // Ejecutamos la sentencia
+            $pdostmt->execute();
+
+            if ($pdostmt->rowCount() != 0) {
                 return false;
             }
-
             return true;
-        } catch (PDOException $e) {
-
-            include_once('template/partials/errorDB.php');
-            exit();
-        }
-    }
-
-    //Validación de dni único
-    public function validateDNI($dni)
-    {
-        try {
-            $sql = "SELECT * FROM clientes 
-                     WHERE dni = :dni";
-
-
-            //Conectar con la base de datos
-            $conexion = $this->db->connect();
-
-            $pdost = $conexion->prepare($sql);
-            $pdost->bindParam(':dni', $dni, PDO::PARAM_STR);
-
-            $pdost->execute();
-
-            if ($pdost->rowCount() != 0) {
-                return false;
-            }
-
-            return true;
-        } catch (PDOException $e) {
-
-            include_once('template/partials/errorDB.php');
-            exit();
-        }
-    }
-
-    //Pillamos los datos del CSV
-    function getCSV()
-    {
-
-        try {
-
-            # comando sql
-            $sql = "SELECT 
-                        clientes.id,
-                        clientes.apellidos,
-                        clientes.nombre,
-                        clientes.email,
-                        clientes.telefono,
-                        clientes.ciudad,
-                        clientes.dni
-                    FROM
-                        clientes
-                    ORDER BY 
-                        id";
-
-            # conectamos con la base de datos
-
-            // $this->db es un objeto de la clase database
-            // ejecuto el método connect de esa clase
-
-            $conexion = $this->db->connect();
-
-            # ejecutamos mediante prepare
-            $pdost = $conexion->prepare($sql);
-
-            # establecemos  tipo fetch
-            $pdost->setFetchMode(PDO::FETCH_OBJ);
-
-            #  ejecutamos 
-            $pdost->execute();
-
-            # devuelvo objeto pdostatement
-            return $pdost;
-        } catch (PDOException $e) {
-
-            include_once('template/partials/errorDB.php');
-            exit();
-        }
-    }
-
-    public function getCuentasDelCliente($idCliente)
-    {
-        try {
-            $sql = "
-            SELECT 
-                id,
-                num_cuenta,
-                id_cliente,
-                fecha_alta,
-                fecha_ul_mov,
-                num_movtos,
-                saldo
-            FROM 
-                cuentas 
-            WHERE 
-                id_cliente = :idCliente";
-
-            $conexion = $this->db->connect();
-            $pdoSt = $conexion->prepare($sql);
-            $pdoSt->bindParam(":idCliente", $idCliente, PDO::PARAM_INT);
-            $pdoSt->setFetchMode(PDO::FETCH_OBJ);
-            $pdoSt->execute();
-            return $pdoSt->fetchAll();
         } catch (PDOException $e) {
             require_once("template/partials/errorDB.php");
             exit();
         }
     }
 
+    #Validamos Email
+    public function validateUniqueEmail($email)
+    {
+        try {
+            // Comando sql
+            $sql = "SELECT * FROM gesbank.clientes WHERE email = :email";
+
+            // Conectamos BBDD
+            $conexion = $this->db->connect();
+
+            // Se prepara la consulta
+            $pdostmt = $conexion->prepare($sql);
+
+            // Vinculamos la variable
+            $pdostmt->bindParam(':email', $email, PDO::PARAM_STR);
+
+            // Ejecutamos la sentencia
+            $pdostmt->execute();
+
+            if ($pdostmt->rowCount() != 0) {
+                return false;
+            }
+            return true;
+        } catch (PDOException $e) {
+            require_once("template/partials/errorDB.php");
+            exit();
+        }
+    }
+
+
+    //-----------------------------CSC----------------------------------//
+
+    #Metodo getCsv()
+    #Lee los datos de la tabla clientes para la creacion de un CSV con todos los clientes
+    function getCSV()
+    {
+
+        try {
+            #Comando SQL
+            $sql = "SELECT
+                    id,
+                    apellidos,
+                    nombre,
+                    email,
+                    telefono,
+                    ciudad,
+                    dni
+                    FROM
+                    gesbank.clientes
+                    ORDER BY
+                    id ASC";
+
+            #Conectamos con la base de datos
+            $conexion = $this->db->connect();
+
+            #Ejecutamos SQL declarado
+            $pdost = $conexion->prepare($sql);
+
+            #Lo establecemos de tipo fetch
+            $pdost->setFetchMode(PDO::FETCH_OBJ);
+
+            #Ejecutamos
+            $pdost->execute();
+
+            #Retornamos el resultado (objeto)
+            return $pdost;
+
+        } catch (PDOException $e) {
+
+            require_once "template/partials/errorDB.php";
+            exit();
+
+        }
+    }
+    
+    #Metodo getCuentasDelCliente()
+    #Obtiene todas las cuentas de un cliente a partir del id
+    public function getCuentasDelCliente($idCliente)
+    {
+        try {
+            #Comando SQL
+            $sql = "SELECT * FROM gesbank.cuenta WHERE id_cliente = :id_cliente";
+
+            #Conectamos con la base de datos
+            $conexion = $this->db->connect();
+
+            #Ejecutamos SQL declarado
+            $pdost = $conexion->prepare($sql);
+
+            #Lo vinculamos con la variable
+            $pdost->bindParam(":id_cliente", $idCliente, PDO::PARAM_INT);
+
+            #Lo establecemos de tipo fetch
+            $pdost->setFetchMode(PDO::FETCH_OBJ);
+
+            #Ejecutamos
+            $pdost->execute();
+
+            #Retornamos el array de objetos
+            return $pdost->fetchAll();
+
+        } catch (PDOException $e) {
+            require_once "template/partials/errorDB.php";
+            exit();
+        }
+    }
+
+    #Metodo deleteCuentas()
+    #Elimina una cuenta desde clientes
     public function deleteCuentas($idCuenta)
     {
         try {

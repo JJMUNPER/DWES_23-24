@@ -136,15 +136,13 @@ class Movimientos extends Controller
                 $errores['concepto'] = 'El campo concepto debe ser inferior a 50 caracteres';
             }
 
-            //Tipo - I o R - valor obligatorio. ha de tomar uno de estos valores ingreso o reintegro
+            //Tipo: I(ingreso) o R(reintedro)
             if (empty($tipo)) {
                 $errores['tipo'] = 'El campo tipo es obligatorio';
             } else if (!in_array($tipo, ['I', 'R'])) {
                 $errores['tipo'] = 'El campo tipo debe ser I o R';
             }
 
-            //Cantidad - Ha de ser un valor tipo float. En caso de un reintegro la cantidad no podrá superar el saldo de la cuenta, en caso contrario, mostrará mensaje cantidad no disponible. 
-            //Por otro lado la cantidad en caso de ser un reintegro se almacenará con un número negativo, de esta forma sumando todas las cantidades de los movimientos de una misma cuenta podré 
             //obtener el saldo.
             if (empty($cantidad)) {
                 $errores['cantidad'] = 'El campo cantidad es obligatorio';

@@ -154,8 +154,8 @@ class Perfil extends Controller
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
 
-                $mail->Username = USUARIO;                                      // Cambiar por tu dirección de correo
-                $mail->Password = PASS;                                         // Cambiar por tu contraseña
+                $mail->Username = //Introduce tu correo;                                      
+                $mail->Password = //Contraseña correo;                                         
 
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
@@ -163,11 +163,8 @@ class Perfil extends Controller
                 // Configurar destinatario, remitente, asunto y mensaje
                 $destinatario = $email;
                 $remitente = USUARIO;
-                $asuntoMail = "Cambio de información de tu Perfil";
-                $mensajeMail =
-                    "Has cambiado la información de tu perfil recientemente: <br><br>"
-                    . "Nuevo Nombre: " . $name . "<br>"
-                    . "Nuevo Email: " . $email . "<br>";
+                $asuntoMail = "Cambiar credenciales del usuario";
+                $mensajeMail ="Datos del perfil cambiada";
 
                 $mail->setFrom($remitente, $name);
                 $mail->addAddress($destinatario);
@@ -297,8 +294,8 @@ class Perfil extends Controller
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
 
-                $mail->Username = USUARIO;                                      // Cambiar por tu dirección de correo
-                $mail->Password = PASS;                                         // Cambiar por tu contraseña
+                $mail->Username = //Introduce tu correo;                                      
+                $mail->Password = //Contraseña correo;                                         
 
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
@@ -306,10 +303,8 @@ class Perfil extends Controller
                 // Configurar destinatario, remitente, asunto y mensaje
                 $destinatario = $infoUsuario->email;
                 $remitente = USUARIO;
-                $asuntoMail = "Cambio de información de tu Perfil";
-                $mensajeMail =
-                    "Has cambiado la contraseña de tu perfil recientemente: <br><br>"
-                    . "Nueva Contraseña: " . $password . "<br>";
+                $asuntoMail = "Cambiar credenciales del usuario";
+                $mensajeMail ="Contraseña cambiada correctamente:";
 
                 $mail->setFrom($remitente, $infoUsuario->name);
                 $mail->addAddress($destinatario);
@@ -349,7 +344,11 @@ class Perfil extends Controller
         } else {
 
             try {
-                // Configurar PHPMailer
+                #La configuracion inicial de PHPMailer es la misma
+                #Manda un correo per cada accion realizada
+                //Cambio de credenciales del perdil
+                //Cammbio contrasela
+                //Eliminacion cuenta
                 $infoUsuario = $this->model->getUserId($_SESSION['id']);
                 $mail = new PHPMailer(true);
                 $mail->CharSet = "UTF-8";
@@ -358,8 +357,8 @@ class Perfil extends Controller
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
 
-                $mail->Username = USUARIO;                                      // Cambiar por tu dirección de correo
-                $mail->Password = PASS;                                         // Cambiar por tu contraseña
+                $mail->Username = //Introduce tu correo;                                      
+                $mail->Password = //Contraseña correo;
 
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
@@ -368,10 +367,7 @@ class Perfil extends Controller
                 $destinatario = $infoUsuario->email;
                 $remitente = USUARIO;
                 $asuntoMail = "Eliminación de tu Perfil";
-                $mensajeMail =
-                    "Se ha eliminado tu cuenta que tenía la siguiente información: <br><br>"
-                    . "Nombre: " . $infoUsuario->name . "<br>"
-                    . "Email: " . $infoUsuario->email . "<br>";
+                $mensajeMail ="Se elimino la cuenta";   
 
                 $mail->setFrom($remitente, $infoUsuario->name);
                 $mail->addAddress($destinatario);

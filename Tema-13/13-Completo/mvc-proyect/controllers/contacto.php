@@ -144,8 +144,8 @@ class Contacto extends Controller
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
 
-                $mail->Username = USUARIO;                                      // Cambiar por tu dirección de correo
-                $mail->Password = PASS;                                         // Cambiar por tu contraseña
+                $mail->Username = //Introduce tu correo//;                                    
+                $mail->Password = //Introduce contraseña//;                                         
 
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;

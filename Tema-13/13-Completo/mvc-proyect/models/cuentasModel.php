@@ -317,50 +317,55 @@ class cuentasModel extends Model
         }
     }
 
-    //Validación de número de cuenta único
+   //---------------------------------Validate--------------------------//
+
+    # Valida Numero Cuenta
     public function validateUniqueNumCuenta($num_cuenta)
     {
         try {
-            $sql = "SELECT * FROM cuentas 
-                     WHERE num_cuenta = :num_cuenta";
+            //Creamos la consulta personalizada a ejecutar
+            $sql = "SELECT * FROM gesbank.cuentas WHERE num_cuenta = :cuenta";
 
-
-            //Conectar con la base de datos
+            // Realizamos la conexión a la base de datos
             $conexion = $this->db->connect();
+            $pdostmt = $conexion->prepare($sql);
+            $pdostmt->bindParam('cuenta', $num_cuenta, PDO::PARAM_STR);
 
-            $pdost = $conexion->prepare($sql);
-            $pdost->bindParam(':num_cuenta', $num_cuenta, PDO::PARAM_INT);
+            // Ejecutamos la sentencia
+            $pdostmt->execute();
 
-            $pdost->execute();
-
-            if ($pdost->rowCount() != 0) {
+            // Realizamos la comprobación
+            if ($pdostmt->rowCount() != 0) {
                 return false;
             }
-
             return true;
         } catch (PDOException $e) {
-
-            include_once('template/partials/errorDB.php');
+            require_once("template/partials/errorDB.php");
             exit();
         }
     }
 
-    //Validación de que el cliente existe en la base de datos
+    #Valida Cliente
     public function validateCliente($id_cliente)
     {
         try {
-            $sql = "SELECT * FROM clientes 
-                    WHERE id = :idCliente";
+            // Creamos la sentencia personalizada a ejecutar
+            $sql = "SELECT * FROM gesbank.clientes WHERE id = :idCliente LIMIT 1";
 
-            //Conectar con la base de datos
+            // Realizamos la conexión a la base de datos
             $conexion = $this->db->connect();
 
-            $pdost = $conexion->prepare($sql);
-            $pdost->bindParam(':idCliente', $id_cliente, PDO::PARAM_INT);
+            // Preparamos la consulta
+            $pdostmt = $conexion->prepare($sql);
 
-            $pdost->execute();
+            // Vinculamos la variable
+            $pdostmt->bindParam(':idCliente', $id_cliente, PDO::PARAM_INT);
 
-            if ($pdost->rowCount() == 1) {
+            // Ejecutamos la sentencia
+            $pdostmt->execute();
+
+            // Realizamos la comprobación
+            if ($pdostmt->rowCount() == 1) {
                 return true;
             }
             return false;
@@ -382,31 +387,30 @@ class cuentasModel extends Model
     }
 
 
+    # Método getCSV
+    # Realiza un SELECT sobre la tabla cuentas para generar el archivo CSV
+    # No obligatorio (No funciona del todo bien)
     public function getCSV()
     {
 
         try {
 
             # comando sql
-            $sql = "SELECT 
-                        cuentas.id,
-                        cuentas.num_cuenta,
-                        cuentas.id_cliente,
-                        cuentas.fecha_alta,
-                        cuentas.fecha_ul_mov,
-                        cuentas.num_movtos,
-                        cuentas.saldo
+            $sql = "SELECT
+                    id,
+                    num_cuentas,
+                    id_cliente,
+                    fecha_alta,
+                    fecha_ul_mov,
+                    num_movtos,
+                    saldo
                     FROM
-                        cuentas
-                    ORDER BY 
-                        cuentas.id";
+                    gesbank.cuentas
+                    ORDER BY
+                    cuentas.id";
 
 
             # conectamos con la base de datos
-
-            // $this->db es un objeto de la clase database
-            // ejecuto el método connect de esa clase
-
             $conexion = $this->db->connect();
 
             # ejecutamos mediante prepare
@@ -431,15 +435,18 @@ class cuentasModel extends Model
     {
         try {
             $sql = "SELECT 
-            movimientos.id,
-            cuentas.num_cuenta as cuenta,
-            movimientos.fecha_hora,
-            movimientos.concepto,
-            movimientos.tipo,
-            movimientos.cantidad,
-            movimientos.saldo
-            FROM movimientos INNER JOIN cuentas ON movimientos.id_cuenta = cuentas.id
-            WHERE movimientos.id_cuenta = :id;";
+                    movimientos.id,
+                    cuentas.num_cuenta as cuenta,
+                    movimientos.fecha_hora,
+                    movimientos.concepto,
+                    movimientos.tipo,
+                    movimientos.cantidad,
+                    movimientos.saldo
+                    FROM 
+                    gesbank.movimientos, gesbank.cuentas
+                    WHERE 
+                    movimientos.id_cuenta = cuentas.id AND
+                    movimientos.id_cuenta = :id";
 
             $conexion = $this->db->connect();
             $pdoSt = $conexion->prepare($sql);
